@@ -1,0 +1,13 @@
+﻿<!-- 查看账号 -->
+@using Portal.Client.Core
+@{
+    Layout = PageUtility.GetOpenLayout;
+}
+<div class="inner">
+    <h1>如何查看账号信息</h1>
+    <p>操作步骤如下：</p>
+    <p>
+        1.<a target="_blank" href="@Url.Content("~/Account/Login")">登录</a>【@(PageUtility.ProjectName)】；
+    </p>
+    <p>2.点击菜单<a target="_blank" href="@Url.Content("~/User/View")">【账号管理】</a>，即可查看当前登陆账号的信息。</p>
+</div>

@@ -1,0 +1,65 @@
+<!-- 外部开发者信息管理查看弹出对话框 -->
+@using Portal.Client.Core
+@using Portal.Web.Core.Common
+@{
+    ViewBag.Title = PageUtility.GetMenuName(ViewContext.RouteData, "查看账号");
+    Layout = PageUtility.GetLayout;
+    var item = Model as Portal.Dto.User;
+    var isLogin = PageUtility.IsLogin();
+    bool update = isLogin && PageUtility.HasPermission(ClientPermissionCodes.ExternalUser_Update); //编辑
+}
+@section Head{
+    <script type="text/javascript" src="@Url.Content2("~/Scripts/Client/UserList.js")"></script>
+}
+<table class="table_Regesit">
+    <tr>
+        <th>
+            用户名：
+        </th>
+        <td>
+            @item.LoginName
+        </td>
+    </tr>
+    <tr>
+        <th>
+            邮箱：
+        </th>
+        <td>
+            @item.Email
+        </td>
+    </tr>
+    <tr>
+        <th>
+            联系电话：
+        </th>
+        <td>
+            @item.Phone
+        </td>
+    </tr>
+    <tr>
+        <th>
+            创建时间：
+        </th>
+        <td>
+            <label utc="@item.CreatedOn.Show("yyyy-MM-dd HH:mm:ss")" utcformat="YYYY-MM-DD HH:mm:ss"></label>
+        </td>
+    </tr>
+    @if (update)
+    {
+        <tr>
+            <td></td>
+            <td>
+                <input type="button" value="修改" class="btn btn-primary" id="btnSubmit" onclick="Update() ">
+            </td>
+        </tr>
+    }
+    else if (!isLogin)
+    {
+        <tr>
+            <td></td>
+            <td>
+                <a class="btn btn-primary" href="@Url.Content("~/Account/Login")">立即登录</a>
+            </td>
+        </tr>
+    }
+</table>

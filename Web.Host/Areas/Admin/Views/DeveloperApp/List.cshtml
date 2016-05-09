@@ -1,0 +1,122 @@
+<!-- 外部开发者应用信息管理明细 -->
+@using Portal.Dto
+@using Portal.Web.Admin.Core
+@using Portal.Web.Core
+@using Portal.Web.Core.Model
+@{
+    var infolist = Model as PageListSource<DeveloperAppDto>;
+    bool view = PageUtility.HasPermission(PermissionCodes.DeveloperApp_View);//查看
+    bool update = PageUtility.HasPermission(PermissionCodes.DeveloperApp_Update);//修改
+    bool audit = PageUtility.HasPermission(PermissionCodes.DeveloperApp_Audit);//审核
+    bool token = PageUtility.HasPermission(PermissionCodes.DeveloperApp_Token);//Token
+    bool authCode = PageUtility.HasPermission(PermissionCodes.DeveloperApp_AuthCode);//授权码
+    bool showOperate = view || update || audit || token || authCode;//是否显示操作
+}
+<table class="table table-striped table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>
+                应用名称
+            </th>
+            <th>
+                应用状态
+            </th>
+            <th>
+                应用类型
+            </th>
+            <th>
+                回调地址
+            </th>
+            <th>
+                应用类型
+            </th>
+            <th>
+                所属账号
+            </th>
+            @if (showOperate)
+            {
+                <th>
+                    操作
+                </th>
+            }
+        </tr>
+    </thead>
+    <tbody>
+        @if (infolist.TotalRows > 0)
+        {
+            foreach (var item in infolist.Source)
+            {
+                <tr id="tr@(item.Id)">
+                    <td>
+                        @if (view)
+                        {
+                            <a href="javascript:void(0);" onclick="ViewDailog('@item.Id') " title="@(item.Name)">
+                                @item.Name
+                            </a>
+                        }
+                        else
+                        {
+                            @item.Name
+                        }
+                    </td>
+                    <td>
+                        @(item.State.GetDescription())
+                    </td>
+                    <td>
+                        @(item.IsExternal ? "外部" : "内部")
+                    </td>
+                    <td>
+                        @item.CallbackUrl
+                    </td>
+                    <td>
+                        @(item.AppType.GetDescription())
+                    </td>
+                    <td>
+                        @item.UserId
+                    </td>
+                    @if (showOperate)
+                    {
+                        <td>
+                            @if (view)
+                            {
+                                <a class="btn btn-mini btn-info" onclick="ViewDailog('@item.Id'); ">查看</a>
+                            }
+                            @if (update)
+                            {
+                                <a title="编辑" class='btn btn-mini btn-info' onclick="EditDailog('@item.Id'); ">
+                                    <i class='ace-icon glyphicon glyphicon-edit'></i>编辑
+                                </a>
+                            }
+                            @if (item.State == DeveloperAppState.Verifying && audit)
+                            {
+                                <a class="btn btn-mini btn-pink" onclick="AuditDailog('@item.Id'); ">审核</a>
+                            }
+                            @if (audit)
+                            {
+                                <a class="btn btn-mini btn-success" onclick="OpenToken('@item.ClientId'); ">
+                                    <i class="ace-icon glyphicon glyphicon-cog"></i>Token
+                                </a>
+                            }
+                            @if (authCode)
+                            {
+                                <a class="btn btn-mini btn-purple" onclick="OpenAuthCode('@item.ClientId'); "><i class="ace-icon glyphicon glyphicon-cog"></i>授权码</a>
+                            }
+                        </td>
+                    }
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="@(showOperate?7:6)">
+                    @{ Html.RenderPartial("~/Views/Control/NoDataControl.cshtml"); }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@if (infolist.TotalRows > 0)
+{
+    Html.RenderPartial("../Control/PagingControl", infolist.Pageing);
+}

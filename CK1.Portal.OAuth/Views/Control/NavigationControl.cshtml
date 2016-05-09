@@ -1,0 +1,31 @@
+﻿@using Portal.OAuth.Core
+@{
+    var userName = PageUtility.GetUserName;
+}
+<div id="login_bar" class="container-fluid">
+    <form id="loginForm" class="container form-inline" method="post" target="_blank" action="#">
+        @if (!string.IsNullOrEmpty(userName))
+        {
+            <span class="user-info">
+                <small>Welcome,</small>
+                <strong>@userName</strong>
+            </span>
+        }
+    </form>
+</div>
+<header>
+    <div id="logo_wrap" class="container">
+        <h1>
+            <a href="/">
+                <img src="http://pic.chukou1.com/0/0_341f27.png" style="width: 423px; height: 95px">
+            </a>
+        </h1>
+        <address>
+            <div>
+                <div id="support_line">
+                    <strong>4006 988 223</strong>
+                </div>
+            </div>
+        </address>
+    </div>
+</header>

@@ -1,0 +1,40 @@
+﻿.div404 {background: url(../../Content/Images/404.png) no-repeat center center; height: 216px;}
+.div500 {background: url(../../Content/Images/500.png) repeat center center; height: 241px;}
+.input-common {width: 160px !important;}
+
+/*---表格样式 ----*/
+.table{table-layout: fixed;}
+.search-table{border-collapse:separate;border-spacing:6px;border: none;}
+.search-table th{ text-align: right;font-weight: normal;font:13px/22px Arial,Helvetica,sans-serif}
+.search-table td{vertical-align: middle;text-align: left;}
+.form_table{border-collapse: collapse; border: 1px solid #ffffff; width: 100%; color: #808080; margin: 0px; padding: 8px 0px; table-layout: fixed;}
+.form_table td{line-height: 30px; height: 30px; vertical-align: middle; padding: 4.8px; border: 2px solid #fff; background-color: #f9f9f9;word-break:break-all;}
+.form_table th{width: 120px; text-align: right; padding-right:5px; background-color: #EDEDED; border: 2px solid #fff; color: #757575;}
+.form_table input,.form_table select,.form_table textarea { margin-bottom:0px; }
+
+
+/*---错误信息提示框 ----*/
+.tips{min-width: 230px;float: left;margin-top: 8px; position:absolute; left:50%; top:50%; margin-left:-130px; border: 1px solid #ff8080;background-color: #fff2f2;display: none;}
+.tips p{font-size: 12px;color: #404040;line-height: 18px;padding: 0px 15px 0px 25px;margin: 5px;background: url(../../Content/images/stuff_1.png) no-repeat left #fff2f2;display: none;}
+.dtipsColse{float: right;margin-right: 10px;margin-top: 5px;cursor: pointer;}
+.center { text-align: center; font-size: 15px;padding-top: 50px;padding-bottom: 50px;}
+
+/*表单表格*/
+.btn2{height: 23px; padding: 3px 8px; margin: 0px 5px; color: #575252; text-decoration: none; border: 1px solid #686363; background-image: url(../images/btn_bg.png); background-repeat: repeat-x; -moz-border-radius: 3px; -webkit-border-radius: 3px; border-radius: 3px;}
+.input-common{width: 120px;}
+.list{padding: 10px 5px; border-bottom: 1px solid #dedede; color: #353535; margin-top: 5px; clear: both;}
+.list p{line-height: 20px; text-indent: 20px; margin: 5px 0px 5px 15px; overflow: hidden;}                                                                                                                                                                                                                                                                                                                                                                                                         
+.table thead th, 
+.table tbody td{text-align: center;word-break:break-all;}
+.textLeft{text-align: left !important;}
+.textRight{text-align: right !important;}
+.wordBreak {white-space:normal;word-wrap:break-word;word-break: normal;}
+
+.accordion-inner ul { background-color:#EDEDED; border:0px solid #D1D1D1}
+.accordion-inner ul li{ border:0px solid #fff; float:left; margin:0px 10px 4px 0px; width:140px;height:18px; line-height:18px;line-height:20px\9; padding:3px; overflow:hidden;}
+
+/*列表查询头*/
+.search-box {margin-bottom:10px;}
+.search-inline {display:block; float:left; font-size:15px; margin:5px 10px;}
+.search-inline span { display:inline-block; min-width:80px; text-align:right; }
+.row listContent{margin-top:10px;}

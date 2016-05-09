@@ -1,0 +1,49 @@
+/** header css **/
+body { font: 12px/1.5 tahoma,arial,宋体b8b\4f53; }
+
+.placeholder { color: #aaa; }
+
+article { padding: 10px 20px; margin: 0 auto; position: relative; min-height: 500px; }
+
+#logo_wrap { height: 120px; vertical-align: baseline; position: relative; }
+    #logo_wrap h1 { display: inline-block; position: absolute; bottom: 10px; }
+
+#IE8 #logo_wrap h1 { display: block; position: static; bottom: auto; margin-top: 25px; }
+
+#logo_wrap address > div { position: absolute; right: 5px; bottom: 5px; text-align: right; }
+#logo_wrap address h4 { display: inline; font-size: 1em; }
+
+#support_line { background-position: -0px -364px; height: 42px; line-height: 42px; display: inline-block; padding-left: 50px; margin-bottom: 10px; }
+    #support_line strong { font-size: 1.5em; color: #0088CC; font-weight: normal; }
+
+#follow_us a { display: inline-block; padding-top: 38px; margin-left: 10px; min-width: 42px; text-align: center; }
+
+a.weibo { background-position: -0px -556px; }
+a.weixin { background-position: -0px -744px; }
+a.favorite { background-position: -0px -1112px; }
+
+.dropdown-menu a:hover, .dropdown-submenu:hover > a { background: #3A77C9 !important; }
+
+.login-form { border: 1px solid #d2d2d2; border-radius: 4px; width: 400px; margin-top: 20px; }
+p.recommend { width: 340px; padding-left: 60px; background-color: white; background-position: -0px -928px; }
+.login-form .control-label { width: 90px; }
+
+.login-form .controls { margin-left: 110px; }
+
+.login-form legend { text-indent: 10px; }
+
+/** footer css **/
+footer { border-top: 1px solid #d2d2d2; text-align: center; }
+
+nav ul { padding-top: 10px; text-indent: 0; word-spacing: -5px; }
+
+nav li { display: inline-block; list-style: none; width: 50px; border: 1px solid #d2d2d2; border-width: 0 1px 0 1px; padding: 0 10px; }
+
+.sprites-0 { background: url('../Images/0_sprites2.png') no-repeat; }
+
+/**login 滚动条*/
+div.recommend { width: 340px; padding-left: 60px; background-color: white; background-position: -0px -928px; }
+.roll-notice { width: 340px; height: 40px; line-height: 40px; vertical-align: middle; overflow: hidden; }
+    .roll-notice ul { margin: 0; height: 40px; vertical-align: middle; }
+        .roll-notice ul li { margin: 0; height: 40px; vertical-align: middle; }
+            .roll-notice ul li a { color: #000000; }

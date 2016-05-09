@@ -1,0 +1,100 @@
+<!-- 外部开发者应用信息管理编辑弹出对话框 -->
+@using Portal.Client.Core
+@using Portal.Dto
+@{
+    ViewBag.Title = PageUtility.GetMenuName(ViewContext.RouteData, "应用管理");
+    Layout = PageUtility.GetLayout;
+    var item = Model as DeveloperAppDto;
+    bool develop = item.State == DeveloperAppState.Developing;
+    bool create = develop && PageUtility.HasPermission(ClientPermissionCodes.ClientDeveloperApp_Create); //创建
+    bool update = develop && PageUtility.HasPermission(ClientPermissionCodes.ClientDeveloperApp_Update); //编辑
+}
+@section Head{
+    <script type="text/javascript" src="@Url.Content2("~/Scripts/Client/ApplicationList.js")"></script>
+}
+<style type="text/css">
+    .radio-td label {
+        float: left;
+        width: 75px;
+    }
+</style>
+<form action="#" id="detailForm">
+    <input type="hidden" id="hddatakey" name="Id" value="@item.Id" backpageid="@ViewBag.BackPageId" />
+    <table class="Commontable">
+        <tr>
+            <th>
+                应用名称<span class="red">*</span>：
+            </th>
+            <td>
+                @Html.TextBox("txtName", item.Name, new { @Name = "Name", checktype = "S{id:'error1'}L{len:100, msg:'应用名称长度不能超过100'};R{请输入应用名称}", onchange = "c$.checkElement(this)" })
+            </td>
+        </tr>
+        <tr>
+            <th>
+                应用简介：
+            </th>
+            <td>
+                @Html.TextArea("txtDesc", item.Desc, new { @Name = "Desc", checktype = "S{id:'error2'}L{len:500, msg:'应用简介长度不能超过500'};", onchange = "c$.checkElement(this)" })
+            </td>
+        </tr>
+        <tr>
+            <th>
+                应用地址：
+            </th>
+            <td>
+                @Html.TextBox("txtUrl", item.AccessUrl, new { @Name = "AccessUrl", Class = "input_common", checktype = "S{id:'error3'}L{len:200, msg:'应用地址长度不能超过200'}U{应用地址输入不正确}", onchange = "c$.checkElement(this)" })
+            </td>
+        </tr>
+        <tr>
+            <th>
+                回调地址<span class="red">*</span>：
+            </th>
+            <td>
+                @Html.TextBox("txtPostUrl", item.CallbackUrl, new { @Name = "CallbackUrl", checktype = "S{id:'error4'}L{len:200, msg:'回调地址长度不能超过200'}U{回调地址输入不正确}R{请输入回调地址};", onchange = "c$.checkElement(this)" })
+            </td>
+        </tr>
+        <tr>
+            <th>
+                应用类型<span class="red">*</span>：
+            </th>
+            <td class="radio-td">
+                <div id="divType" style="width: 250px;">
+                    @Html.Raw(ViewBag.TypeHtml)
+                </div>
+            </td>
+        </tr>
+        @if (item.IsNew())
+        {
+            <tr>
+                <th>
+
+                </th>
+                <td class="error-td">
+                    <label class="checkbox" id="divAgree">
+                        <input type="checkbox" id="ckAgree" checked="checked" /> 我已认真阅读并同意出口易开发者协议
+                    </label>
+                </td>
+            </tr>
+        }
+        <tr>
+            <td></td>
+            <td>
+                @if (item.IsNew())
+                {
+                    if (create)
+                    {
+                        <input type="button" value="创建应用" class="btn btn-primary" onclick="SaveData()" />
+                        @Html.Raw("&nbsp;&nbsp;&nbsp;")
+                    }
+                }
+                else if (update)
+                {
+                    <input type="button" value="提 交" class="btn btn-primary" onclick="SaveData()" />
+                    @Html.Raw("&nbsp;&nbsp;&nbsp;")
+                }
+                <input type="button" value="取消" class="btn" onclick="Cancel()">
+            </td>
+        </tr>
+    </table>
+</form>
+

@@ -1,0 +1,27 @@
+﻿@using Portal.Web.Admin.Core
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewBag.Title</title>
+    <!--CK1-Portal-LoginPage 用于ajax碰到Response.Redirect时前端从定向到登录页-->
+    <meta name="CK1-Portal-LoginPage">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, Chrome=1">
+    
+    <!-- 防止被iframe -->
+    <script> if (this.location != top.location) { top.location = this.location; } </script>
+    @Styles.Render("~/bundles/css/login")
+    <script type="text/javascript" language="javascript">
+    // js绝对路径,须写在有可能引用此变量的文件前
+    var ServiceAppPath = '@Url.Content("~/")';
+    </script>
+</head>
+<body>
+    <div class="main">
+        @RenderBody()
+    </div>
+    <div id="amazon-root"></div>
+    @Scripts.Render("~/bundles/js/login")
+    <script type="text/javascript" src="@Url.Content2("~/Scripts/Account/Login.js")"></script>
+</body>
+</html>

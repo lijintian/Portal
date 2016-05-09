@@ -1,0 +1,117 @@
+﻿@model Portal.Web.Admin.Model.PermissionSetting.ClonePermission
+<form action="#" id="samePermissionForm">
+    <table id="table1" class="tab-pane active form_table">
+        <tr>
+            <th>
+                源用户<span class="red">*</span>：
+            </th>
+            <td>
+                <input id="txtFromUser" class="input-common" type="text" name="fromUserLoginName" value="@Model.FromUserLoginName" checktype="S{id:'error1'}R{请输入源帐号}" />
+            </td>
+        </tr>
+        <tr>
+            <th>
+                目标用户<span class="red">*</span>：
+            </th>
+            <td>
+                <input id="txtToUser" class="input-common" type="text" name="toUserLoginName" value="@Model.ToUserLoginName" checktype="S{id:'error2'}R{请输入目标帐号}" />
+            </td>
+        </tr>
+    </table>
+    @{Html.RenderPartial("~/Views/Control/ErrorControl.cshtml", 3);}
+</form>
+<script>
+    $(function() {
+        UserAutocomplete("#txtFromUser");
+        UserAutocomplete("#txtToUser");
+    });
+    function UserAutocomplete(selector) {
+        $(selector).typeahead(
+            {
+            hint: false,
+            minLength: 1 }, 
+            {
+            name: 'states',
+            displayKey: 'value',
+            source: function (query, process) {
+                var parameter = new Object();
+                parameter.LoginName = query;
+                parameter.UserType = @Model.userType;
+                $.post('@Url.Action("GetUserJson", "User")', parameter, function (data) {
+                    var users = data;
+                    var loginNames = new Array();
+                    for (var i = 0; i < users.length;i++)
+                    {
+                        loginNames.push({ value:users[i].LoginName});
+                    }
+                    process(loginNames);
+                });
+            }
+        });
+    }
+
+    //保存用户同步权限
+    function SaveClonePermission(obj) {
+        //debugger;
+        var checkresult = c$.checkForm(this.form);
+        if(!check())
+        {
+            return;
+        }
+        if (!checkresult) { $("#dtips").show(); return false; }
+        var postObject = $("#samePermissionForm").BfeSerialize();
+        $(this).ajaxBfeData({
+            url: 'Admin/PermissionSetting/SaveClonePermission', data: postObject, type: 'post', dataType: 'Json',
+            success: function (data) {
+                if (data.Status) {
+                    c$.alert(data.ErrorMessage);
+                    $(obj).Close();
+                } else {
+                    c$.alert(data.ErrorMessage);
+                }
+            }
+        });
+    }
+
+    function check()
+    {
+        var isValid=true;
+        if($("#txtFromUser").val()!=""&&$("#txtToUser").val()!="")
+        {
+            if($("#txtFromUser").val()==$("#txtToUser").val())
+            {
+                isValid=false;
+                c$.alert("源用户和目标用户不能相等");
+            }
+        }
+        return isValid;
+
+    }
+</script>
+<style>
+    .divTitle {
+        width: 100px;
+        display: inline-block;
+        text-align: right;
+    }
+
+    .divContent {
+        width: 200px;
+        display: inline-block;
+    }
+
+    .Boxbody {
+        /*重写弹出框样式使autocomplete能显示在弹出框上方*/
+        overflow: visible;
+    }
+
+
+    .BodyL {
+    float: left;
+    overflow: visible;
+    padding: 10px 0 10px 20px;
+}
+    .Boxfooter {
+        z-index: -1;
+    }
+</style>

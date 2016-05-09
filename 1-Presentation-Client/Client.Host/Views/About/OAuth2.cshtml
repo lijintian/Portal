@@ -1,0 +1,180 @@
+﻿<!--了解OAuth2.0 -->
+@using Portal.Client.Core
+@{
+    Layout = PageUtility.GetOpenLayout;
+}
+<div class="inner">
+    <h1>使用 OAuth 2.0 访问出口易 API</h1>
+    <p>出口易支持 OAuth 2.0 协议的授权访问。关于 OAuth 2.0 协议规范，请参考<a target="_blank" href="http://oauth.net/2/">这里</a>。</p>
+    <p>使用 OAuth 2.0 的流程可以简单概括为：</p>
+    <ol>
+        <li>应用向出口易请求授权</li>
+        <li>出口易为用户显示一个授权页面，用户在此页面确认是否同意应用的请求</li>
+        <li>如果用户同意授权，应用会获取到一个访问令牌(access_token)，通过此令牌，应用可以访问授权用户的数据。</li>
+        <li>如果访问需要授权的 API，请使用 HTTPS 协议，加上 access_token 的 Header，具体见<a href="@Url.Content("~/About/Index?Code=oauth2#access_token")">获取 access_token</a></li>
+    </ol>
+    <p>出口易支持三种 OAuth 2.0 的授权流程：</p>
+    <ul>
+        <li>服务器的 WEB 应用的授权流程（server-side flow）</li>
+        <li>桌面客户端应用、移动客户端应用的授权流程（native-application flow）</li>
+        <li><a href="@Url.Content("~/About/Index?Code=OAuthBrowser")">直接在浏览器中运行的Javascript应用的授权流程（user-agent flow）</a></li>
+    </ul>
+    <h2><a id="server-side_flow"></a> server-side flow 与 native-application flow</h2>
+    <p>这两种授权流程基本相同，需要通过两步来获取 access_token。</p>
+    <h4>获取 authorization_code</h4>
+    <p>通过在浏览器中访问下面的地址，来引导用户授权，并获得 authorization_code</p>
+    <pre><code>@PageUtility.PortalOpenApiOauth2Url</code></pre>
+    <p>参数：</p>
+    <table class="table table-striped table-bordered table-hover">
+        <tbody>
+            <tr><td style="width: 85px;"><em>参数名称</em></td><td class="textLeft"><em>参数说明</em></td></tr>
+            <tr><td>client_id</td><td class="textLeft">必选参数，应用的唯一标识，对应于ClientId</td></tr>
+            <tr><td>redirect_uri</td><td class="textLeft">必选参数，用户授权完成后的回调地址，应用需要通过此回调地址获得用户的授权结果。此地址必须与在应用注册时填写的回调地址一致。</td></tr>
+            <tr><td>response_type</td><td class="textLeft">必选参数，此值可以为 code 或者 token 。在本流程中，此值为 code</td></tr>
+            <tr><td>scope</td><td class="textLeft">必选参数，申请权限的范围。如果申请多个 scope，使用逗号分隔。</td></tr>
+        </tbody>
+    </table>
+    <p><em>注意</em>：此请求必须是 HTTP GET 方式</p>
+    <p>例如：</p>
+<pre><code>@string.Format("{0}?",PageUtility.PortalOpenApiOauth2Url)
+client_id=YzgyNWQxMGMtN2E3MC00ZTBlLTg5NDgtNTEwZmQ5OGVkYjFk&amp;
+redirect_uri=http://appdemo.test-ck1.cn/back&amp;
+response_type=code&amp;
+scope=3333
+</code></pre>
+    <p>返回结果：</p>
+    <ul>
+        <li>
+            <p>当用户拒绝授权时，浏览器会重定向到 redirect_uri，并附加错误信息</p>
+<pre><code>http://appdemo.test-ck1.cn/back?error=access_denied
+</code></pre>
+        </li>
+        <li>
+            <p>当用户同意授权时，浏览器会重定向到 redirect_uri，并附加 autorization_code</p>
+<pre><code>http://appdemo.test-ck1.cn/back?code=NGVhZTE4Y2UtNjBiNi00NjFjLThlNmUtMmRhYjJhNDA3OTRi
+</code></pre>
+        </li>
+    </ul>
+    <h4 id="access_token">获取 access_token</h4>
+<pre><code>@PageUtility.PortalOpenApiOauth2Url
+</code></pre>
+    <table class="table table-striped table-bordered table-hover">
+        <tbody>
+            <tr><td style="width: 85px;"><em>参数名称</em></td><td class="textLeft"><em>参数说明</em></td></tr>
+            <tr><td>client_id</td><td class="textLeft">必选参数，应用的唯一标识，对应于ClientId</td></tr>
+            <tr><td>redirect_uri</td><td class="textLeft">必选参数，用户授权完成后的回调地址，应用需要通过此回调地址获得用户的授权结果。此地址必须与在应用注册时填写的回调地址一致。</td></tr>
+            <tr><td>response_type</td><td class="textLeft">必选参数，此值可以为 code 或者 token 。在本流程中，此值为 token</td></tr>
+            <tr><td>scope</td><td class="textLeft">必选参数，申请权限的范围。如果申请多个 scope，使用逗号分隔。</td></tr>
+        </tbody>
+    </table>
+    <p><em>注意</em>：此请求必须是 HTTP POST 方式</p>
+    <p>例如：</p>
+<pre><code>@string.Format("{0}?",PageUtility.PortalOpenApiOauth2Url)
+client_id=YzgyNWQxMGMtN2E3MC00ZTBlLTg5NDgtNTEwZmQ5OGVkYjFk&amp;
+redirect_uri=http://appdemo.test-ck1.cn/back&amp;
+response_type=token&amp;
+scope=3333
+</code></pre>
+    <p>返回结果：</p>
+    <ul>
+        <li>
+            <p>当用户拒绝授权时，浏览器会重定向到 redirect_uri，并附加错误信息</p>
+<pre><code>http://appdemo.test-ck1.cn/back?error=access_denied
+</code></pre>
+        </li>
+        <li>
+            <p>当用户同意授权时，浏览器会重定向到 redirect_uri，并附加 autorization_code</p>
+<pre><code>http://appdemo.test-ck1.cn/back?code=NGVhZTE4Y2UtNjBiNi00NjFjLThlNmUtMmRhYjJhNDA3OTRi
+</code></pre>
+        </li>
+    </ul>
+    @*<p>返回结果：</p>
+        <pre><code>{
+          "access_token":"a14afef0f66fcffce3e0fcd2e34f6ff4",
+          "expires_in":3920,
+          "refresh_token":"5d633d136b6d56a41829b73a424803ec",
+          "douban_user_id":"1221"
+        }
+        </code></pre>*@
+    <h4>使用 access_token</h4>
+<pre><code>curl "https://api.douban.com/v2/user/~me"
+     -H "Authorization: Bearer a14afef0f66fcffce3e0fcd2e34f6ff4"
+</code></pre>
+    <h1><a id="token"></a> access_token 有效期 与 refresh_token</h1>
+    <p>在 OAuth 2.0 中，access_token 不再长期有效。在授权获取 access_token 时会一并返回其有效期，也就是返回值中的 expires_in 参数。</p>
+    <p>在 access_token 使用过程中，如果服务器返回106错误：“access_token_has_expired ”，此时，说明 access_token 已经过期，除了通过再次引导用户进行授权来获取 access_token 外，还可以通过 refresh_token 的方式来换取新的 access_token 和 refresh_token。</p>
+    <p>通过 refresh_token 换取 access_token 的处理过程如下：</p>
+<pre><code>https://www.douban.com/service/auth2/token
+</code></pre>
+    <table class="table table-striped table-bordered table-hover">
+        <tbody>
+            <tr><td><em>参数名称</em></td><td class="textLeft"><em>参数说明</em></td></tr>
+            <tr><td>client_id</td><td class="textLeft">必选参数，应用的唯一标识，对应于 APIKey</td></tr>
+            <tr><td>client_secret</td><td class="textLeft">必选参数，应用的唯一标识，对应于出口易 secret</td></tr>
+            <tr><td>redirect_uri</td><td class="textLeft">必选参数，用户授权完成后的回调地址，应用需要通过此回调地址获得用户的授权结果。此地址必须与在应用注册时填写的回调地址一致</td></tr>
+            <tr><td>grant_type</td><td class="textLeft">必选参数，此值可以为 authorization_code 或者 refresh_token。在本流程中，此值为 refresh_token</td></tr>
+            <tr><td>refresh_token</td><td class="textLeft">必选参数，刷新令牌</td></tr>
+        </tbody>
+    </table>
+    <p><em>注意</em>：此请求必须是 HTTP POST 方式，refresh_token 只有在 access_token 过期时才能使用，并且只能使用一次。当换取到的 access_token 再次过期时，使用新的 refresh_token 来换取 access_token</p>
+    <p>例如：</p>
+<pre><code>https://www.douban.com/service/auth2/token?
+  client_id=0b5405e19c58e4cc21fc11a4d50aae64&amp;
+  client_secret=edfc4e395ef93375&amp;
+  redirect_uri=http://appdemo.test-ck1.cn/back&amp;
+  grant_type=refresh_token&amp;
+  refresh_token=5d633d136b6d56a41829b73a424803ec
+</code></pre>
+    <p>返回结果：</p>
+<pre><code>{
+  "access_token":"0e63c03dfb66c4172b2b40b9f2344c45",
+  "expires_in":3920,
+  "refresh_token":"84406d40cc58e0ae8cc147c2650aa20a",
+  "douban_user_id":"1000"
+}
+</code></pre>
+    <h1>错误代码</h1>
+    <p>如果在 API 使用过程中，有错误，则返回结果为：</p>
+<pre><code>{
+  "code":113,
+  "msg":"required_parameter_is_missing: client_id",
+  "request":"GET /shuo/statuses/232323"
+}
+</code></pre>
+    <table class="table table-striped table-bordered table-hover">
+        <tbody>
+            <tr><td><em>错误代码</em></td><td class="textLeft"><em>错误说明</em></td></tr>
+            <tr><td>800F0608</td><td class="textLeft">不支持的请求授权类型</td></tr>
+            <tr><td>800F0609</td><td class="textLeft">请求授权的应用不存在</td></tr>
+            <tr><td>800F0610</td><td class="textLeft">请求授权应用的重定向地址与应用注册时回调地址非同源</td></tr>
+            <tr><td>800F0611</td><td class="textLeft">未指定授权范围参数</td></tr>
+            <tr><td>800F0612</td><td class="textLeft">请求的授权部分不存在，请重新确认授权范围</td></tr>
+            <tr><td>800F0613</td><td class="textLeft">未指定请求授权响应类型(responseType)</td></tr>
+            <tr><td>800F0614</td><td class="textLeft">未指定重定向参数(redirect_uri)</td></tr>
+            <tr><td>800F0615</td><td class="textLeft">未指定应用Clientid参数</td></tr>
+            <tr><td>800F0616</td><td class="textLeft">未指定应用授权范围参数(scope)</td></tr>
+            <tr><td>800F0617</td><td class="textLeft">授权范围与应用授权不匹配，请重新确认授权范围(scope)</td></tr>
+            <tr><td>800F0618</td><td class="textLeft">请求访问Token应用密钥参数未指定.(Client_secret)</td></tr>
+            <tr><td>800F0619</td><td class="textLeft">请求访问Token应用密钥不匹配.(Client_secret)</td></tr>
+            <tr><td>800F0620</td><td class="textLeft">请求访问Token授权类型未指定.(Grant_type)</td></tr>
+            <tr><td>800F0621</td><td class="textLeft">请求访问Token授权类型指定错误，目前支持authorization_code和refresh_token两种方式</td></tr>
+            <tr><td>800F0622</td><td class="textLeft">请求访问Token授权未指定授权码.</td></tr>
+            <tr><td>800F0623</td><td class="textLeft">请求访问的授权码不存在.</td></tr>
+            <tr><td>800F0622</td><td class="textLeft">请求访问的授权码无效.</td></tr>
+            <tr><td>800F0623</td><td class="textLeft">请求访问的授权码不属于当前应用</td></tr>
+            <tr><td>800F0624</td><td class="textLeft">请求访问Token授权未指定刷新Token</td></tr>
+            <tr><td>800F0625</td><td class="textLeft">请求访问Token授权刷新Token不存在</td></tr>
+            <tr><td>800F0626</td><td class="textLeft">请求访问Token授权刷新Token不属于当前应用</td></tr>
+            <tr><td>800F0627</td><td class="textLeft">请求访问Token授权刷新Token无效</td></tr>
+            <tr><td>800F0639</td><td class="textLeft">请求的重定向地址格式不正确</td></tr>
+        </tbody>
+    </table>
+    <table class="table table-striped table-bordered table-hover">
+        <tbody>
+            <tr><td><em>HTTP状态码</em></td><td class="textLeft"><em>说明</em></td></tr>
+            <tr><td>200</td><td class="textLeft">表明 API 的请求正常</td></tr>
+            <tr><td>400</td><td class="textLeft">表明 API 的请求出错，具体原因参考上面列出的错误码</td></tr>
+        </tbody>
+    </table>
+</div>
+

@@ -1,0 +1,12 @@
+﻿@{
+    string key = Guid.NewGuid().ToString("N");
+    string url = "~/Control/GetValidateCode?key=" + key;
+}
+<input type="hidden" id="validateKey" name="validateKey" value="@key" />
+<img id="valiCode" style="cursor: pointer;" src="@Url.Content(url)" alt="验证码" onclick="ChangeCode();return false;" />
+<a href="javascript:void(0)" onclick="ChangeCode();return false;">看不清，换一张</a>
+<script type="text/javascript">
+    function ChangeCode() {
+        $("#valiCode").attr("src", window.ServiceAppPath + "Control/GetValidateCode?key=" + $("#validateKey").val() + "&r=" + (new Date()).getMilliseconds());
+    }
+</script>

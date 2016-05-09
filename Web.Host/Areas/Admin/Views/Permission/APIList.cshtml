@@ -1,0 +1,93 @@
+﻿<!-- 系统页面权限管理明细 -->
+@using Portal.Dto
+@using Portal.Web.Admin.Core
+@using Portal.Web.Core
+@using Portal.Web.Core.Model
+@{
+    var infolist = Model as PageListSource<ApiPermission>;
+    var first = (infolist.PageIndex - 1) * infolist.PageSize + 1;
+    bool update = PageUtility.HasPermission(PermissionCodes.APIPermission_Update);//编辑
+}
+<table class="table table-striped table-bordered table-hover">
+    <thead>
+        <tr>
+            <th style="width: 30px;">
+                编号
+            </th>
+            <th>
+                系统名称
+            </th>
+            <th>
+                名称
+            </th>
+            <th>
+                权限码
+            </th>
+            <th>
+                对外开放
+            </th>
+            @if (update)
+            {
+                <th style="width: 12%; min-width: 80px;">
+                    操作
+                </th>
+            }
+        </tr>
+    </thead>
+    <tbody>
+        @if (infolist.TotalRows > 0)
+        {
+            foreach (var item in infolist.Source)
+            {
+                <tr>
+                    <td>
+                        @first
+                    </td>
+                    <td>
+                        @item.ApplictionName
+                    </td>
+                    <td class="textLeft wordBreak">
+                        @item.Name
+                    </td>
+                    <td class="textLeft wordBreak">
+                        @item.Code
+                    </td>
+                    <td>
+                        @if (item.IsOpened)
+                        {
+                            <span class="label label-lg label-pink arrowed-right">开放</span>
+                        }
+                        else
+                        {
+                            <span class="label label-lg label-yellow arrowed-right">不开放</span>
+                        }
+                    </td>
+                    @if (update)
+                    {
+                        <td>
+                            <button title="编辑" class='btn btn-mini btn-info' onclick="EditApiDailog('@item.Code');">
+                                <i class='ace-icon glyphicon glyphicon-edit'></i>编辑
+                            </button>
+                            @*<button title="删除" class='btn btn-mini btn-danger' onclick="DeleInfo('@item.Id');">
+                                    <i class='ace-icon glyphicon glyphicon-trash'></i>删除
+                                </button>*@
+                        </td>
+                    }
+                </tr>
+                    first++;
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="@(update?7:6)">
+                    @{ Html.RenderPartial("~/Views/Control/NoDataControl.cshtml"); }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@if (infolist.TotalRows > 0)
+{
+    Html.RenderPartial("~/Views/Control/PagingControl.cshtml", infolist.Pageing);
+}

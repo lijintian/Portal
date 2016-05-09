@@ -1,0 +1,33 @@
+﻿@model List<Portal.Dto.PagePermission>
+
+@if (Model.Count() == 0)
+{
+    <div class="level3">没有权限</div>
+}
+else
+{
+<table class="level3">
+    <tbody>
+        @foreach (var pgPe in Model)
+        {//页面
+            <tr>
+                <td>
+                    <div class="level3_1">
+                        <label><input appid="@pgPe.ApplicationId" type="checkbox" value="@pgPe.Code" onchange='Tab$.CheckResultAllByAttribute(this,"page=@pgPe.Id")' pageid=@pgPe.Id /><span class="lbl">@pgPe.Name</span></label>
+                    </div>
+                </td>
+                <td>
+                    <div class="level3_2">
+                        @foreach (var fpm in pgPe.FunctionPermissions)
+                        {//Item
+                            <div>
+                                <label><input appid="@pgPe.ApplicationId" page=@pgPe.Id type="checkbox" value="@fpm.Code" onclick='Tab$.CheckParent(this,"page=@pgPe.Id", "pageId=@pgPe.Id","#txtCurrentUserPermission")' callback="false" /><span class="lbl">@fpm.Name</span></label>
+                            </div>
+                        }
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+}

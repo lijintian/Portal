@@ -1,0 +1,93 @@
+<!-- 外部开发者信息管理编辑弹出对话框 -->
+@using Portal.Client.Core
+@{
+    ViewBag.Title = PageUtility.GetMenuName(ViewContext.RouteData, "修改账号");
+    Layout = PageUtility.GetLayout;
+    var item = Model as Portal.Dto.User;
+}
+@section Head{
+    <script type="text/javascript" src="@Url.Content2("~/Scripts/Client/UserList.js")"></script>
+}
+<style type="text/css">
+    .updatePwd {
+        float: right;padding-right: 5px;
+    }
+    .updatePwd a {
+        color: orange;cursor: pointer;
+    }
+</style>
+<form action="#" id="detailForm">
+    <input type="hidden" value="@item.Id" name="Id" />
+    <input type="hidden" value="@item.LoginName" name="LoginName" />
+    <input type="hidden" id="hdIsUpdatePwd" value="0" />
+    <table class="table_Regesit">
+        <tbody>
+            <tr>
+                <th style="width: 80px;">
+                    用户名：
+                </th>
+                <td>
+                    @item.LoginName
+                    <div class="updatePwd">
+                        <a onclick="UpdatePwd();">修改密码</a>
+                    </div>
+                </td>
+                <td>
+                    
+                </td>
+            </tr>
+            <tr name="trUpdatePwd" style="display: none;">
+                <th>
+                    原始密码<span class="red">*</span>：
+                </th>
+                <td>
+                    @Html.Password("txtOldPassword", null, new { @Name = "OldPassword", checktype = "S{id:'error1'}B{msg:'原始密码只允许输入字母、数字、下划线'}Z{func:CheckOldPassword}L{len:50, msg:'密码长度不能超过50'};", onchange = "c$.checkElement(this)", onkeydown = "return c$.inputNumLetter(event);" })
+                </td>
+            </tr>
+            <tr name="trUpdatePwd" style="display: none;">
+                <th>
+                    新密码<span class="red">*</span>：
+                </th>
+                <td>
+                    @Html.Password("txtPassword", null, new { @Name = "Password", checktype = "S{id:'error2'}B{msg:'新密码只允许输入字母、数字、下划线'}Z{func:CheckPassword}L{len:50, msg:'新密码长度不能超过50'};", onchange = "c$.checkElement(this)", onkeydown = "return c$.inputNumLetter(event);" })
+                </td>
+            </tr>
+            <tr name="trUpdatePwd" style="display: none;">
+                <th>
+                    确认密码<span class="red">*</span>：
+                </th>
+                <td>
+                    @Html.Password("txtAgainPassword", null, new { @Name = "AgainPassword", checktype = "S{id:'error3'}B{msg:'确认密码只允许输入字母、数字、下划线'}Z{func:CheckAgainPassword}L{len:50, msg:'确认密码长度不能超过50'};", onchange = "c$.checkElement(this)", onkeydown = "return c$.inputNumLetter(event);" })
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    邮箱<span class="red">*</span>：
+                </th>
+                <td>
+                    @Html.TextBox("txtEmail", item.Email, new { @Name = "Email", Class = "input_common", checktype = "S{id:'error4'}R{请输入Email}@{请输入正确的邮箱地址}", onchange = "c$.checkElement(this)" })
+                </td>
+                <td>
+                    <span>*请填写正确的邮箱，以便我们与您联系</span>
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    手机号码<span class="red">*</span>：
+                </th>
+                <td>
+                    @Html.TextBox("txtPhone", item.Phone, new { @Name = "Phone", Style = "width:200px", checktype = "S{id:'error5'}L{len:11, msg:'手机号码长度不能超过11'};P{手机号码输入不正确};R{请输入手机号码}", onchange = "c$.checkElement(this)" })
+                </td>
+                <td>
+                    <span>*请填写正确的手机号码，以便我们与您联系</span>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td colspan="2">
+                    <input type="button" value="提交" class="btn btn-primary" id="btnSubmit" onclick="SaveData(this)">
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</form>

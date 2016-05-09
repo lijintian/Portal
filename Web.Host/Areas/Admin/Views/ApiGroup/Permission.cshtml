@@ -1,0 +1,57 @@
+﻿@using Portal.Web.Admin.Model.ApiPermissionGroup
+@model  IEnumerable<Portal.Dto.Application>
+@{
+    GroupApiPermission info = ViewBag.Permissions as GroupApiPermission;
+}
+<form class="tab-content" action="#" id="permissionForm">
+    <div>
+        <input type="hidden" name="Code" value="@info.Code" />
+        <input type="hidden" id="txtCurrentUserRolePermission" value="" />
+        <input type="hidden" name="PermissionCode" id="txtCurrentUserPermission" value="@info.PermissionCode" />
+    </div>
+    <div class="checkBar">
+    </div>
+    <div>
+        @foreach (var app in Model)
+        {
+            <div class="level1">
+                <span class="fa fa-chevron-down  btn btn-info" style="cursor:pointer" aria-hidden="true" applicationid="@app.Id">@app.CnName</span>
+                <div class="level2">
+                    <label><input application type="checkbox" onchange='Tab$.CheckResultAllByAttribute(this,"AppId=@app.Id")' value="" /><span class="lbl">全选</span></label>
+                    <div class="level2_1">
+                        @{ Html.RenderPartial("~/Views/Control/LodingControl.cshtml"); }
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</form>
+<script src="~/Scripts/PermissionSetting/PermissionSettingCommon.js"></script>
+<script type="text/javascript">
+    $(function () {
+        InitPermissionPage();
+    });
+</script>
+<style>
+    .level1 {
+        color: blue;
+        margin-bottom: 10px;
+        word-break: break-all;
+    }
+
+    .level2 {
+        display: none;
+        color: black;
+        margin-top: 5px;
+    }
+
+    .level2_1 {
+        padding-left: 30px;
+    }
+
+        .level2_1 div {
+            display: inline-block;
+            width: 135px;
+            margin-right: 5px;
+        }
+</style>

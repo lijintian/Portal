@@ -1,0 +1,59 @@
+﻿
+/* 设置浮动，减少浮动带来的 bug */
+#processor .fl,.fr {display:inline;}
+#processor .fl {float:left;}
+#processor .fr {float:right;}
+.processorBox li {float: left;width:33.333%;margin-top: 8px;padding: 0;}
+.step_inner {color: #FFFFFF;text-align: center;width: 100px;margin: 0 auto;}
+.step_line {width: 820px;background-color: #9E9F9F;height: 6px;position: absolute;top: 50%;left: 50%;margin: -18px auto auto -395px;z-index: 1; padding: 0;}
+.processorBox li .icon_step {width: 36px;height: 36px;line-height: 36px;display: inline-block;border-radius: 50%;-webkit-border-radius: 50%;-moz-border-radius: 50%;color: #fff;font-size: 18px;text-align: center;background-color: #A4A4A4;position: relative;z-index: 2;}
+.processorBox li.current .icon_step {background-color: #64BD2E;}
+.processorBox h4 {color: #fff;margin-top: 5px;font: 14px/24px "Microsoft YaHei","Arial",sans-serif;}
+.processorBox li.current h4 {color: #64BD2E;}
+
+.div404 {
+    background: url(../../Content/Images/404.png) no-repeat center center; height: 216px;
+}
+.div500 {
+    background: url(../../Content/Images/500.png) repeat center center; height: 241px;
+}
+.input-common {
+    width: 160px !important;
+}
+
+.table_Regesit, .Commontable{width: 550px;margin-top:20px;font: 12px/1.5 tahoma,arial,宋体b8b体;color: #333;}
+.table_Regesit td,.Commontable td {height: 38px;text-align: left;word-break:break-all}
+.table_Regesit th,.Commontable th { text-align: right;white-space:nowrap;}
+.table_Regesit td span{font-size: 12px;color: #989898;line-height: 22px;}
+.wordBreak {white-space:normal;word-wrap:break-word;word-break: normal;}
+
+/*---表格样式 ----*/
+.form_table{width: 550px;margin-top:20px;font: 12px/1.5 tahoma,arial,宋体b8b体;color: #333;}
+.form_table td {height: 26px;text-align: left;word-break:break-all}
+.form_table th { text-align: right;white-space:nowrap;}
+
+/*---错误信息提示框 ----*/
+.error-input {background: #faebeb none repeat scroll 0 0 !important;border: 1px solid #d14848 !important;color: #8f2424 !important;}
+.error-icon {background: #f5f5f5 url("../Images/stuff_1.png") repeat scroll 0 0;height: 18px;position: absolute; width: 22px;margin-top: 7px;cursor: pointer;}
+.error-td  label{float: left;width: 240px;}
+.error-td font {float: left;margin-top: 2px;}
+
+/*表单表格*/
+.input-common{width: 120px;}
+.list{padding: 10px 5px; border-bottom: 1px solid #dedede; color: #353535; margin-top: 5px; clear: both;}
+.list p{line-height: 20px; text-indent: 20px; margin: 5px 0px 5px 15px; overflow: hidden;}                                                                                                                                                                                                                                                                                                                                                                                                         
+.table thead th, 
+.table tbody td{text-align: center;word-break:break-all;}
+.textLeft{text-align: left !important;}
+.textRight{text-align: right !important;}
+.wordBreak {white-space:normal;word-wrap:break-word;word-break: normal;}
+
+.accordion-inner ul { background-color:#EDEDED; border:0px solid #D1D1D1}
+.accordion-inner ul li{ border:0px solid #fff; float:left; margin:0px 10px 4px 0px; width:140px;height:18px; line-height:18px;line-height:20px\9; padding:3px; overflow:hidden;}
+
+/*列表查询头*/
+.search-box {margin-bottom:10px;}
+.search-inline {display:block; float:left; font-size:15px; margin:5px 10px;}
+.search-inline span { display:inline-block; min-width:80px; text-align:right; }
+.row listContent{margin-top:10px;}
+.red{ color: red;}

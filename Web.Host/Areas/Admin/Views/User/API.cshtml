@@ -1,0 +1,57 @@
+﻿<!-- API帐号管理 -->
+@using Portal.Web.Admin.Core
+@using Portal.Web.Core
+@{
+    ViewBag.Title = PageUtility.GetMenuName(ViewContext.RouteData, "API帐号管理");
+    Layout = PageUtility.GetLayout;
+    bool add = PageUtility.HasPermission(PermissionCodes.APIUser_Add);//添加
+    //bool isCanClonePermission = PageUtility.HasPermission(PermissionCodes.APIUser_SetPermission);
+}
+@section Head{
+    @{ Html.RenderPartial("~/Views/Control/AutocompleteCtl.cshtml"); }
+    <script type="text/javascript" src="@Url.Content2("~/Scripts/SysManage/SysUserList.js")"></script>
+}
+<div id="divmain" class="row">
+    <div class="row">
+        <div class="col-xs-12 dataTables_length" id="divFilter">
+            <input type="text" id="txtloginName" name="LoginName" placeholder="登陆名称" class="input-common" />&nbsp;&nbsp;
+            <input type="text" id="txtEmail" name="Email" placeholder="邮箱" class="input-common" />&nbsp;&nbsp;
+            <input type="text" id="txtPhone" name="Phone" placeholder="手机号码" class="input-common" />&nbsp;&nbsp;
+            <span class="input-icon input-icon-right">
+                <input type="text" id="StartTime" name="FromCreatedDateTime" placeholder="创建起始时间" style="width: 120px;" onfocus="WdatePicker({startDate: '%y-%M-%d' ,dateFmt:'yyyy-MM-dd',alwaysUseStartDate: true,isShowClear:false,readOnly:true });">
+                <i class="ace-icon glyphicon glyphicon-calendar"></i>
+            </span>
+            至
+            <span class="input-icon input-icon-right">
+                <input type="text" id="EndTime" name="ToCreatedDateTime" placeholder="创建结束时间" style="width: 120px;" onfocus="WdatePicker({startDate: '%y-%M-%d' ,dateFmt:'yyyy-MM-dd',alwaysUseStartDate: true,isShowClear:false,readOnly:true });">
+                <i class="ace-icon glyphicon glyphicon-calendar"></i>
+            </span>
+            <button class="btn btn-purple" onclick="SearchInfo();">
+                <i class="ace-icon glyphicon glyphicon-search"></i>查询
+            </button>
+            @*@if (isCanClonePermission)
+                {
+                    <button class="btn btn-purple" onclick="javascript: ClonePermissionDailog('@((int)Portal.Dto.UserType.InternalApi)','');">
+                        <i class="ace-icon glyphicon glyphicon-cog"></i>克隆API帐号权限
+                    </button>
+                }*@
+            @if (add)
+            {
+                <button class="btn btn-info" onclick="CreateDailog(); ">
+                    <i class="ace-icon glyphicon glyphicon-plus-sign"></i> 新增
+                </button>
+            }
+        </div>
+    </div>
+    <div id="divcontent" class="row listContent">
+        @{Html.RenderPartial("APIList");}
+    </div>
+</div>
+<script type="text/javascript" language="javascript">
+    // 保存各查询参数
+    var SearchConfig = {
+        IsPostBack: true,
+        UserType: 'Api'
+    };
+</script>
+

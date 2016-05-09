@@ -1,0 +1,102 @@
+﻿<!-- 系统用户信息管理编辑弹出对话框 -->
+@{
+    var item = Model as Portal.Dto.User;
+}
+<form class="form-horizontal" action="#" id="detailForm">
+    <input type="hidden" id="hddatakey" name="Id" value="@item.Id" />
+    <input type="hidden" id="hdIsApproved" name="IsApproved" value="0" />
+    @*<input type="hidden" id="hdIsUpdatePwd" value="@(item.IsNew()?1:0)" />
+    <span class="red">提示：用户名、密码是以邮箱的形式发送给用户</span>*@
+    <table id="table1" class="tab-pane active form_table">
+        @if (item.IsNew())
+        {
+            <tr>
+                <th>
+                    用户名<span class="red">*</span>：
+                </th>
+                <td>
+                    @Html.TextBox("txtLoginName", item.LoginName, new { @Name = "LoginName", checktype = "S{id:'error1'}L{len:50, msg:'用户名长度不能超过50'}R{请输入用户名}", onchange = "c$.checkElement(this)" })
+                </td>
+            </tr>
+            @*<tr>
+                <th>
+                    密码<span class="red">*</span>：
+                </th>
+                <td>
+                    @Html.Password("txtPassword", null, new { @Name = "Password", checktype = "S{id:'error2'}L{len:50, msg:'密码长度不能超过50'}B{msg:'密码只允许输入字母、数字、下划线'}Z{func:CheckPassword};R{请输入密码}", onchange = "c$.checkElement(this)", onkeydown = "return c$.inputNumLetter(event);" })
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    确认密码<span class="red">*</span>：
+                </th>
+                <td>
+                    @Html.Password("txtAgainPassword", null, new { @Name = "AgainPassword", checktype = "S{id:'error3'}L{len:50, msg:'确认密码长度不能超过50'}B{msg:'确认密码只允许输入字母、数字、下划线'}Z{func:CheckAgainPassword}R{请输入确认密码}", onchange = "c$.checkElement(this)", onkeydown = "return c$.inputNumLetter(event);" })
+                </td>
+            </tr>*@
+        }
+        else
+        {
+            <tr>
+                <th>
+                    用户名：
+                </th>
+                <td>
+                    @item.LoginName
+                    @*<div style="float: right;padding-right: 5px;">
+                        <a onclick="UpdatePwd();">修改密码</a>
+                    </div>*@
+                </td>
+            </tr>
+            @*<tr name="trUpdatePwd" style="display: none;">
+                <th>
+                    原始密码：
+                </th>
+                <td>
+                    @Html.Password("txtOldPassword", null, new { @Name = "OldPassword", checktype = "S{id:'error1'}Z{func:CheckOldPassword}L{len:50, msg:'原始密码长度不能超过50'}B{msg:'原始密码只允许输入字母、数字、下划线'};", onchange = "c$.checkElement(this)", onkeydown = "return c$.inputNumLetter(event);" })
+                </td>
+            </tr>
+            <tr name="trUpdatePwd" style="display: none;">
+                <th>
+                    新密码：
+                </th>
+                <td>
+                    @Html.Password("txtPassword", null, new { @Name = "Password", checktype = "S{id:'error2'}Z{func:CheckPassword}L{len:50, msg:'新密码长度不能超过50'}B{msg:'新密码只允许输入字母、数字、下划线'};", onchange = "c$.checkElement(this)", onkeydown = "return c$.inputNumLetter(event);" })
+                </td>
+            </tr>
+            <tr name="trUpdatePwd" style="display: none;">
+                <th>
+                    确认密码：
+                </th>
+                <td>
+                    @Html.Password("txtAgainPassword", null, new { @Name = "AgainPassword", checktype = "S{id:'error3'}Z{func:CheckAgainPassword}L{len:50, msg:'确认密码长度不能超过50'}B{msg:'确认密码只允许输入字母、数字、下划线'};", onchange = "c$.checkElement(this)", onkeydown = "return c$.inputNumLetter(event);" })
+                </td>
+            </tr>*@
+        }
+        <tr>
+            <th>
+                邮箱<span class="red">*</span>：
+            </th>
+            <td>
+                @Html.TextBox("txtEmail", item.Email, new { @Name = "Email", checktype = "S{id:'error4'}R{请输入Email}@{请输入正确的Email}", onchange = "c$.checkElement(this)" })
+            </td>
+        </tr>
+        <tr>
+            <th>
+                手机号码<span class="red">*</span>：
+            </th>
+            <td>
+                @Html.TextBox("txtPhone", item.Phone, new { @Name = "Phone", checktype = "S{id:'error5'}L{len:11, msg:'手机号码长度不能超过11'};P{手机号码输入不正确};R{请输入手机号码}", onchange = "c$.checkElement(this)" })
+            </td>
+        </tr>
+        <tr>
+            <th>
+                备注：
+            </th>
+            <td>
+                <textarea rows="3" name="Desc" checktype="S{id:'error6'}L{len:200, msg:'备注长度不能超过200'}" onchange="c$.checkElement(this)">@item.Desc</textarea>
+            </td>
+        </tr>
+    </table>
+    @{Html.RenderPartial("~/Views/Control/ErrorControl.cshtml", 6);}
+</form>

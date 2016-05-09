@@ -1,0 +1,12 @@
+﻿<PermissionCodes>
+  <Segment Name="Portal Permission">
+    <PermissionCode Name="ExternalUser" Code="ExternalUser" Desc="外部开发者账号 查看"/>
+    <PermissionCode Name="ExternalUser_Update" Code="ExternalUser_Update" Desc="外部开发者账号 修改" />
+    <PermissionCode Name="ClientDeveloperApp" Code="ClientDeveloperApp" Desc="外部开发者应用管理 查询" />
+    <PermissionCode Name="ClientDeveloperApp_View" Code="ClientDeveloperApp_View" Desc="外部开发者应用管理 查看" />
+    <PermissionCode Name="ClientDeveloperApp_Update" Code="ClientDeveloperApp_Update" Desc="外部开发者应用管理 更新" />
+    <PermissionCode Name="ClientDeveloperApp_Delete" Code="ClientDeveloperApp_Delete" Desc="外部开发者应用管理 删除" />
+    <PermissionCode Name="ClientDeveloperApp_Audit" Code="ClientDeveloperApp_Audit" Desc="外部开发者应用管理 提交审核" />
+    <PermissionCode Name="ClientDeveloperApp_Create" Code="ClientDeveloperApp_Create" Desc="外部开发者应用管理 创建" />
+  </Segment>
+</PermissionCodes>

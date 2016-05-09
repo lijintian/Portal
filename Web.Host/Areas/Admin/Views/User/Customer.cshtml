@@ -1,0 +1,51 @@
+﻿<!-- 客户帐号管理 -->
+@using Portal.Web.Admin.Core
+@{
+    ViewBag.Title = PageUtility.GetMenuName(ViewContext.RouteData, "客户帐号管理");
+    Layout = PageUtility.GetLayout;
+    bool isCanClonePermission = PageUtility.HasPermission(Portal.Web.Core.PermissionCodes.Customer_SetPermission);
+}
+@section Head{
+    @{ Html.RenderPartial("~/Views/Control/AutocompleteCtl.cshtml"); }
+    <script type="text/javascript" src="@Url.Content2("~/Scripts/SysManage/SysUserList.js")"></script>
+}
+<div id="divmain" class="row">
+    <div class="row">
+        <div class="col-xs-12 dataTables_length" id="divFilter">
+            <input type="text" name="LoginName" class="input-common" placeholder="请输入名称" />&nbsp;&nbsp;
+            <input type="text" name="ClientNo" class="input-common" placeholder="请输入客户代码" />&nbsp;&nbsp;
+            日期：
+            <span class="input-icon input-icon-right">
+                <input type="text" id="StartTime" name="FromCreatedDateTime" style="width: 120px;" onfocus="WdatePicker({startDate: '%y-%M-%d' ,dateFmt:'yyyy-MM-dd',alwaysUseStartDate: true,isShowClear:false,readOnly:true });">
+                <i class="ace-icon glyphicon glyphicon-calendar"></i>
+            </span>
+            至
+            <span class="input-icon input-icon-right">
+                <input type="text" id="EndTime" name="ToCreatedDateTime" style="width: 120px;" onfocus="WdatePicker({startDate: '%y-%M-%d' ,dateFmt:'yyyy-MM-dd',alwaysUseStartDate: true,isShowClear:false,readOnly:true });">
+                <i class="ace-icon glyphicon glyphicon-calendar"></i>
+            </span>
+            &nbsp;&nbsp;
+            <button class="btn btn-purple" onclick="javascript:SearchInfo();">
+                <i class="ace-icon glyphicon glyphicon-search"></i>查询
+            </button>
+            @Html.Raw(ViewBag.BatchImportSource)
+            @if (isCanClonePermission)
+            {
+                <button class="btn btn-purple" onclick="javascript: ClonePermissionDailog('@((int)Portal.Dto.UserType.Customer)','');">
+                    <i class="ace-icon glyphicon glyphicon-cog"></i>克隆用户权限
+                </button>
+            }
+        </div>
+    </div>
+    <div id="divcontent" class="row listContent">
+        @{Html.RenderPartial("CustomerList");}
+    </div>
+</div>
+<script type="text/javascript" language="javascript">
+    // 保存各查询参数
+    var SearchConfig = {
+        IsPostBack: true,
+        UserType: 'Customer'
+    };
+</script>
+

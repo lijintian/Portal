@@ -1,0 +1,48 @@
+﻿<!-- 管理授权码 -->
+@using Portal.Dto
+@using Portal.Web.Admin.Core
+@using Portal.Web.Core.Model
+@{
+    ViewBag.Title = PageUtility.GetMenuName(ViewContext.RouteData, "管理授权码");
+    Layout = PageUtility.GetLayout;
+    var infolist = Model as PageListSource<AuthorizationCodeDto>;
+    var clientId = infolist.GetValue("ClientId");
+}
+@section Head{
+    <script type="text/javascript" src="@Url.Content2("~/Scripts/Client/AuthorizationCodeList.js")"></script>
+}
+<div id="divmain" class="row">
+    <div class="row">
+        <div class="col-xs-12 dataTables_length" id="divFilter">
+            <input type="text" placeholder="应用ClientId" name="ClientId" class="input-common" value="@clientId" />&nbsp;&nbsp;
+            <input type="text" placeholder="授权码" name="Code" class="input-common" />&nbsp;&nbsp;
+            <input type="text" id="txtName" name="UserName" placeholder="授权客户" class="input-common" />&nbsp;&nbsp;
+            <span class="input-icon input-icon-right">
+                <input type="text" name="StartTime" placeholder="授权起始时间" style="width: 120px;" onfocus="WdatePicker({startDate: '%y-%M-%d' ,dateFmt:'yyyy-MM-dd',alwaysUseStartDate: true,isShowClear:false,readOnly:true });">
+                <i class="ace-icon glyphicon glyphicon-calendar"></i>
+            </span>
+            至
+            <span class="input-icon input-icon-right">
+                <input type="text" name="EndTime" placeholder="授权结束时间" style="width: 120px;" onfocus="WdatePicker({startDate: '%y-%M-%d' ,dateFmt:'yyyy-MM-dd',alwaysUseStartDate: true,isShowClear:false,readOnly:true });">
+                <i class="ace-icon glyphicon glyphicon-calendar"></i>
+            </span>
+            <button class="btn btn-purple" onclick="SearchInfo();">
+                <i class="ace-icon glyphicon glyphicon-search"></i>查询
+            </button>&nbsp;&nbsp;
+            @if (!string.IsNullOrEmpty(clientId))
+            {
+                <button class="btn btn-purple" onclick="Back();"><i class="ace-icon fa fa-share"></i>返 回</button>
+            }
+        </div>
+    </div>
+    <div id="divcontent" class="row listContent">
+        @{Html.RenderPartial("List");}
+    </div>
+</div>
+<script type="text/javascript" language="javascript">
+    // 保存各查询参数
+    var SearchConfig = {
+        IsPostBack: true,
+        ClientId: "@clientId"
+    };
+</script>

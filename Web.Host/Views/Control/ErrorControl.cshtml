@@ -1,0 +1,12 @@
+﻿@using Portal.Web.Admin.Core
+@{
+    var length = Convert.ToInt32(Model);
+}
+<div class="tips" id="dtips">
+    <img src="@Url.Ck1Content("portal/Images/close.png")" onclick="c$.HideError('dtips')" class="dtipsColse" alt="error" />
+    @for (int i = 1; i <= length; i++)
+    {
+        <p id="@("error" + i)" name="error">
+        </p>
+    }
+</div>

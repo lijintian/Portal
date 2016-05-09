@@ -1,0 +1,178 @@
+﻿@*左侧菜单*@
+@using Portal.Dto
+@using Portal.Web.Admin.Model
+@{
+    var list = Model as NavMenuInfo[];
+    int count = list == null ? 0 : list.Count();
+    var self = (int)MenuTarget.Self;
+}
+<style type="text/css">
+    #sidebar-shortcuts-large > .btn-group > .btn {
+        border-width: 4px !important;
+    }
+
+    .menuMargin {
+        margin-right: -150px;
+        margin-top: -35px;
+    }
+</style>
+<div id="sidebar" class="sidebar responsive" style="overflow:scroll;overflow-x:hidden; overflow-y:auto;">
+    <script type="text/javascript">
+        try {
+            ace.settings.check('sidebar', 'fixed');
+        } catch (e) { }
+    </script>
+    <ul class="nav nav-list" id="mainMenu">
+        @if (count > 0)
+        {
+            foreach (var item in list)
+            {
+                @GetMenuLevel1(item, self)
+            }
+        }
+    </ul>
+    <script type="text/javascript">
+        $(function () {
+            Tab$.BindMenu();
+        });
+    </script>
+    <div class="sidebar-toggle sidebar-collapse" id="sidebar-collapse">
+        <i class="ace-icon fa fa-angle-double-left" data-icon1="ace-icon fa fa-angle-double-left" data-icon2="ace-icon fa fa-angle-double-right"></i>
+    </div>
+    <script type="text/javascript">
+        try { ace.settings.check('sidebar', 'collapsed'); } catch (e) { }
+    </script>
+</div>
+
+@helper GetMenuLevel1(NavMenuInfo menu, int self)
+{
+    var current = menu.Current;
+    <li id="@string.Format("Li{0}",current.Id)">
+        @if (menu.ChildCount > 0)
+        {
+            <a href="javascript:void(0)" class="dropdown-toggle" id="@current.Id" title="@current.Name">
+                <i class="@string.Format("menu-icon fa {0}", current.ClassName)"></i><span class="menu-text">@current.Name</span>
+                <b class="arrow fa fa-angle-down"></b>
+            </a>
+            <b class="arrow"></b>
+            <ul class="submenu">
+                @foreach (var childItem in menu.Child)
+                {
+                    if (childItem.ChildCount > 0)
+                    {
+                        @GetMenuLevel2(childItem, current.Id, self)
+                    }
+                    else
+                    {
+                        <li id="@childItem.Current.Id">
+                            @GetHref(childItem.Current, current.Id, current.Id, self)
+                        </li>
+                    }
+                }
+            </ul>
+        }
+        else
+        {
+            <a name="navMenu" href="@(string.IsNullOrEmpty(current.Url) ? "#" : current.IsAbsoluteUrl ? current.Url : Url.Content(current.Url))" target="@(current.Target == self ? "mainFrame" : "_blank")" class="dropdown-toggle" title="@current.Name">
+                <i class="@string.Format("menu-icon fa {0}", current.ClassName)"></i><span class="menu-text">@current.Name</span>
+            </a>
+            <b class="arrow"></b>
+        }
+    </li>
+}
+
+@helper GetMenuLevel2(NavMenuInfo info, string parentId, int self)
+{
+    <li id="@info.Current.Id" parentid="@parentId" title="@info.Current.Name">
+        <a class="dropdown-toggle" href="#">
+            <i class="menu-icon fa fa-caret-right"></i>
+            @info.Current.Name
+            <b class="arrow fa fa-angle-down"></b>
+        </a>
+        <b class="arrow"></b>
+        <ul class="submenu">
+            @foreach (var item in info.Child)
+            {
+                if (item.ChildCount > 0)
+                {
+                    @GetMenuLevel3(item, parentId, info.Current.Id, self)
+                }
+                else
+                {
+                    <li>
+                        @GetHref(item.Current, parentId, info.Current.Id, self)
+                        <b class="arrow"></b>
+                    </li>
+                }
+            }
+        </ul>
+    </li>
+}
+
+@helper GetMenuLevel3(NavMenuInfo info, string firstId, string parentId, int self)
+{
+    string css = "menu-icon fa fa-plus purple";
+    <li id="@info.Current.Id" parentid="@parentId" title="@info.Current.Name">
+        <a href="#" class="dropdown-toggle">
+            <i class="menu-icon fa fa-leaf green"></i>
+            @info.Current.Name
+            <b class="arrow fa fa-angle-down"></b>
+        </a>
+        <b class="arrow"></b>
+        <ul class="submenu">
+            @foreach (var item in info.Child)
+            {
+                if (item.ChildCount > 0)
+                {
+                    @GetMenuLevel4(item, firstId, item.Current.Id, self)
+                }
+                else
+                {
+                    <li class="">
+                        @GetCssHref(item.Current, css, firstId, info.Current.Id, self)
+                        <b class="arrow"></b>
+                    </li>
+                }
+            }
+        </ul>
+    </li>
+}
+
+@helper GetMenuLevel4(NavMenuInfo info, string firstId, string parentId, int self)
+{
+    int i = 1;
+    <li class="dropdown-submenu dropdown-hover" id="@info.Current.Id" parentid="@parentId" title="@info.Current.Name">
+        <a class="clearfix" tabindex="-1" href="#">
+            <span class="pull-left">@info.Current.Name</span>
+            <i class="ace-icon fa fa-caret-right pull-right"></i>
+        </a>
+        <ul class="dropdown-menu pull-right menuMargin">
+            @foreach (var item in info.Child)
+            {
+                <li>
+                    @GetHref(item.Current, firstId, info.Current.Id, self)
+                </li>
+                if (i < info.ChildCount)
+                {
+                    <li class="divider"></li>
+                }
+                i++;
+            }
+        </ul>
+    </li>
+}
+
+@helper GetCssHref(MenuInfo child, string css, string firstId, string parentId, int self)
+{
+    <a name="navMenu" href="@(string.IsNullOrEmpty(child.Url)?"#": child.IsAbsoluteUrl?child.Url:Url.Content(child.Url))" target="@(child.Target == self ? "mainFrame" : "_blank")" parentid="@parentId" firstid="@firstId" title="@child.Name">
+        <i class="@css"></i>
+        @child.Name
+    </a>
+}
+
+@helper GetHref(MenuInfo child, string firstId, string parentId, int self)
+{
+    <a name="navMenu" href="@(string.IsNullOrEmpty(child.Url) ? "#" : (child.IsAbsoluteUrl ? child.Url : Url.Content(child.Url)))" target="@(child.Target == self ? "mainFrame" : "_blank")" parentid="@parentId" firstid="@firstId" title="@child.Name">
+        @child.Name
+    </a>
+}

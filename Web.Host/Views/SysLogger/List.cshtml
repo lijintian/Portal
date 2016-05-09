@@ -1,0 +1,95 @@
+﻿<!-- 系统日志管理明细 -->
+@using Portal.Dto
+@using Portal.Web.Admin.Core
+@using Portal.Web.Core.Common
+@using Portal.Web.Core.Model
+@{
+    var infolist = Model as PageListSource<SysLoggerDto>;
+    var first = (infolist.PageIndex - 1) * infolist.PageSize + 1;
+}
+<table class="table table-striped table-bordered table-hover">
+    <thead>
+        <tr>
+            <th style="width: 45px;">
+                编号
+            </th>
+            <th style="width:15%;">
+                应用系统
+            </th>
+            <th style="width:15%;">
+                标题
+            </th>
+            <th style="width:12%;">
+                操作人员
+            </th>
+            <th style="width:8%;">
+                来源
+            </th>
+            <th style="width:6%;">
+                类型
+            </th>
+            <th style="width:6%;">
+                等级
+            </th>
+            <th style="width:12%;">
+                操作时间
+            </th>
+            <th>
+                操作详情
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (infolist.TotalRows > 0)
+        {
+            foreach (var item in infolist.Source)
+            {
+                <tr>
+                    <td>
+                        @first
+                    </td>
+                    <td>
+                        @item.ApplicationName
+                    </td>
+                    <td>
+                        <a href="javascript:void(0);" onclick="ViewDailog('@item.Id')" title="@(item.Title)">
+                            @item.Title
+                        </a>
+                        @*@string.Format("操作系统：{0} 浏览器:{1}", item.OS, item.Browser)*@
+                    </td>
+                    <td>
+                        @item.CreatedBy
+                    </td>
+                    <td>
+                        @item.Ip
+                    </td>
+                    <td>
+                        @item.Type.GetDescription()
+                    </td>
+                    <td>
+                        @item.Level.GetDescription()
+                    </td>
+                    <td>
+                        <label utc="@item.CreatedOn.Show("yyyy-MM-dd HH:mm")" utcformat="YYYY-MM-DD HH:mm"></label>
+                    </td>
+                    <td class="textLeft">
+                        @item.Content
+                    </td>
+                </tr>
+                first++;
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="9">
+                    @{ Html.RenderPartial("~/Views/Control/NoDataControl.cshtml"); }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@if (infolist.TotalRows > 0)
+{
+    Html.RenderPartial("~/Views/Control/PagingControl.cshtml", infolist.Pageing);
+}

@@ -1,0 +1,45 @@
+﻿
+@{
+    ViewBag.Title = "DoAuth";
+}
+
+<h2>客户授权测试</h2>
+<div>
+    <input type="text" value="" name="clientId" id="clientId" placeholder="clientId" style="width:800pt"/>
+    <br/><br />
+    <select name="responseType" id="responseType">
+        <option value="code">Code</option>
+        <option value="token">Token</option>
+    </select>
+    <br /><br />
+
+    <input type="text" value="" name="scope" id="scope" placeholder="scope" />
+    <br /><br />
+    
+    <input type="button" value="请求客户授权" name="requestAuth" id="requestAuth" />
+</div>
+
+@section scripts {
+    <script>
+        $(function() {
+            $("#requestAuth").click(function () {
+                var url = "http://openapi.test-ck1.cn/oauth2/authorization?";
+                var clientId = $("#clientId").val();
+                var responseType = $("#responseType").val();
+                var redirectUrl = window.LocalAppPath + "/Authorization/GetCode";
+                var scope = $("#scope").val();
+                
+                //scope={0}&redirect_uri={1}&response_type={2}client_id={3}
+                url += "client_id=" + clientId;
+                url += "&response_type=" + responseType;
+                url += "&scope=" + scope;
+                url += "&redirect_uri=" + encodeURI(redirectUrl);
+                
+                window.open(url);
+            });
+        })
+    </script>
+}
+
+
+

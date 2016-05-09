@@ -1,0 +1,78 @@
+﻿@using Portal.Web.Admin.Core
+@model Portal.Dto.User
+@{
+    Layout = PageUtility.GetLayout;
+    ViewBag.Title = PageUtility.GetMenuName(ViewContext.RouteData, "设置用户权限");
+    bool isEmployee = (bool)ViewData["IsEmployee"];
+ }
+@{ Html.RenderPartial("../Control/CommonControl");}
+
+@if (Model == null)
+{
+    <div class="divTitle">当前用户不存在或未同步到Portal</div>
+}
+else
+{
+    if (isEmployee)
+    {
+        <div class="divTitle">
+            设置用户 <font color="blue">@Model.DisplayName</font>  的权限
+        </div>
+        <div class="divContent">
+            @{Html.RenderAction("AsynUserPermissionSetting", "PermissionSetting", Model.LoginName);}
+        </div>
+        <div class="divBottom">
+            <button title="保存" class='btn  btn-info' onclick="SaveDataPermission()">
+                <i class='ace-icon glyphicon glyphicon-plus-sign'></i>保存
+            </button>
+        </div>
+    }
+    else
+    {
+         <div class="divContent">
+        @{Html.RenderAction("ExternalUnPermission", "Control");}
+             </div>
+    }
+}
+<style type="text/css">
+    .divTitle {
+       text-align:center;
+       font-size:x-large;
+       margin:10px;
+    }
+
+    .divBottom {
+       text-align:center;
+    }
+
+    .level1 {
+      padding-bottom:5px;
+    }
+
+    .level2 {
+      padding-top:5px;
+    }
+</style>
+
+
+<script type="text/javascript">
+    var ServiceAppPath = '@Url.Content("~/")';
+
+    //保存用户角色信息
+    function SaveDataPermission() {
+        var postObject = $("#permissionForm").BfeSerialize();
+        $(this).ajaxBfeData({
+            url: 'Admin/PermissionSetting/SaveUserPermission', data: postObject, type: 'post', dataType: 'Json',
+            success: function (data) {
+                if (data.Status) {
+                    c$.alert(data.ErrorMessage);
+                } else {
+                    c$.alert(data.ErrorMessage);
+                }
+            } 
+        });
+    }
+</script>
+
+
+

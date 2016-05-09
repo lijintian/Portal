@@ -1,0 +1,28 @@
+﻿<!-- 菜单管理 -->
+@using Portal.Dto.Request.Enum
+@using Portal.Web.Admin.Core
+@using Portal.Web.Core
+@{
+    ViewBag.Title = PageUtility.GetMenuName(ViewContext.RouteData, "菜单管理");
+    Layout = PageUtility.GetLayout;
+    bool add = PageUtility.HasPermission(PermissionCodes.Menu_Add);//添加
+}
+@section Head{
+    <script type="text/javascript" src="@Url.Content2("~/Scripts/SysManage/SysMenuList.js")"></script>
+    @{ Html.RenderPartial("~/Views/Control/TreeControl.cshtml");}
+}
+<div class="dataTables_filter">
+    @if (add)
+    {
+        <a class="btn btn-info" onclick="CreateDailog(); ">
+            <i class="ace-icon glyphicon glyphicon-plus-sign"></i> 新增
+        </a>
+        @Html.Raw(PageUtility.GetBatchImportHtml(TemplateType.ImportMenu, PermissionCodes.ImportMenu))
+    }
+</div>
+
+<div class="row">
+    <div class="row" id="divcontent">
+        @{Html.RenderPartial("List");}
+    </div>
+</div>

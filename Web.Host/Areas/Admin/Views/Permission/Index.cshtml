@@ -1,0 +1,47 @@
+﻿<!-- 系统页面权限管理 -->
+@using Portal.Dto.Request.Enum
+@using Portal.Web.Admin.Core
+@using Portal.Web.Core
+@{
+    ViewBag.Title = PageUtility.GetMenuName(ViewContext.RouteData, "系统页面权限管理");
+    Layout = PageUtility.GetLayout;
+    bool add = PageUtility.HasPermission(PermissionCodes.Permission_Add);//添加
+}
+@section Head{
+    <script type="text/javascript" src="@Url.Ck1Content("portal/Js/jquery.json-2.4.js")"></script>
+    <script type="text/javascript" src="@Url.Content2("~/Scripts/SysManage/PermissionList.js")"></script>
+}
+<div id="divmain" class="row">
+    <div class="row">
+        <div class="col-xs-10 dataTables_length" id="divFilter">
+            系统：@Html.DropDownList("ApplicationList2", null, new { @style = "width:150px", onchange = "SearchInfo();" })
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            名称：<input type="text" id="content1" class="input-common" />&nbsp;&nbsp;&nbsp;&nbsp;
+            权限码：<input type="text" id="code1" class="input-common" />&nbsp;&nbsp;&nbsp;&nbsp;
+            <a class="btn btn-purple" onclick="SearchInfo();">
+                <i class="ace-icon glyphicon glyphicon-search"></i>查询
+            </a>
+        </div>
+        <div class="col-xs-2">
+            <div class="dataTables_filter">
+                @if (add)
+                {
+                    <a class="btn btn-info" onclick="CreateDailog();">
+                        <i class="ace-icon glyphicon glyphicon-plus-sign"></i> 新增
+                    </a>
+                }
+                @Html.Raw(PageUtility.GetBatchImportHtml(TemplateType.ImportPermission, PermissionCodes.ImportPermission))
+            </div>
+        </div>
+    </div>
+    <div id="divcontent" class="row listContent">
+        @{Html.RenderPartial("List");}
+    </div>
+</div>
+<script type="text/javascript" language="javascript">
+    // 保存各查询参数
+    var SearchConfig = {
+        IsPostBack: true
+    };
+</script>
+

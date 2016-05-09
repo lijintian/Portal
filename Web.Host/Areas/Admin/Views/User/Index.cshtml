@@ -1,0 +1,50 @@
+﻿<!-- 用户管理 -->
+@using Portal.Web.Admin.Core
+@{
+    ViewBag.Title = PageUtility.GetMenuName(ViewContext.RouteData, "内部员工账号管理");
+    Layout = PageUtility.GetLayout;
+    bool isCanClonePermission = PageUtility.HasPermission(Portal.Web.Core.PermissionCodes.User_SetPermission);
+}
+@section Head{
+    @{ Html.RenderPartial("~/Views/Control/AutocompleteCtl.cshtml"); }
+    <script type="text/javascript" src="@Url.Content2("~/Scripts/SysManage/SysUserList.js")"></script>
+}
+<div id="divmain" class="row">
+    <div class="row">
+        <div class="col-xs-12 dataTables_length" id="divFilter">
+            @Html.DropDownList("SearchTypeSource", null, new { @class = "input-common", @style = "width:150px", onchange = "TypeChange();" })
+            <input type="text" id="txtKeyword" name="LoginName" placeholder="请输入登陆名称" class="input-common" />&nbsp;&nbsp;
+            <span class="input-icon input-icon-right">
+                <input type="text" id="StartTime" name="FromCreatedDateTime" placeholder="创建起始时间" style="width: 120px;" onfocus="WdatePicker({startDate: '%y-%M-%d' ,dateFmt:'yyyy-MM-dd',alwaysUseStartDate: true,isShowClear:false,readOnly:true });">
+                <i class="ace-icon glyphicon glyphicon-calendar"></i>
+            </span>
+            至
+            <span class="input-icon input-icon-right">
+                <input type="text" id="EndTime" name="ToCreatedDateTime" placeholder="创建结束时间" style="width: 120px;" onfocus="WdatePicker({startDate: '%y-%M-%d' ,dateFmt:'yyyy-MM-dd',alwaysUseStartDate: true,isShowClear:false,readOnly:true });">
+                <i class="ace-icon glyphicon glyphicon-calendar"></i>
+            </span>
+            <a class="btn btn-purple" onclick="SearchInfo();">
+                <i class="ace-icon glyphicon glyphicon-search"></i>查询
+            </a>
+            @Html.Raw(ViewBag.BatchImportSource)
+            @if (isCanClonePermission)
+            {
+                <a class="btn btn-purple" onclick="ClonePermissionDailog('@((int)Portal.Dto.UserType.Employee)','');">
+                    <i class="ace-icon glyphicon glyphicon-cog"></i>克隆用户权限
+                </a>
+            }
+            <a class="btn-link" style="display: none;" onclick="Export();">
+                导出
+            </a>
+        </div>
+    </div>
+    <div id="divcontent" class="row listContent">
+        @{Html.RenderPartial("List");}
+    </div>
+</div>
+<script type="text/javascript" language="javascript">
+    // 保存各查询参数
+    var SearchConfig = {
+        IsPostBack: true
+    };
+</script>

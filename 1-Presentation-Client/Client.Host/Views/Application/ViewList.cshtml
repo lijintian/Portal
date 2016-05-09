@@ -1,0 +1,64 @@
+﻿<!-- 外部开发者应用信息管理查看弹出对话框 -->
+@using Portal.Client.Core
+@using Portal.Dto
+@{
+    ViewBag.Title = PageUtility.GetMenuName(ViewContext.RouteData, "应用管理");
+    Layout = PageUtility.GetLayout;
+    var item = Model as DeveloperAppDto;
+}
+@section Head{
+    <script type="text/javascript" src="@Url.Content2("~/Scripts/Client/ApplicationList.js")"></script>
+}
+<style type="text/css">
+    .accordion .accordion-heading, .accordion .accordion-body {
+        text-align: left;
+    }
+
+        .accordion .accordion-body .Commontable {
+            margin-top: 0px;
+        }
+
+            .accordion .accordion-body .Commontable th {
+                width: 80px;
+            }
+</style>
+<div class="row-fluid">
+    <div class="accordion" id="accordion2">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                <a class="accordion-toggle" data-toggle="collapse" href="#colView">
+                    应用属性
+                </a>
+            </div>
+            <div id="colView" class="accordion-body in collapse">
+                <div class="accordion-inner">
+                    @{Html.RenderPartial("View");}
+                </div>
+            </div>
+        </div>
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                <a class="accordion-toggle collapsed" data-toggle="collapse" href="#colPermission">
+                    API权限
+                </a>
+            </div>
+            <div id="colPermission" class="accordion-body collapse">
+                <div class="accordion-inner">
+                    @{Html.RenderPartial("Permission");}
+                </div>
+            </div>
+        </div>
+        <div class="accordion-group" style="@(item.State == DeveloperAppState.Approved ? "display: none;" : "")" id="accordion3">
+            <div class="accordion-heading">
+                <a class="accordion-toggle collapsed" data-toggle="collapse" href="#colAudit">
+                    提交审核
+                </a>
+            </div>
+            <div id="colAudit" class="accordion-body collapse">
+                <div class="accordion-inner" id="innerAudit">
+                    @{Html.RenderPartial("Audit");}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

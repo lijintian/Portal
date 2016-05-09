@@ -1,0 +1,113 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!--错误编码按“段”分，每一段长度为0x100-->
+<ErrorCodes>
+  <Segment Name="System Error" BeginCode="800F0001" EndCode="800F0100">
+    <!-- System Error: 800F0001-800F0100 -->
+    <ErrorCode Name="InternalError" Value="800F0001" Msg="Internal error" />
+    <ErrorCode Name="ValidationRequestParameterNull" Value="800F0002" Msg="The request parameter can not null" />
+  </Segment>
+  <Segment Name="Generic Error" BeginCode="800F0101" EndCode="800F0200">
+    <!-- Generic Error: 800F0101-800F0200 -->
+    <ErrorCode Name="LoginFailed" Value="800F0101" Msg="Login failed" />
+    <ErrorCode Name="AccessDenied" Value="800F0102" Msg="Access denied" />
+    
+  </Segment>
+
+  <Segment Name="Portal Business Error" BeginCode="800F0501" EndCode="800F0700">
+    <!--Application -->
+    <ErrorCode Name="ExistsSameApplicationName" Value="800F0501" Msg="系统已存在相同的应用名称{0}"/>
+
+
+
+    <!--User -->
+    <ErrorCode Name="CannotChangeUserStateToEnabled" Value="800F0530" Msg="当前用户已经为启用状态，不能再次转为启用状态" />
+    <ErrorCode Name="CannotChangeUserStateToDisabled" Value="800F0531" Msg="当前用户已经为禁用状态，不能再次转为禁用状态" />
+    <ErrorCode Name="ExistsSameUserLoginName" Value="800F0532" Msg="系统已存在相同的用户名{0}"/>
+    <ErrorCode Name="LoginNameOrPasswordInvalid" Value="800F0533" Msg="用户名或密码无效"/>
+    <ErrorCode Name="ExistsSameRoleName" Value="800F0534" Msg="已存在相同的角色名称"/>
+    <ErrorCode Name="ExistsSameRoleCode" Value="800F0535" Msg="已存在相同的角色代码"/>
+    <ErrorCode Name="NoFoundRoleCode" Value="800F0536" Msg="系统不存在角色代码:{0}"/>
+<<<<<<< HEAD
+
+    <!--Permission -->
+    <ErrorCode Name="NoFoundPermissionCode" Value="800F0550" Msg="系统不存在权限代码:{0}"/>
+    
+    
+=======
+    <!--Menu -->
+    <ErrorCode Name="NoFoundMenuId" Value="800F0540" Msg="不存在该菜单ID:{0}"/>
+>>>>>>> origin/shaoliang/150808_EditPortal
+    <!-- PRC Business Error: 800F0201-800F0300 -->
+    <!--<ErrorCode Name="NotFoundPricingSheet" Value="800F0201" Msg="价格表不存在" />
+    <ErrorCode Name="CannotChangePricingSheetStateToValid" Value="800F0202" Msg="当前状态为有效，不能再次转为有效状态" />
+    <ErrorCode Name="CannotChangePricingSheetStateToInValid" Value="800F0203" Msg="当前状态为无效，不能再次转为无效状态" />
+    <ErrorCode Name="ExistsSamePricingSheetName" Value="800F0204" Msg="系统已存在相同的报价表名称" />
+    <ErrorCode Name="PackageMinWeightNotBeGreaterThanMaxWeight" Value="800F0205" Msg="最小重量不可超过最大重量" />
+    <ErrorCode Name="NotFoundCountry" Value="800F0206" Msg="找不到名称为{0}的国家" />
+    <ErrorCode Name="ExistsSamePricingGradeName" Value="800F0207" Msg="已经存在相同的等级名称({0})" />
+    <ErrorCode Name="ExistsSameGradeInPricingGradeSheet" Value="800F0208" Msg="已经存在相同的等级({0})的等级报价表" />
+    <ErrorCode Name="NotFoundPricingGrade" Value="800F0209" Msg="找不到名称为{0}的报价等级" />
+    <ErrorCode Name="NotFoundPricingGradeSheet" Value="800F0210" Msg="找不到指定的等级报价表" />
+
+    <ErrorCode Name="CannotChangeLogisticsProductStateToValid" Value="800F0211" Msg="当前产品状态为有效，不能再次转为有效状态" />
+    <ErrorCode Name="CannotChangeLogisticsProductStateToInValid" Value="800F0212" Msg="当前产品状态为无效，不能再次转为无效状态" />
+
+    <ErrorCode Name="NotFoundLogisticsProducts" Value="800F0213" Msg="以下产品代码不存在：{0}" />
+    <ErrorCode Name="ExistsSameLogisticsProductName" Value="800F0214" Msg="系统已存在相同的产品名称" />
+    <ErrorCode Name="NotFoundLogisticsProductByCode" Value="800F0215" Msg="产品{0}不存在" />
+    <ErrorCode Name="ExistsSameLogisticsProductCode" Value="800F0216" Msg="系统已存在相同的产品代码" />
+    <ErrorCode Name="NotFoundLogisticsProductRouteId" Value="800F0217" Msg="找不到产品对应的物流线路图" />
+    <ErrorCode Name="NotFoundLogisticsProductGradeSheet" Value="800F0218" Msg="找不到产品{0}对应的等级{1}的报价表" />
+
+    <ErrorCode Name="NotFoundPricingGradeById" Value="800F0218" Msg="找不到报价等级" />
+    <ErrorCode Name="ExistsCustomerPricingGrade" Value="800F0219" Msg="客户对应的产品已经设置了等级，不可重复添加" />
+    <ErrorCode Name="NotFoundProductRelatedses" Value="800F0220" Msg="组合产品下找不到任何存在的普通产品" />
+    <ErrorCode Name="NotFoundLogisticsProductInGroupProductByWarehouse" Value="800F021" Msg="找不到组合产品({0})下，存在处理点为{1}的子产品" />
+
+    <ErrorCode Name="LessThanMinWeightByCheckLimit" Value="800F0222" Msg="低于最小重量限制 {0}{1}" />
+    <ErrorCode Name="MoreThanMaxWeightByCheckLimit" Value="800F0223" Msg="超出最大重量限制 {0}{1}" />
+    <ErrorCode Name="MoreThanFirstLengthByCheckLimit" Value="800F0224" Msg="最长边超过限制 {0}{1}" />
+    <ErrorCode Name="MoreThanSecondLengthByCheckLimit" Value="800F0225" Msg="最二边超过限制 {0}{1}" />
+    <ErrorCode Name="MoreThanThridLengthByCheckLimit" Value="800F0226" Msg="最三边超过限制 {0}{1}" />
+    <ErrorCode Name="MoreThanVolumeLongByCheckLimit" Value="800F0227" Msg="L+(W+H)*2超过限制 {0}{1}" />
+    <ErrorCode Name="MoreThanVolumeByCheckLimit" Value="800F0228" Msg="L*W*H超过限制 {0}{1}" />
+    <ErrorCode Name="MoreThanPerimeterByCheckLimit" Value="800F0229" Msg="L+W+H超过限制 {0}{1}" />
+    <ErrorCode Name="PricingSheetWeightPackingVerificationNotThrough" Value="800F0230" Msg="产品报价表重量尺寸验证不通过： {0}" />
+
+    <ErrorCode Name="NotExistAvailableChargeModelByLogNode" Value="800F0231" Msg="服务不支持，目的节点：{0}" />
+    <ErrorCode Name="NotExistAvailableChargeModelByAddress" Value="800F0232" Msg="服务不支持，城市：{0}，省份：{1}，国家：{2}，邮编：{3}" />
+    
+    <ErrorCode Name="NotExistAvailableChargeModel" Value="800F0233" Msg="服务不支持此派送地" />
+    <ErrorCode Name="NotExistAvailableChargeModelByWeight" Value="800F0235" Msg="服务不支持，重量：{0}{1}" />
+    <ErrorCode Name="NotFoundValidPricingSheet" Value="800F0230" Msg="找不到产品{0}下已生效的报价表" />
+    <ErrorCode Name="NotFoundPricingGradeSheetByGrade" Value="800F0231" Msg="找不到等级为{0}的等级报价表" />
+
+    <ErrorCode Name="NotFoundDefaultPricingGrade" Value="800F0232" Msg="找不到默认等级" />
+    <ErrorCode Name="NotTargetZoneByAddress" Value="800F0233" Msg="产品不支持到目标地区，国家：{0}，省/州：{1}，城市：{2}，邮编：{3}" />
+    <ErrorCode Name="NotExistAvailableChargeByWeight" Value="800F0234" Msg="产品下分区({0})不支持运送{1} {2}的货物" />
+
+
+    <ErrorCode Name="ImportAssociatedCustomersMustHaveAItem" Value="800F0235" Msg="导入关联客户列表必须至少有一个客户" />
+    <ErrorCode Name="ImportProductGratesMustHaveAItem" Value="800F0236" Msg="导入产品等级列表必须至少有一个产品等级" />
+    <ErrorCode Name="ImportPricingDiscountMustHaveAItem" Value="800F0237" Msg="导入折扣信息列表必须至少有一个折扣信息" />
+    <ErrorCode Name="NotFoundCustomerGradeTemplate" Value="800F0238" Msg="客户等级方案不存在" />
+    <ErrorCode Name="NotFoundPricingDiscountTemplate" Value="800F0239" Msg="折扣方案不存在" />   
+    <ErrorCode Name="ExistsSameCustomerGradeTemplatetName" Value="800F0260" Msg="系统已存在相同的客户等级方案名称" />
+    <ErrorCode Name="ExistsSamePricingDiscountTemplatetName" Value="800F0261" Msg="系统已存在相同的折扣方案名称" />
+
+    <ErrorCode Name="PricingSheetZoneErrors" Value="800F0262" Msg="报价分区配置存在错误：{0}" />
+    <ErrorCode Name="PricingSheetBaseChargeErrors" Value="800F0263" Msg="基础运费配置存在错误：{0}" />
+    <ErrorCode Name="PricingSheetSurchargesErrors" Value="800F0264" Msg="附加费配置存在错误：{0}" />
+
+    <ErrorCode Name="BaseChargeWeightSectionOverlap" Value="800F0265" Msg="分区{0}的重量段({1}-{2})与重量段({3}-{4})存在重叠交叉" />
+    <ErrorCode Name="PricingSheetZoneNoExists" Value="800F0266" Msg="分区{0}不存在" />
+
+    <ErrorCode Name="AssociateCustomerErrors" Value="800F0267" Msg="关联客户存在错误：{0}" />
+    <ErrorCode Name="AssociateCustomerValidedTimeRepeat" Value="800F0268" Msg="客户{0}存在存在多个时间段，只能有一个" />
+
+    <ErrorCode Name="MultiGradeInProductForGradeTemplate" Value="800F0269" Msg="客户等级方案中，产品{0}，存在了多个等级（{1}）" />
+ 
+    <ErrorCode Name="ProductNotSupportedWarehouse" Value="800F0269" Msg="产品({0})不支持处理点({1})" />-->
+
+  </Segment>
+</ErrorCodes>

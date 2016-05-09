@@ -1,0 +1,156 @@
+﻿@using Portal.Dto
+@using Portal.Web.Admin.Core
+@using Portal.Web.Core
+<!-- 系统页面权限管理编辑弹出对话框 -->
+@{
+    var item = Model as PagePermission;
+    var index = 1;
+    bool add = PageUtility.HasPermission(PermissionCodes.Permission_AddDetail);//添加明细
+}
+<form class="form-horizontal" action="#" id="detailForm" style="width: 680px;">
+   
+    <table id="formMain" class="tab-pane active form_table">
+        <tr>
+            <th style="width: 100px;white-space: nowrap;">所属系统<span class="red">*</span>：</th>
+            <td style="width: 240px;">
+                <input type="hidden" id="hddatakey" name="Id" value="@item.Id" />
+                @if (string.IsNullOrEmpty(item.Id))
+                {
+                    @Html.DropDownList("ApplicationList", null, new { @Name = "ApplicationId", checktype = "S{id:'error1'}R{请选择所属系统};", onchange = "c$.checkElement(this);" })
+                }
+                else
+                {
+                    @Html.DropDownList("ApplicationList", null, new { @Name = "ApplicationId", @Disabled = "disabled", checktype = "S{id:'error1'}R{请选择所属系统};", onchange = "c$.checkElement(this);" })
+                }
+            </td>
+            <th style="width: 100px;">
+                名称<span class="red">*</span>：
+            </th>
+            <td style="width: 240px;">
+                @Html.TextBox("txtName", item.Name, new { @Name = "Name", checktype = "S{id:'error2'}L{len:20, msg:'名称长度不能超过20'};R{请输入名称}", onchange = "c$.checkElement(this);" })
+            </td>
+        </tr>
+        <tr>
+            <th>
+                权限码<span class="red">*</span>：
+            </th>
+            <td>
+                @if (string.IsNullOrEmpty(item.Id))
+                {
+                    @Html.TextBox("txtCode", item.Code, new { @Name = "Code", Class = "input_common", checktype = "S{id:'error3'}L{len:50, msg:'权限码长度不能超过50'}R{请输入权限码}", onchange = "c$.checkElement(this)", onkeydown = "return c$.inputNumLetter(event);" })
+                }
+                else
+                {
+                    @item.Code
+                    <input type="hidden" name="Code" value="@item.Code" />
+                }
+            </td>
+            <th>兼容老系统：</th>
+            <td>
+                <label>
+                    <input id="cbIsCompatible" name="IsCompatible" type="checkbox" @(item.IsCompatible ? "checked='checked'" : "") /><span class="lbl">兼容</span>
+                </label>
+            </td>
+        </tr>
+        <tr>
+            <th>排序：</th>
+            <td>
+                @Html.TextBox("txtOrder", item.Order, new { @Name = "Order",checktype = "S{id:'error5'}I{min:0,max:2147483647,  name:'排序'}", onchange = "c$.checkElement(this)", onkeydown = "return c$.inputNumber(event);" })
+            </td>
+            <th>
+                描述：
+            </th>
+            <td>
+                @Html.TextBox("txtDesc", item.Desc, new { @Name = "Desc", checktype = "S{id:'error6'}L{len:200, msg:'描述长度不能超过200'}", onchange = "c$.checkElement(this)" })
+            </td>
+        </tr>
+    </table>
+    @if (add)
+    {
+        <div style="width: 99%;">
+            <div class="dataTables_filter">
+                <a class="btn btn-info" onclick=" AddDetail(); ">
+                    <i class="ace-icon glyphicon glyphicon-plus-sign"></i>新增
+                </a>
+            </div>
+            <div class="clearfix">&nbsp;&nbsp;</div>
+        </div>
+    }
+    else
+    {
+        <div class="clearfix">&nbsp;&nbsp;</div>
+    }
+    @{Html.RenderPartial("~/Views/Control/ErrorControl.cshtml", 7);}
+    <table class="table table-striped table-bordered table-hover" id="tableDetail">
+        <thead>
+            <tr>
+                <th style="width: 12%;">
+                    编号
+                </th>
+                <th>
+                    名称<span class="red">*</span>
+                </th>
+                <th style="width: 30%;">
+                    权限码<span class="red">*</span>
+                </th>
+                <th>
+                    排序
+                </th>
+                @*<th style="width: 12%;">
+                        操作
+                    </th>*@
+            </tr>
+        </thead>
+        <tbody>
+            @if (item.FunctionPermissions.Any())
+            {
+                foreach (var item2 in item.FunctionPermissions)
+                {
+                    <tr>
+                        <td>
+                            @index
+                        </td>
+                        <td>
+                            <input type="hidden" value="@item2.Id" name="Id" />
+                            <input type="text" value="@item2.Name" name="Name" class="span2" />
+                        </td>
+                        <td>
+                            @if (string.IsNullOrEmpty(item2.Code))
+                            {
+                                <input type="text" value="@item2.Code" name="Code" class="input-mini" onkeydown="return c$.inputNumLetter(event);" />
+                            }
+                            else
+                            {
+                                @item2.Code
+                                <input type="hidden" name="Code" value="@item2.Code" />
+                            }
+                        </td>
+                        <td>
+                            <input type="text" value="@item2.Order" name="Order" class="input-mini" onkeydown="return c$.inputNumber(event);" />
+                        </td>
+                        <!--<td>
+                                <a title="删除" class='btn btn-mini btn-danger' onclick="DeleInfo2('@(item2.Id)',this);">
+                                    <i class='ace-icon glyphicon glyphicon-trash'></i></a>
+                            </td>-->
+                    </tr>
+                    index++;
+                }
+            }
+            <tr style="display: none" id="trLast">
+                <td></td>
+                <td>
+                    <input type="text" name="Name" class="span2" />
+                </td>
+                <td>
+                    <input type="text" name="Code" class="span2" onkeydown="return c$.inputNumLetter(event);" />
+                </td>
+                <td>
+                    <input type="text" name="Order" class="input-mini" onkeydown="return c$.inputNumber(event);" />
+                    <a title="删除" class='btn btn-mini btn-danger' onclick="DeleInfo2('',this);">
+                        <i class='ace-icon glyphicon glyphicon-trash'></i>
+                    </a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</form>

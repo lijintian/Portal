@@ -1,0 +1,35 @@
+﻿@using Portal.Dto
+@using Portal.OAuth.Core
+@{
+    ViewBag.Title = "出口易客户授权";
+    Layout = PageUtility.GetLayout;
+    var groups = ViewBag.ApiGroups as List<ApiPermissionGroup>;
+}
+@this.Html.ValidationSummary()
+<form action="@(this.Url.Action("DoAuthorization") + this.Request.Url.Query)" method="POST">
+    <h5>
+        【<b style="color: blue">@this.ViewBag.AppName</b>】应用需要您授权以下权限
+    </h5>
+    <div class="row-fluid">
+        <div class="span12">
+            <table class="form_table">
+                @foreach (var g in groups)
+                {
+                    <tr>
+                        <td class="td1">@(g.Name)：</td>
+                        <td>@g.Desc</td>
+                    </tr>
+                }
+            </table>
+        </div>
+    </div>
+    <br />
+    <input type="submit" value="同意授权" class="btn btn-primary" />
+    <input type="button" value="再想想" name="think" id="think" class="btn btn-primary" onclick="window.close()" />
+</form>
+<style type="text/css">
+.form_table{width: 550px;margin-top:20px;font: 12px/1.5 tahoma,arial,宋体b8b体;color: #333;}
+.form_table td {height: 26px;text-align: left;word-break:break-all}
+.form_table th { text-align: right;white-space:nowrap;}
+.td1{width: 150px;font-weight: bolder;font-size: 13px;text-align: right !important;}
+</style>

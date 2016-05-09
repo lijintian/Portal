@@ -1,0 +1,128 @@
+﻿<!-- 系统用户信息管理明细 -->
+@using Portal.Dto
+@using Portal.Web.Admin.Core
+@using Portal.Web.Core
+@using Portal.Web.Core.Common
+@using Portal.Web.Core.Model
+@{
+    var infolist = Model as PageListSource<User>;
+    var internalUser = UserType.InternalApi;
+    bool update = PageUtility.HasPermission(PermissionCodes.APIUser_Update); //编辑
+    bool approve = PageUtility.HasPermission(PermissionCodes.APIUser_Approve);//启用
+    bool disapprove = PageUtility.HasPermission(PermissionCodes.APIUser_DisApprove);//禁用
+    bool reset = PageUtility.HasPermission(PermissionCodes.APIUser_ResetPassword); //重置密码
+    bool setRole = PageUtility.HasPermission(PermissionCodes.APIUser_SetRole);//设置角色
+    bool setPermission = PageUtility.HasPermission(PermissionCodes.APIUser_SetPermission);//设置权限
+    bool showOperate = update || approve || disapprove || reset || setRole || setPermission;//是否显示操作
+}
+<table class="table table-striped table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>
+                登录名称
+            </th>
+            <th>
+                邮箱
+            </th>
+            <th>
+                手机号码
+            </th>
+            <th style="width: 8%;">
+                类型
+            </th>
+            <th style="width: 8%;">
+                状态
+            </th>
+            <th style="width: 10%;">
+                创建时间
+            </th>
+            @if (showOperate)
+            {
+                <th>
+                    操作
+                </th>
+            }
+        </tr>
+    </thead>
+    <tbody>
+        @if (infolist.TotalRows > 0)
+        {
+            foreach (var item in infolist.Source)
+            {
+                <tr>
+                    <td>
+                        <label>@item.LoginName</label>
+                    </td>
+                    <td>
+                        <label>@item.Email</label>
+                    </td>
+                    <td>
+                        <label>@item.Phone</label>
+                    </td>
+                    <td>
+                        @(item.UserType == internalUser ? "内部" : "外部")
+                    </td>
+                    <td>
+                        @(item.IsApproved ? "启用" : "禁用")
+                    </td>
+                    <td>
+                        <label utc="@item.CreatedOn.Show("yyyy-MM-dd HH:mm")" utcformat="YYYY-MM-DD"></label>
+                    </td>
+                    @if (showOperate)
+                    {
+                        <td>
+                            @if (update)
+                            {
+                                <button title="编辑" class='btn btn-mini btn-info' onclick="EditDailog('@item.Id','@(item.IsApproved?1:0)');">
+                                    <i class='ace-icon glyphicon glyphicon-edit'></i>编辑
+                                </button>
+                            }
+                            @if (disapprove && item.IsApproved)
+                            {
+                                <button title="禁用" class='btn btn-mini btn-danger' onclick="DeleInfo('@item.LoginName', 0); ">
+                                    <i class='ace-icon glyphicon glyphicon-ban-circle'></i>禁用
+                                </button>
+                            }
+                            else if (approve && !item.IsApproved)
+                            {
+                                <button title="启用" class='btn btn-mini btn-success' onclick="DeleInfo('@item.LoginName', 1); ">
+                                    <i class='ace-icon glyphicon glyphicon-wrench'></i>启用
+                                </button>
+                            }
+                            @if (item.UserType != internalUser && reset)
+                            {
+                                <button title="重置密码" class='btn btn-mini btn-yellow' onclick="Reset('@item.LoginName'); ">
+                                    重置密码
+                                </button>
+                            }
+                            @*@if (item.UserType == internalUser && setRole)
+                                {
+                                    <button title="设置角色" class='btn btn-mini btn-pink' onclick="RoleDailog('@item.Id', '@item.LoginName' ); ">
+                                        <i class='ace-icon glyphicon glyphicon-cog'></i>设置角色
+                                    </button>
+                                }*@
+                            @if (item.UserType == internalUser && setPermission)
+                            {
+                                <button title="设置权限" class='btn btn-mini btn-purple' onclick="PermissionDailog('@item.Id', '@item.LoginName' ); ">
+                                    <i class='ace-icon glyphicon glyphicon-cog'></i>设置权限
+                                </button>
+                            }
+                        </td>
+                    }
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="@(showOperate?7:6)">
+                    @{ Html.RenderPartial("~/Views/Control/NoDataControl.cshtml"); }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@if (infolist.TotalRows > 0)
+{
+    Html.RenderPartial("~/Views/Control/PagingControl.cshtml", infolist.Pageing);
+}

@@ -1,0 +1,104 @@
+<!-- 外部开发者应用信息管理查看弹出对话框 -->
+@using Portal.Client.Core
+@using Portal.Dto
+@using Portal.Web.Core
+@using Portal.Web.Core.Common
+@{
+    var item = Model as DeveloperAppDto;
+    bool update = item.State == DeveloperAppState.Developing && PageUtility.HasPermission(ClientPermissionCodes.ClientDeveloperApp_Update); //编辑
+}
+<input type="hidden" id="hddatakey" name="Id" value="@item.Id" />
+<span style="color: #ff8400;padding-left: 20px;">注意：提交审核后您的应用信息将不能被直接修改。如果有异常情况，请联系<a href="mailto:@(PageUtility.AdminEmail)">系统管理员</a>。</span>
+<table class="Commontable" style="width: 98%;">
+    <tr>
+        <th>
+            应用名称：
+        </th>
+        <td>
+            @item.Name
+        </td>
+    </tr>
+    <tr>
+        <th>
+            应用简介：
+        </th>
+        <td>
+            @item.Desc
+        </td>
+    </tr>
+    <tr>
+        <th>
+            应用地址：
+        </th>
+        <td>
+            @item.AccessUrl
+        </td>
+    </tr>
+    <tr>
+        <th>
+            回调地址：
+        </th>
+        <td>
+            @item.CallbackUrl
+        </td>
+    </tr>
+    <tr>
+        <th>
+            应用类型：
+        </th>
+        <td>
+            @(item.AppType.GetDescription())
+        </td>
+    </tr>
+    <tr>
+        <th>
+            状态：
+        </th>
+        <td>
+            @(item.State.GetDescription())
+        </td>
+    </tr>
+    <tr>
+        <th>
+            ClientId：
+        </th>
+        <td>
+            @item.ClientId
+        </td>
+    </tr>
+    <tr>
+        <th>
+            Secret：
+        </th>
+        <td>
+            @item.Secret
+        </td>
+    </tr>
+    <tr>
+        <th>
+            创建时间：
+        </th>
+        <td>
+            <label utc="@item.CreatedOn.Show("yyyy-MM-dd HH:mm:ss")" utcformat="YYYY-MM-DD HH:mm:ss"></label>
+        </td>
+    </tr>
+    <tr>
+        <th>
+            备注：
+        </th>
+        <td>
+            @item.Remarks
+        </td>
+    </tr>
+    <tr>
+        <td></td>
+        <td>
+            @if (update)
+            {
+                <input type="button" value="更新应用" id="btnSubmit" class="btn btn-primary" onclick="OpenEdit('@item.Id','ViewList')" />
+                @Html.Raw("&nbsp;&nbsp;&nbsp;")
+            }
+            <input type="button" value="取消" class="btn" onclick="Cancel()" />
+        </td>
+    </tr>
+</table>

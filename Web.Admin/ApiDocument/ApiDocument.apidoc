@@ -1,0 +1,806 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Portal.Web.Admin</name>
+    </assembly>
+    <members>
+        <member name="T:Portal.Web.Admin.UnityWebApiActivator">
+            <summary>Provides the bootstrapping for integrating Unity with WebApi when it is hosted in ASP.NET</summary>
+        </member>
+        <member name="M:Portal.Web.Admin.UnityWebApiActivator.Start">
+            <summary>Integrates Unity when the application starts.</summary>
+        </member>
+        <member name="M:Portal.Web.Admin.UnityWebApiActivator.Shutdown">
+            <summary>Disposes the Unity container when the application is shut down.</summary>
+        </member>
+        <member name="M:Portal.Web.Admin.Controllers.AccountController.AmazonUkPromotion">
+            <summary>
+            amazon注册推广
+            </summary>
+        </member>
+        <member name="T:Portal.Web.Admin.Controllers.ApiGroupController">
+            <summary>
+            API权限分组
+            </summary>
+        </member>
+        <member name="M:Portal.Web.Admin.Controllers.ApiGroupController.Create">
+            <summary>
+            创建API权限分组
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Portal.Web.Admin.Controllers.ApiGroupController.Permission(System.String)">
+            <summary>
+            角色权限设置
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Portal.Web.Admin.Controllers.ApiGroupController.Save(Portal.Dto.ApiPermissionGroup)">
+            <summary>
+            新增编辑API权限分组保存
+            </summary>
+            <param name="info"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Portal.Web.Admin.Controllers.ApiGroupController.SavePermission(Portal.Web.Admin.Model.ApiPermissionGroup.GroupApiPermission)">
+             <summary>
+            保存API权限分组权限
+             </summary>
+             <returns></returns>
+        </member>
+        <member name="M:Portal.Web.Admin.Controllers.ApiGroupController.GetModel(System.String)">
+            <summary>
+            获取单行记录
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Portal.Web.Admin.Controllers.ApplicationController">
+            <summary>
+             应用系统管理
+            </summary>
+        </member>
+        <member name="M:Portal.Web.Admin.Controllers.ApplicationController.Index">
+            <summary>
+            应用系统列表
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Portal.Web.Admin.Controllers.ApplicationController.Partial">
+            <summary>
+            刷新应用系统列表
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Portal.Web.Admin.Controllers.ApplicationController.Edit(System.String)">
+            <summary>
+            编辑页面
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Portal.Web.Admin.Controllers.ApplicationController.Save(Portal.Dto.Application)">
+            <summary>
+            保存
+            </summary>
+            <param name="info"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Portal.Web.Admin.Controllers.ApplicationController.Add">
+            <summary>
+            新建页面
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:Portal.Web.Admin.Controllers.BaseController.CurrentUser">
+            <summary>
+            当前登录用户信息(保存Session)
+            </summary>
+        </member>
+        <member name="M:Portal.Web.Admin.Controllers.BaseController.ReturnContent(System.String,System.Boolean)">
+            <summary>
+            返回html或json
+            </summary>
+            <param name="str"></param>
+            <param name="isJson"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Portal.Web.Admin.Controllers.BaseController.ReturnJson">
+            <summary>
+            返回JSON格式的字符串
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Portal.Web.Admin.Controllers.BaseController.ReturnJson(System.String,System.Boolean)">
+            <summary>
+            返回JSON格式的字符串
+            </summary>
+            <param name="errorMessage"></param>
+            <param name="status">状态</param>
+            <returns></returns>
+        </member>
+        <member name="M:Portal.Web.Admin.Controllers.BaseController.ReturnView(System.Object,System.Boolean,System.String)">
+            <summary>
+            返回页面或用户控件
+            </summary>
+            <param name="source"></param>
+            <param name="isPostBack">是否非首次加载</param>
+            <param name="viewName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Portal.Web.Admin.Controllers.BaseController.ReturnView``2(Portal.Dto.PagerFindResponse{``0},``1,System.String,System.String)">
+            <summary>
+            返回页面
+            </summary>
+            <param name="list"></param>
+            <param name="parameter"></param>
+            <param name="viewName"></param>
+            <param name="jsName"></param>
+            <typeparam name="T"></typeparam>
+            <typeparam name="TParameter"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:Portal.Web.Admin.Controllers.BaseController.GetPageList``1(Portal.Dto.PagerFindResponse{``0},Portal.Dto.PagerFindRequest,System.String)">
+            <summary>
+            获取分页结果
+            </summary>
+            <param name="list"></param>
+            <param name="parameter"></param>
+            <param name="jsName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Portal.Web.Admin.Controllers.DeveloperAppController.View(System.String)">
+            <summary>
+            查看页
+            </summary>
+        </member>
+        <member name="M:Portal.Web.Admin.Controllers.DeveloperAppController.Detail(System.String)">
+            <summary>
+            编辑页
+            </summary>
+        </member>
+        <member name="M:Portal.Web.Admin.Controllers.DeveloperAppController.Audit(System.String)">
+            <summary>
+            审核列表
+            </summary>
+            <param name="id"></param>
+        </member>
+        <member name="M:Portal.Web.Admin.Controllers.DeveloperAppController.Save(Portal.Dto.DeveloperAppDto)">
+            <summary>
+            更新应用信息
+            </summary>
+            <param name="app"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Portal.Web.Admin.Controllers.DeveloperAppController.Approve(Portal.Dto.Client.DeveloperAppSubmissionContext)">
+            <summary>
+            审核通过
+            </summary>
+        </member>
+        <member name="M:Portal.Web.Admin.Controllers.DeveloperAppController.Reject(Portal.Dto.Client.DeveloperAppSubmissionContext)">
+            <summary>
+            驳回审请
+            </summary>
+        </member>
+        <member name="M:Portal.Web.Admin.Controllers.DeveloperAppController.GetUserList">
+            <summary>
+            获取内部和外部API账号
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Portal.Web.Admin.Controllers.TokenController.Delete(System.String,System.String)">
+            <summary>
+            删除用户
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Portal.Web.Admin.Controllers.FileController.ImportSave(Portal.Dto.Request.Enum.TemplateType)">
+            <summary>
+            上传附件
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Portal.Web.Admin.Controllers.FileController.DownTemplate(Portal.Dto.Request.Enum.TemplateType)">
+            <summary>
+            根据类型下载模板
+            </summary>
+        </member>
+        <member name="M:Portal.Web.Admin.Controllers.FileController.DownErrorFile(System.String)">
+            <summary>
+            下载错误数据附件
+            </summary>
+        </member>
+        <member name="M:Portal.Web.Admin.Controllers.ControlController.SysMenuControl">
+            <summary>
+            系统菜单用户控件
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Portal.Web.Admin.Controllers.ControlController.UnPermission">
+            <summary>
+            无权限提示页面
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Portal.Web.Admin.Controllers.ControlController.ExternalUnPermission">
+            <summary>
+            外部没权限提示页面
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Portal.Web.Admin.Controllers.ControlController.GetNavMenuList(Portal.Dto.Menu[])">
+            <summary>
+            获取导航菜单
+            </summary>
+            <param name="list"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Portal.Web.Admin.Controllers.MenuController.Index(Portal.Web.Admin.Model.SysMenuTreeParameter)">
+            <summary>
+            菜单列表
+            </summary>
+            <param name="parameter"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Portal.Web.Admin.Controllers.MenuController.Detail(System.String)">
+            <summary>
+            菜单信息编辑页面
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Portal.Web.Admin.Controllers.MenuController.Delete(System.String)">
+            <summary>
+            删除菜单
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Portal.Web.Admin.Controllers.MenuController.Save(Portal.Dto.Menu)">
+            <summary>
+            保存菜单信息
+            </summary>
+            <param name="info"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Portal.Web.Admin.Controllers.MenuController.ApplicationIdChange(Portal.Dto.Menu)">
+            <summary>
+            应用系统ID改变时的事件
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Portal.Web.Admin.Controllers.MenuController.GetTreeList(System.Collections.Generic.IEnumerable{Portal.Dto.Menu},System.String)">
+            <summary>
+            根据parentid获取TreeModel数据源
+            </summary>
+            <param name="list"></param>
+            <param name="parentId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Portal.Web.Admin.Controllers.MenuController.GetParentList(System.String,System.String,System.String)">
+            <summary>
+            获取上级菜单下拉框数据源
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Portal.Web.Admin.Controllers.MenuController.GetParentList(System.Collections.Generic.IEnumerable{Portal.Dto.Menu},System.String,System.String)">
+            <summary>
+            获取上级菜单下拉框数据源
+            </summary>
+            <param name="list"></param>
+            <param name="parentId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Portal.Web.Admin.Controllers.MenuController.GetPermissionList(System.String)">
+            <summary>
+            获取权限码列表
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Portal.Web.Admin.Controllers.MenuController.GetAppList">
+            <summary>
+            获取应用系统列表
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Portal.Web.Admin.Controllers.PermissionController.GetApplicationList(System.String)">
+            <summary>
+            获取系统下拉框数据源
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Portal.Web.Admin.Controllers.PermissionController.Index(Portal.Dto.FindPermissionRequest)">
+            <summary>
+            系统页面权限列表
+            </summary>
+            <param name="parameter"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Portal.Web.Admin.Controllers.PermissionController.API(Portal.Dto.FindPermissionRequest)">
+            <summary>
+            API权限列表
+            </summary>
+            <param name="parameter"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Portal.Web.Admin.Controllers.PermissionController.Detail(System.String,System.String)">
+            <summary>
+            权限信息编辑页面
+            </summary>
+            <param name="code"></param>
+            <param name="applicationId">系统ID</param>
+            <returns></returns>
+        </member>
+        <member name="M:Portal.Web.Admin.Controllers.PermissionController.ApiDetail(System.String,System.String)">
+            <summary>
+            权限信息编辑页面
+            </summary>
+            <param name="code"></param>
+            <param name="applicationId">系统ID</param>
+            <returns></returns>
+        </member>
+        <member name="M:Portal.Web.Admin.Controllers.PermissionController.Delete(System.String)">
+            <summary>
+            删除权限
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Portal.Web.Admin.Controllers.PermissionController.Save(Portal.Dto.PagePermission)">
+            <summary>
+            保存系统页面权限信息
+            </summary>
+            <param name="info"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Portal.Web.Admin.Controllers.PermissionController.ApiSave(Portal.Dto.ApiPermission)">
+            <summary>
+            保存API权限信息
+            </summary>
+            <param name="info"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Portal.Web.Admin.Controllers.RoleController.Create(System.String)">
+            <summary>
+            创建角色
+            </summary>
+            <param name="parameter"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Portal.Web.Admin.Controllers.RoleController.GetList(Portal.Dto.Role)">
+            <summary>
+            获取列表
+            </summary>
+            <param name="parameter"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Portal.Web.Admin.Controllers.RoleController.GetModel(System.String)">
+            <summary>
+            获取单行记录
+            </summary>
+            <param name="parameter"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Portal.Web.Admin.Controllers.RoleController.Index">
+            <summary>
+            Index
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Portal.Web.Admin.Controllers.RoleController.ListPartial(Portal.Dto.Role)">
+            <summary>
+            角色列表
+            </summary>
+            <param name="parameter"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Portal.Web.Admin.Controllers.RoleController.Permission(System.String)">
+            <summary>
+            角色权限设置
+            </summary>
+            <param name="roleId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Portal.Web.Admin.Controllers.RoleController.Edit(System.String)">
+            <summary>
+            编辑角色
+            </summary>
+            <param name="parameter"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Portal.Web.Admin.Controllers.RoleController.Save(Portal.Dto.Role)">
+            <summary>
+            新增编辑角色保存
+            </summary>
+            <param name="info"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Portal.Web.Admin.Controllers.RoleController.SavePermission(Portal.Web.Admin.Model.Role.RolePermission)">
+             <summary>
+            保存角色权限
+             </summary>
+             <param name="info"></param>
+             <returns></returns>
+        </member>
+        <member name="M:Portal.Web.Admin.Controllers.RoleController.Delete(Portal.Dto.Role)">
+            <summary>
+            删除角色
+            </summary>
+            <param name="parameter"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Portal.Web.Admin.Controllers.UserController.Index(Portal.Dto.FindUserRequest)">
+            <summary>
+            用户列表
+            </summary>
+            <param name="parameter"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Portal.Web.Admin.Controllers.UserController.Customer(Portal.Dto.FindUserRequest)">
+            <summary>
+            客户帐号管理
+            </summary>
+            <param name="parameter"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Portal.Web.Admin.Controllers.UserController.Api(Portal.Dto.FindUserRequest)">
+            <summary>
+            API帐号列表
+            </summary>
+            <param name="parameter"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Portal.Web.Admin.Controllers.UserController.GetUserJson(Portal.Dto.FindUserRequest)">
+            <summary>
+            获取用户信息的json
+            </summary>
+            <param name="parameter"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Portal.Web.Admin.Controllers.UserController.Detail(System.String)">
+            <summary>
+            用户信息编辑页面
+            </summary>
+            <param name="userId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Portal.Web.Admin.Controllers.UserController.Delete(Portal.Web.Admin.Model.SysUserParameter)">
+            <summary>
+            删除用户
+            </summary>
+            <param name="parameter"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Portal.Web.Admin.Controllers.UserController.ResetPassword(System.String)">
+            <summary>
+            重置密码
+            </summary>
+            <param name="loginName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Portal.Web.Admin.Controllers.UserController.Save(Portal.Dto.User)">
+            <summary>
+            保存用户信息
+            </summary>
+            <param name="info"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Portal.Web.Admin.Controllers.UserController.Check(System.String)">
+            <summary>
+            检测用户名称是否重复
+            </summary>
+            <param name="loginName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Portal.Web.Admin.Controllers.UserController.Export(Portal.Dto.FindUserRequest)">
+            <summary>
+            导出
+            </summary>
+        </member>
+        <member name="M:Portal.Web.Admin.Controllers.PermissionSettingController.AsynUserPermissionSetting(System.String)">
+            <summary>
+            异步加载用户权限
+            </summary>
+            <param name="loginName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Portal.Web.Admin.Controllers.PermissionSettingController.AsynPagePermission(Portal.Dto.FindPermissionRequest)">
+            <summary>
+            异步加载系统页面权限
+            </summary>
+            <param name="applicationId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Portal.Web.Admin.Controllers.PermissionSettingController.AsynApiUserPermissionSetting(System.String)">
+            <summary>
+            异步加载API用户权限
+            </summary>
+            <param name="userId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Portal.Web.Admin.Controllers.PermissionSettingController.AsynApiPermission(Portal.Dto.FindPermissionRequest)">
+            <summary>
+            异步加载系统api权限
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Portal.Web.Admin.Controllers.PermissionSettingController.AsynUserRoleSetting(System.String)">
+            <summary>
+            异步加载角色
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Portal.Web.Admin.Controllers.PermissionSettingController.AsynRole(System.String)">
+            <summary>
+            异步加载系统角色
+            </summary>
+            <param name="applicationId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Portal.Web.Admin.Controllers.PermissionSettingController.SaveUserRole(Portal.Web.Admin.Model.PermissionSetting.UserRole)">
+             <summary>
+            保存用户角色
+             </summary>
+             <param name="userR"></param>
+             <returns></returns>
+        </member>
+        <member name="M:Portal.Web.Admin.Controllers.PermissionSettingController.SaveUserPermission(Portal.Web.Admin.Model.PermissionSetting.UserPermission)">
+             <summary>
+            保存用户角色
+             </summary>
+             <param name="userP"></param>
+             <returns></returns>
+        </member>
+        <member name="M:Portal.Web.Admin.Core.CommonUtility.InitOperateInfo``1(``0)">
+            <summary>
+            初始化用户操作信息
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="info"></param>
+        </member>
+        <member name="M:Portal.Web.Admin.Core.LogicCheckHelper.IsOutLoginFail">
+            <summary>
+            登陆失败超过3次，出现验证码
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="F:Portal.Web.Admin.Core.PageUtility.FileVersion">
+            <summary>
+            缓存文件的版本
+            </summary>
+        </member>
+        <member name="P:Portal.Web.Admin.Core.PageUtility.IsAuthenticated">
+            <summary>
+            是否已经登陆
+            </summary>
+        </member>
+        <member name="P:Portal.Web.Admin.Core.PageUtility.CurrentUser">
+            <summary>
+            当前登陆用户
+            </summary>
+        </member>
+        <member name="P:Portal.Web.Admin.Core.PageUtility.GetLayout">
+            <summary>
+            获取模板名称
+            </summary>
+        </member>
+        <member name="M:Portal.Web.Admin.Core.PageUtility.GetMenuName(System.Web.Routing.RouteData,System.String)">
+            <summary>
+            获取菜单名称
+            </summary>
+            <param name="data">数据</param>
+            <param name="defaultTitle">默认标题</param>
+            <returns>菜单名称</returns>
+        </member>
+        <member name="M:Portal.Web.Admin.Core.PageUtility.Content2(System.Web.Mvc.UrlHelper,System.String)">
+            <summary>
+            将虚拟（相对）路径转换为应用程序绝对路径
+            </summary>
+            <param name="url">已呈现的页的 URL</param>
+            <param name="contentPath">内容的虚拟路径</param>
+            <returns>应用程序绝对路径</returns>
+        </member>
+        <member name="M:Portal.Web.Admin.Core.PageUtility.IsLocal">
+            <summary>
+            是否本地访问(本机及局域网内都返回true,否则返回false)
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Portal.Web.Admin.Core.PageUtility.Ck1Content(System.Web.Mvc.UrlHelper,System.String)">
+            <summary>
+            将虚拟（相对）路径转换为应用程序绝对路径
+            </summary>
+            <param name="url">已呈现的页的 URL</param>
+            <param name="contentPath">内容的虚拟路径</param>
+            <returns>应用程序绝对路径</returns>
+        </member>
+        <member name="M:Portal.Web.Admin.Core.PageUtility.GetLogger">
+            <summary>
+            初始化日志
+            </summary>
+        </member>
+        <member name="M:Portal.Web.Admin.Core.Authentication.IsLoginCookieExist">
+            <summary>
+            检查当前请求中是否包含指定Cookie
+            </summary>    
+            <returns></returns>
+        </member>
+        <member name="M:Portal.Web.Admin.Core.Authentication.GetCookie(System.String)">
+            <summary>
+            得到Cookies值
+            </summary>
+            <param name="cookiename"></param>
+        </member>
+        <member name="M:Portal.Web.Admin.Core.Authentication.SetCookie(System.String,System.String)">
+            <summary>
+            设置Cookie
+            </summary>
+            <param name="CookieName"></param>
+            <param name="CookieValue"></param>       
+        </member>
+        <member name="M:Portal.Web.Admin.Core.RemotePost.Add(System.String,System.String)">
+            <summary>
+            添加需要提交的名和值
+            </summary>
+            <param name="name"></param>
+            <param name="value"></param>
+        </member>
+        <member name="M:Portal.Web.Admin.Core.RemotePost.Post">
+            <summary>
+            以输出Html方式POST
+            </summary>
+        </member>
+        <member name="P:Portal.Web.Admin.Model.BatchImportSelect.Type">
+            <summary>
+            类型
+            </summary>
+        </member>
+        <member name="P:Portal.Web.Admin.Model.BatchImportSelect.HasPermission">
+            <summary>
+            是否有权限
+            </summary>
+        </member>
+        <member name="P:Portal.Web.Admin.Model.MenuAppChangeInfo.ParentSource">
+            <summary>
+            父节点下拉框数据源
+            </summary>
+        </member>
+        <member name="P:Portal.Web.Admin.Model.MenuAppChangeInfo.PermissionSource">
+            <summary>
+            权限下拉框数据源
+            </summary>
+        </member>
+        <member name="P:Portal.Web.Admin.Model.MenuInfo.Id">
+            <summary>
+            菜单ID
+            </summary>
+        </member>
+        <member name="P:Portal.Web.Admin.Model.MenuInfo.Name">
+            <summary>
+            名称
+            </summary>
+        </member>
+        <member name="P:Portal.Web.Admin.Model.MenuInfo.ParentId">
+            <summary>
+            父菜单Id
+            </summary>
+        </member>
+        <member name="P:Portal.Web.Admin.Model.MenuInfo.Url">
+            <summary>
+            链接
+            </summary>
+        </member>
+        <member name="P:Portal.Web.Admin.Model.MenuInfo.IsAbsoluteUrl">
+            <summary>
+            是否是绝对地址
+            </summary>
+        </member>
+        <member name="P:Portal.Web.Admin.Model.MenuInfo.Target">
+            <summary>
+            打开方式，参考枚举：MenuTarget
+            </summary>
+        </member>
+        <member name="P:Portal.Web.Admin.Model.MenuInfo.ClassName">
+            <summary>
+            样式名称
+            </summary>
+        </member>
+        <member name="F:Portal.Web.Admin.Model.MenuInfo.IsActive">
+            <summary>
+            是选打开、激活
+            </summary>
+        </member>
+        <member name="T:Portal.Web.Admin.Model.NavMenuInfo">
+            <summary>
+            顶级菜单
+            </summary>
+        </member>
+        <member name="P:Portal.Web.Admin.Model.NavMenuInfo.Current">
+            <summary>
+            当前菜单信息
+            </summary>
+        </member>
+        <member name="P:Portal.Web.Admin.Model.NavMenuInfo.ChildCount">
+            <summary>
+            子节点个数
+            </summary>
+        </member>
+        <member name="P:Portal.Web.Admin.Model.NavMenuInfo.Child">
+            <summary>
+            节节点
+            </summary>
+        </member>
+        <member name="F:Portal.Web.Admin.Model.NavMenuInfo.IsActive">
+            <summary>
+            是否选中
+            </summary>
+        </member>
+        <member name="P:Portal.Web.Admin.Model.SysUserParameter.UserId">
+            <summary>
+            用户ID
+            </summary>
+        </member>
+        <member name="P:Portal.Web.Admin.Model.SysUserParameter.LoginName">
+            <summary>
+            登录名称
+            </summary>
+        </member>
+        <member name="P:Portal.Web.Admin.Model.SysUserParameter.Type">
+            <summary>
+            类型：1表示内部帐号，2表示客户帐号，3表示API帐号，参考枚举：UserTypeEm
+            </summary>
+        </member>
+        <member name="P:Portal.Web.Admin.Model.SysUserParameter.State">
+            <summary>
+            状态,0禁用,1启用,参考枚举：UserState
+            </summary>
+        </member>
+        <member name="P:Portal.Web.Admin.Model.LoginVM.CheckCode">
+            <summary>
+            是否检查验证码
+            </summary>
+        </member>
+        <member name="P:Portal.Web.Admin.Model.LoginVM.validateKey">
+            <summary>
+            验证码保存的Session对应的KEY值
+            </summary>
+        </member>
+        <member name="T:Portal.Web.WebApplication">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Portal.Web.WebApplication.Application_Start">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Portal.Admin.Controllers.SysLoggerController.View(System.String)">
+            <summary>
+            查看页
+            </summary>
+        </member>
+        <member name="M:Portal.Admin.Controllers.SysLoggerController.Detail(System.String)">
+            <summary>
+            修改页
+            </summary>
+        </member>
+        <member name="M:Portal.Admin.Controllers.SysLoggerController.Delete(System.String)">
+            <summary>
+            删除
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Portal.Admin.Controllers.SysLoggerController.Save(Portal.Dto.SysLoggerDto)">
+            <summary>
+            保存
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Portal.Admin.Controllers.SysLoggerController.GetApplicationList(System.String)">
+            <summary>
+            获取系统下拉框数据源
+            </summary>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

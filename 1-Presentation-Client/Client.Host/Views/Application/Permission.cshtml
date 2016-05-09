@@ -1,0 +1,43 @@
+﻿@using Portal.Client.Core
+@using Portal.Dto
+@{
+    var item = Model as DeveloperAppDto;
+    var list = ViewBag.PermissionList as List<ApiPermissionGroup>;
+    bool show = item.State == DeveloperAppState.Developing;//状态在开发者可以操作按钮和复选框
+    bool create = item.IsNew() && PageUtility.HasPermission(ClientPermissionCodes.ClientDeveloperApp_Create); //创建
+    bool update = !item.IsNew() && PageUtility.HasPermission(ClientPermissionCodes.ClientDeveloperApp_Update); //编辑
+    string format1 = "{0}【{1}】：{2}";
+    string format2 = "{0}【{1}】";
+}
+<h5>
+    选择你需要哪些产品的API。请根据你应用的实际功能按需选择，若包含不必要的API则不会被审核通过。
+</h5>
+<div class="row-fluid" id="AppPermission">
+    <div class="span12">
+        <div class="control-group">
+            <label class="control-label">
+                <input type="checkbox" @Html.Raw(show ? "" : "disabled='disabled'") onclick="CheckPermission(this);"><span class="lbl">全选</span>
+            </label>
+            <div class="controls wordBreak">
+                @if (list != null)
+                {
+                    foreach (var item1 in list)
+                    {
+                        <label>
+                            <input type="checkbox" name="Code" @Html.Raw(!show || item1.Approved ? "disabled='disabled'" : "") @Html.Raw(item1.Checked ? "checked='checked'" : "") value="@item1.Code">
+                            <span class="lbl">@string.Format(string.IsNullOrEmpty(item1.Desc) ? format2 : format1, item1.Name, item1.Code, item1.Desc)</span>
+                        </label>
+                    }
+                }
+                else
+                {
+                    Html.RenderPartial("../Control/NoDataControl");
+                }
+            </div>
+        </div>
+        @if (show && (create || update))
+        {
+            <input type="button" value="保存" class="btn btn-primary" onclick="SubmitPermission()" />
+        }
+    </div>
+</div>

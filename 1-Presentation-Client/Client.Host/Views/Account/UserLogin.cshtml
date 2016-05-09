@@ -1,0 +1,46 @@
+﻿@using Portal.Client.Core
+<form id="LoginForm" action="@Model" method="post" class="form-horizontal login-form" style="width: 500px;">
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    <div class="alert alert-block" id="warning" style="display: none;">
+    </div>
+    <table class="Commontable">
+        <tbody>
+            <tr>
+                <th>
+                    用户名：
+                </th>
+                <td>
+                    <input type="text" id="loginUserName" name="loginUserName" placeholder="用户名" onkeydown="Keydown(event)" />
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    密 码：
+                </th>
+                <td>
+                    <input type="password" id="loginPassWord" name="loginPassWord" placeholder="密码" onkeydown="Keydown(event)" />
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    <span>验证码：</span>
+                </th>
+                <td>
+                    <input class="text" id="Code" name="Code" placeholder="验证码" type="text" style="width: 80px;" />
+                    @{ Html.RenderPartial("../Control/ValidateImgCtl");}
+                </td>
+            </tr>
+            <tr>
+                <th></th>
+                <td>
+                    <input onclick="return CheckLogin()" class="btn btn-primary" value="登 录" type="submit" />
+                    &nbsp;&nbsp;
+                    <a href="@Url.Content("~/User/Create")" class="btn btn-primary">注册</a>
+                    @*&nbsp;&nbsp;&nbsp;&nbsp;<a href="RetrievePassword.aspx" target="_blank" class="color_eb9b00">忘记密码</a>*@
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</form>
+<script type="text/javascript" src="@Url.Content2("~/Scripts/Client/Login.js")"></script>

@@ -1,0 +1,59 @@
+﻿<!-- 外部开发者应用信息管理编辑弹出对话框 -->
+@using Portal.Dto
+@{
+    var item = Model as DeveloperAppDto;
+}
+<style type="text/css">
+    .radio-td label {
+        float: left;
+        width: 75px;
+    }
+</style>
+<form class="form-horizontal" action="#" id="detailForm">
+    <input type="hidden" id="hddatakey" name="Id" value="@item.Id" />
+    <table class="tab-pane active form_table">
+        <tr>
+            <th>
+                应用名称<span class="red">*</span>：
+            </th>
+            <td>
+                @Html.TextBox("txtName", item.Name, new { @Name = "Name", checktype = "S{id:'error1'}L{len:100, msg:'应用名称长度不能超过100'};R{请输入应用名称}", onchange = "c$.checkElement(this)" })
+            </td>
+        </tr>
+        <tr>
+            <th>
+                应用简介：
+            </th>
+            <td>
+                @Html.TextArea("txtDesc", item.Desc, new { @Name = "Desc", checktype = "S{id:'error2'}L{len:500, msg:'应用简介长度不能超过500'};", onchange = "c$.checkElement(this)" })
+            </td>
+        </tr>
+        <tr>
+            <th>
+                应用地址：
+            </th>
+            <td>
+                @Html.TextBox("txtUrl", item.AccessUrl, new { @Name = "AccessUrl", Class = "input_common", checktype = "S{id:'error3'}L{len:200, msg:'应用地址长度不能超过200'}U{应用地址输入不正确}", onchange = "c$.checkElement(this)" })
+            </td>
+        </tr>
+        <tr>
+            <th>
+                回调地址<span class="red">*</span>：
+            </th>
+            <td>
+                @Html.TextBox("txtPostUrl", item.CallbackUrl, new { @Name = "CallbackUrl", checktype = "S{id:'error4'}L{len:200, msg:'回调地址长度不能超过200'}U{回调地址输入不正确}R{请输入回调地址};", onchange = "c$.checkElement(this)" })
+            </td>
+        </tr>
+        <tr>
+            <th>
+                应用类型<span class="red">*</span>：
+            </th>
+            <td class="radio-td">
+                <div id="divType" style="width: 250px;">
+                    @Html.Raw(ViewBag.TypeHtml)
+                </div>
+            </td>
+        </tr>
+    </table>
+    @{Html.RenderPartial("../Control/ErrorControl", 4);}
+</form>

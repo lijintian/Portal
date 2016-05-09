@@ -1,0 +1,144 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{2EE2EF7E-E851-4EB6-AC24-09DA0BDDE8C1}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>CK1.Portal.Dto</RootNamespace>
+    <AssemblyName>CK1.Portal.Dto</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Release\CK1.Portal.Dto.XML</DocumentationFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\versions\Versions.cs">
+      <Link>Properties\Versions.cs</Link>
+    </Compile>
+    <Compile Include="ApiPermission.cs" />
+    <Compile Include="ApiPermissionGroup.cs" />
+    <Compile Include="Application.cs" />
+    <Compile Include="AuthorizationCodeDto.cs" />
+    <Compile Include="AuthorizationRequestValidateResult.cs" />
+    <Compile Include="BatchSaveResult.cs" />
+    <Compile Include="Client\AppPermission.cs" />
+    <Compile Include="Client\ClientApplicationDto.cs" />
+    <Compile Include="Client\ClientUserDto.cs" />
+    <Compile Include="Client\DeveloperAppSubmissionContext.cs" />
+    <Compile Include="Client\FlowInfo.cs" />
+    <Compile Include="Client\Request\FindDeveloperAppRequest.cs" />
+    <Compile Include="Client\Response\FindClientUserResponse.cs" />
+    <Compile Include="Common\AggregateDto.cs" />
+    <Compile Include="Common\BadResponseBase.cs" />
+    <Compile Include="Common\BaseLoggerDto.cs" />
+    <Compile Include="Common\ErrorData.cs" />
+    <Compile Include="Common\ResponseBase.cs" />
+    <Compile Include="ApplicationPermission.cs" />
+    <Compile Include="Client\DeveloperAppDto.cs" />
+    <Compile Include="Client\Enum\DeveloperAppState.cs" />
+    <Compile Include="Client\Enum\DeveloperAppType.cs" />
+    <Compile Include="FindAuthorizationCodesRequest.cs" />
+    <Compile Include="FindAuthorizationCodesResponse.cs" />
+    <Compile Include="Client\Response\FindDeveloperAppResponse.cs" />
+    <Compile Include="FindTokensRequest.cs" />
+    <Compile Include="FindTokensResponse.cs" />
+    <Compile Include="Request\AuthorizationRequest.cs" />
+    <Compile Include="Request\FindMenuRequest.cs" />
+    <Compile Include="Request\FindSysLoggerRequest.cs" />
+    <Compile Include="Request\Import\BaseImportRequest.cs" />
+    <Compile Include="Request\ChangePasswordRequest.cs" />
+    <Compile Include="Request\CreateUserRequest.cs" />
+    <Compile Include="Common\DomainDto.cs" />
+    <Compile Include="Request\Enum\TemplateType.cs" />
+    <Compile Include="Request\FindApiPermissionGroupRequest.cs" />
+    <Compile Include="Request\FindPermissionRequest.cs" />
+    <Compile Include="Request\Import\ImportCustomerPermissionRequest.cs" />
+    <Compile Include="Request\Import\ImportCustomerRoleRequest.cs" />
+    <Compile Include="Request\Import\ImportMenuRequest.cs" />
+    <Compile Include="Request\Import\ImportPermissionRequest.cs" />
+    <Compile Include="Request\Import\ImportRolePermissionRequest.cs" />
+    <Compile Include="Request\Import\ImportRoleRequest.cs" />
+    <Compile Include="Request\Import\ImportUserPermissionRequest.cs" />
+    <Compile Include="Request\Import\ImportUserRoleRequest.cs" />
+    <Compile Include="Response\FindApiPermissionGroupResponse.cs" />
+    <Compile Include="Response\FindPermissionResponse.cs" />
+    <Compile Include="Request\FindRoleRequest.cs" />
+    <Compile Include="Response\FindRoleResponse.cs" />
+    <Compile Include="Request\FindUserRequest.cs" />
+    <Compile Include="Response\FindSysLoggerResponse.cs" />
+    <Compile Include="Response\FindUserResponse.cs" />
+    <Compile Include="FunctionPermission.cs" />
+    <Compile Include="Menu.cs" />
+    <Compile Include="PagePermission.cs" />
+    <Compile Include="Common\PagerFindRequest.cs" />
+    <Compile Include="Common\PagerFindResponse.cs" />
+    <Compile Include="Permission.cs" />
+    <Compile Include="LoginInfo.cs" />
+    <Compile Include="Request\GetUsersRequest.cs" />
+    <Compile Include="Request\UpdateUserRequest.cs" />
+    <Compile Include="Response\ApproveResponse.cs" />
+    <Compile Include="Response\AuthorizationResponse.cs" />
+    <Compile Include="Response\ChangePasswordResponse.cs" />
+    <Compile Include="Response\CreateUserResponse.cs" />
+    <Compile Include="Response\DisapproveResponse.cs" />
+    <Compile Include="Response\GetListResponse.cs" />
+    <Compile Include="Response\GetLoggerResponse.cs" />
+    <Compile Include="Response\GetTokenErrorResponse.cs" />
+    <Compile Include="Response\GetTokenResponse.cs" />
+    <Compile Include="Response\GetUserMenusResponse.cs" />
+    <Compile Include="Response\GetUserResponse.cs" />
+    <Compile Include="Response\GetUsersResponse.cs" />
+    <Compile Include="Response\LoginOutResponse.cs" />
+    <Compile Include="Response\LoginInResponse.cs" />
+    <Compile Include="Response\ResetPasswordResponse.cs" />
+    <Compile Include="Response\UpdateUserRequestResponse.cs" />
+    <Compile Include="Response\UserInfo.cs" />
+    <Compile Include="Response\VerifyTokenResponse.cs" />
+    <Compile Include="Role.cs" />
+    <Compile Include="SysLoggerDto.cs" />
+    <Compile Include="TokenValidateResult.cs" />
+    <Compile Include="TokenWrapperDto.cs" />
+    <Compile Include="User.cs" />
+    <Compile Include="UserIdentity.cs" />
+    <Compile Include="VerifyTokenResult.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

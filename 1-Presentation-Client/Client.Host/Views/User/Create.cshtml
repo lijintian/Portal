@@ -1,0 +1,100 @@
+﻿<!-- 外部开发者信息管理编辑弹出对话框 -->
+@using Portal.Client.Core
+@{
+    ViewBag.Title = PageUtility.GetMenuName(ViewContext.RouteData, "用户注册");
+    Layout = PageUtility.GetLayout;
+    var item = Model as Portal.Dto.User;
+}
+@section Head{
+    <script type="text/javascript" src="@Url.Content2("~/Scripts/Client/UserList.js")"></script>
+}
+<form action="#" id="detailForm">
+    <input type="hidden" value="@item.Id" name="Id" />
+    <input type="hidden" id="hdIsUpdatePwd" value="1" />
+    <table class="table_Regesit">
+        <tbody>
+            <tr>
+                <th style="width: 80px;">
+                    用户名<span class="red">*</span>：
+                </th>
+                <td style="width: 240px;">
+                    @Html.TextBox("txtLoginName", item.LoginName, new { @Name = "LoginName", checktype = "S{id:'error1'}L{len:50, msg:'用户名长度不能超过50'}R{请输入用户名}", onchange = "c$.checkElement(this)" })
+                </td>
+                <td>
+                    <span>*用户名将作为登录用户名，一旦设定不可更改</span>
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    密码<span class="red">*</span>：
+                </th>
+                <td>
+                    @Html.Password("txtPassword", null, new { @Name = "Password", checktype = "S{id:'error2'}L{len:50, msg:'密码长度不能超过50'}B{msg:'密码只允许输入字母、数字、下划线'}Z{func:CheckPassword}R{请输入密码}", onchange = "c$.checkElement(this)", onkeydown = "return c$.inputNumLetter(event);" })
+                </td>
+                <td>
+                    <span>*请输入不少于6位的字符，不允许空白</span>
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    确认密码<span class="red">*</span>：
+                </th>
+                <td>
+                    @Html.Password("txtAgainPassword", null, new { @Name = "AgainPassword", checktype = "S{id:'error3'}L{len:50, msg:'确认密码长度不能超过50'}B{msg:'确认密码只允许输入字母、数字、下划线'}Z{func:CheckAgainPassword}R{请输入确认密码}", onchange = "c$.checkElement(this)", onkeydown = "return c$.inputNumLetter(event);" })
+                </td>
+                <td>
+                    <span>*请重复上面的密码</span>
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    邮箱<span class="red">*</span>：
+                </th>
+                <td>
+                    @Html.TextBox("txtEmail", item.Email, new { @Name = "Email", checktype = "S{id:'error4'}R{请输入Email}@{请输入正确的邮箱地址}", onchange = "c$.checkElement(this)" })
+                </td>
+                <td>
+                    <span>*请填写正确的邮箱，以便我们与您联系</span>
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    手机号码<span class="red">*</span>：
+                </th>
+                <td>
+                    @Html.TextBox("txtPhone", item.Phone, new { @Name = "Phone", checktype = "S{id:'error5'}L{len:11, msg:'手机号码长度不能超过11'};P{手机号码输入不正确};R{请输入手机号码}", onchange = "c$.checkElement(this)" })
+                </td>
+                <td>
+                    <span>*请填写正确的手机号码，以便我们与您联系</span>
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    验证码<span class="red">*</span>：
+                </th>
+                <td>
+                    @Html.TextBox("txtCode", null, new { @Name = "Code", checktype = "S{id:'error6'}R{请输入验证码}", onchange = "c$.checkElement(this)" })
+                </td>
+                <td>
+                    @{ Html.RenderPartial("../Control/ValidateImgCtl");}
+                </td>
+            </tr>
+            <tr>
+                <th>
+
+                </th>
+                <td colspan="2" class="error-td">
+                    <label class="checkbox" id="divAgree">
+                        <input type="checkbox" id="ckAgree" checked="checked" /> 我已认真阅读并同意出口易开发者协议
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td colspan="2">
+                    <input type="button" value="确认注册" class="btn btn-primary" onclick="SaveData(this)">
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</form>

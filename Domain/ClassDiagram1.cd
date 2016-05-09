@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Domain.Aggregates.ApplictionAgg.Application">
+    <Position X="7.75" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAAAAAAAEAgAAAAAwAAAAAAAAIAAAAQAABAAA=</HashCode>
+      <FileName>Aggregates\ApplictionAgg\Application.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Domain.Aggregates.MenuAgg.Menu">
+    <Position X="11.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAgAAAACgAAQAAAAAA=</HashCode>
+      <FileName>Aggregates\MenuAgg\Menu.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Domain.Aggregates.PermissionAgg.Permission">
+    <Position X="13.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEACgAABAAAAAAAQAAEAAAAAAAQAAAAAAAEA=</HashCode>
+      <FileName>Aggregates\PermissionAgg\Permission.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Domain.Aggregates.RoleAgg.Role">
+    <Position X="10" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAQAAAAQAAAAAAAAAAAAAQAAAAAA=</HashCode>
+      <FileName>Aggregates\RoleAgg\Role.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Domain.Aggregates.TokenAgg.Token">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Aggregates\TokenAgg\Token.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Domain.Aggregates.UserAgg.Profile">
+    <Position X="2.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>Aggregates\UserAgg\Profile.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Domain.Aggregates.UserAgg.User">
+    <Position X="4.5" Y="0.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AEAAAAAAACAIggAAAAAAiEABAAAAAgCCAAAhAAAAAAA=</HashCode>
+      <FileName>Aggregates\UserAgg\User.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Domain.Services.AthorizationService">
+    <Position X="7.5" Y="3.5" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAE=</HashCode>
+      <FileName>Services\AthorizationService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="Domain.Repositories.IMenuRepository" Collapsed="true">
+    <Position X="0.5" Y="3.75" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Repositories\IMenuRepository.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Domain.Repositories.IPermissionRepository">
+    <Position X="2.25" Y="2.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Repositories\IPermissionRepository.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Domain.Repositories.IRoleRepository">
+    <Position X="0.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Repositories\IRoleRepository.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Domain.Repositories.IUserRepository" Collapsed="true">
+    <Position X="0.5" Y="4.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Repositories\IUserRepository.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="Domain.Aggregates.PermissionAgg.PermissionType">
+    <Position X="15.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAEAAAAAAABAAAAAAAAAAAAAAAAAAAAAgAAA=</HashCode>
+      <FileName>Aggregates\PermissionAgg\PermissionType.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="微软雅黑" Size="9" />
+</ClassDiagram>

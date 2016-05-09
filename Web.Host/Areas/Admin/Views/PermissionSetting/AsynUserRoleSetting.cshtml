@@ -1,0 +1,97 @@
+﻿@model  IEnumerable<Portal.Dto.Application>
+@{
+    Portal.Dto.User currentUser = ViewData["CurrentUser"] as Portal.Dto.User;
+    string currentUserRoles = ViewData["currentUserRoles"] as string;
+}
+
+<form class="tab-content" action="#" id="permissionForm">
+    <div>
+        <input type="hidden" name="userId" value="@currentUser.Id" />
+        <input type="hidden" name="RoleCode" id="txtUserRoles" value="@currentUserRoles" />
+    </div>
+    <div class="checkBar">
+        @*<input id="checkAll" type="checkbox" onclick='Tab$.CheckResultAllByAttribute(this, "application")' value="" /><span class="lbl">全选</span>*@
+    </div>
+
+    <div>
+        @foreach (var app in Model)
+        {//系统
+            <div class="level1">
+                <span class="fa fa-chevron-down btn btn-info" style="cursor:pointer" aria-hidden="true" applicationid="@app.Id">@app.CnName </span>
+
+                <div class="level2">
+                    <label> <input application type="checkbox" onchange='Tab$.CheckResultAllByAttribute(this,"AppId=@app.Id")' value="" /><span class="lbl">全选</span></label>
+                    <div class="level2_1">
+                        @{ Html.RenderPartial("~/Views/Control/LodingControl.cshtml"); }
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</form>
+<script src="~/Scripts/PermissionSetting/PermissionSettingCommon.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $("[applicationid]").each(function () {
+            $(this).click(function () {
+                if (!$(this).attr("hasload")) {
+                    GetApplicationRoles(this, $(this).attr("applicationId"));
+                }
+                ShowOrHide(this);
+            });
+        });
+
+        //绑定checkbox change引起的权限变化
+        BindPermissionChange("#permissionForm", "#txtUserRoles");
+    })
+
+    function GetApplicationRoles(obj, appId) {
+        $.ajaxBfeData({
+            isloading: false,
+            url: window.ServiceAppPath + "Admin/PermissionSetting/AsynRole", data: { "applicationId": appId }, type: 'post', dataType: 'html',
+            success: function (data) {
+                $(obj).parent('.level1').find('.level2_1').html(data);
+                $(this).attr("hasload","true")
+                var currenUserRoles = $("#txtUserRoles").val();
+                if (currenUserRoles != "") {//选中原有角色
+                    $(obj).parent('.level1').find('.level2').find("input[type=checkbox]").each(function () {
+                        if (currenUserRoles.indexOf("," + $(this).val() + ",") > -1) {
+                            this.checked = true;
+                        }
+                    });
+                }
+            }
+        });
+    }
+
+</script>
+
+
+
+
+
+<style>
+    .level1 {
+        word-break: break-all;
+        color: blue;
+        margin-bottom: 10px;
+    }
+
+    .level2 {
+     display:none;
+      color: black;
+    }
+
+    .level2_1 {
+       
+        padding-left: 30px;
+        margin-top: 5px;
+       
+    }
+
+        .level2_1 div {
+            margin-right: 5px;
+            width:120px;
+            display:inline-block;
+        }
+</style>

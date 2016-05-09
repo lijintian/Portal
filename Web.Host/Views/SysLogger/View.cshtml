@@ -1,0 +1,85 @@
+﻿<!-- 系统日志管理查看弹出对话框 -->
+@using Portal.Web.Core.Common
+@{var item = Model as Portal.Dto.SysLoggerDto;}
+<form class="form-horizontal" action="#" id="detailForm">
+    <input type="hidden" id="hddatakey" value="@item.Id" />
+    <table class="form_table">
+        <tr>
+            <th>
+                标题：
+            </th>
+            <td>
+                @item.Title
+            </td>
+            <th>
+                应用系统名称：
+            </th>
+            <td>
+                @item.ApplicationName
+            </td>
+        </tr>
+        <tr>
+            <th>
+                重要等级:
+            </th>
+            <td>
+                @item.Level.GetDescription()
+            </td>
+            <th>
+                类型：
+            </th>
+            <td>
+                @item.Type.GetDescription()
+            </td>
+        </tr>
+        @if (!string.IsNullOrEmpty(item.OS) || !string.IsNullOrEmpty(item.Browser))
+        {
+            <tr>
+                <th>
+                    客户端信息：
+                </th>
+                <td colspan="3">
+                    @string.Format("操作系统：{0} 浏览器:{1}", item.OS, item.Browser)
+                </td>
+            </tr>
+        }
+        <tr>
+            <th>
+                创建人员：
+            </th>
+            <td>
+                @item.CreatedBy
+            </td>
+            <th>
+                创建时间：
+            </th>
+            <td>
+                <label utc="@item.CreatedOn.Show("yyyy-MM-dd HH:mm")" utcformat="YYYY-MM-DD"></label>
+            </td>
+        </tr>
+        <tr>
+            <th>
+                访问用户IP：
+            </th>
+            <td colspan="3">
+                @item.Ip
+            </td>
+        </tr>
+        <tr>
+            <th>
+                访问的地址：
+            </th>
+            <td colspan="3">
+                @item.Url
+            </td>
+        </tr>
+        <tr>
+            <th>
+                日志内容：
+            </th>
+            <td colspan="3">
+                @item.Content
+            </td>
+        </tr>
+    </table>
+</form>

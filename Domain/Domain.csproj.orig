@@ -1,0 +1,150 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{67C014AD-A14C-4E4B-8E76-6EF379FC44B1}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>CK1.Portal.Domain</RootNamespace>
+    <AssemblyName>CK1.Portal.Domain</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CK1.Framework.Domain.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\CK1.Framework.Domain.Core.1.0.3\lib\net45\CK1.Framework.Domain.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="CK1.Framework.Infrastructure.Crosscutting">
+      <HintPath>..\packages\CK1.Framework.Infrastructure.Crosscutting.1.0.3\lib\.net4.5\CK1.Framework.Infrastructure.Crosscutting.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\versions\Versions.cs">
+      <Link>Properties\Versions.cs</Link>
+    </Compile>
+    <Compile Include="Aggregates\ApiUserAgg\ApiUser.cs" />
+    <Compile Include="Aggregates\ApplictionAgg\Application.cs" />
+    <Compile Include="Aggregates\ApplictionAgg\Events\Callbacks\ValidateApplicationExistsSameNameEventResult.cs" />
+    <Compile Include="Aggregates\ApplictionAgg\Events\Handlers\ValidateApplicationExistsSameNameEventHandler.cs" />
+    <Compile Include="Aggregates\ApplictionAgg\Events\ValidateApplicationExistsSameNameEvent.cs" />
+    <Compile Include="Aggregates\MenuAgg\Events\Callbacks\ValidateMenuExistsParentIdEventResult.cs" />
+    <Compile Include="Aggregates\MenuAgg\Events\Handlers\ValidateMenuExistsParentIdEventHandler.cs" />
+    <Compile Include="Aggregates\MenuAgg\Events\ValidateMenuExistsParentIdEvent.cs" />
+    <Compile Include="Aggregates\MenuAgg\Menu.cs" />
+    <Compile Include="Aggregates\PermissionAgg\ApiPermission.cs" />
+    <Compile Include="Aggregates\PermissionAgg\Events\AddOrUpdateFunctionPermissionEvent.cs" />
+    <Compile Include="Aggregates\PermissionAgg\Events\Callbacks\ValidatePermissionExistsEventResult.cs" />
+    <Compile Include="Aggregates\PermissionAgg\Events\Handlers\AddOrUpdateFunctionPermissionEventHandler.cs" />
+    <Compile Include="Aggregates\PermissionAgg\Events\ValidatePermissionExistsEvent.cs" />
+    <Compile Include="Aggregates\PermissionAgg\FunctionPermission.cs" />
+    <Compile Include="Aggregates\PermissionAgg\FunctionPermissionInfo.cs" />
+    <Compile Include="Aggregates\PermissionAgg\PagePermission.cs" />
+    <Compile Include="Aggregates\PermissionAgg\Permission.cs" />
+    <Compile Include="Aggregates\PermissionAgg\PermissionType.cs" />
+    <Compile Include="Aggregates\RoleAgg\Events\Callbacks\ValidateRoleExistsEventResult.cs" />
+    <Compile Include="Aggregates\RoleAgg\Events\Callbacks\ValidateRoleExistsSameNameEventResult.cs" />
+    <Compile Include="Aggregates\RoleAgg\Events\Handlers\ValidateRoleExistsEventHandler.cs" />
+    <Compile Include="Aggregates\RoleAgg\Events\Handlers\ValidateRoleExistsSameNameEventHandler.cs" />
+    <Compile Include="Aggregates\RoleAgg\Events\ValidateRoleExistsEvent.cs" />
+    <Compile Include="Aggregates\RoleAgg\Events\ValidateRoleExistsSameNameEvent.cs" />
+    <Compile Include="Aggregates\RoleAgg\Role.cs" />
+    <Compile Include="Model\Strategies\ITokenDeserializeStrategy.cs" />
+    <Compile Include="Model\Strategies\ITokenGenerateStrategy.cs" />
+    <Compile Include="Model\Strategies\TokenDeserializeStrategy.cs" />
+    <Compile Include="Model\Strategies\TokenGenerateStrategy.cs" />
+    <Compile Include="Model\Token.cs" />
+    <Compile Include="Aggregates\UserAgg\Events\Callbacks\ValidateUserExistsSameLoginNameEventResult.cs" />
+    <Compile Include="Aggregates\UserAgg\Events\Handlers\ValidateUserExistsSameLoginNameEventHandler.cs" />
+    <Compile Include="Aggregates\UserAgg\Events\ValidateUserExistsSameLoginNameEvent.cs" />
+    <Compile Include="Aggregates\UserAgg\Strategies\IPasswordEncryptStrategy.cs" />
+    <Compile Include="Aggregates\UserAgg\Strategies\PasswordEncryptStrategy.cs" />
+    <Compile Include="Aggregates\UserAgg\State\EnabledState.cs" />
+    <Compile Include="Aggregates\UserAgg\State\UserState.cs" />
+    <Compile Include="Aggregates\UserAgg\State\DisabledState.cs" />
+    <Compile Include="Aggregates\UserAgg\User.cs" />
+    <Compile Include="Aggregates\UserAgg\UserType.cs" />
+    <Compile Include="Model\UserIdentity.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\IApplicationRepository.cs" />
+    <Compile Include="Repositories\IApiUserRepository.cs" />
+    <Compile Include="Repositories\IMenuRepository.cs" />
+    <Compile Include="Repositories\IPermissionRepository.cs" />
+    <Compile Include="Repositories\IRoleRepository.cs" />
+    <Compile Include="Repositories\IUserRepository.cs" />
+    <Compile Include="Services\AthorizationService.cs" />
+    <Compile Include="Services\ILoginService.cs" />
+    <Compile Include="Services\Impl\LoginService.cs" />
+    <Compile Include="Specification\Application\ApplicationNameSpecification.cs" />
+<<<<<<< HEAD
+    <Compile Include="Specification\Permission\PermissionCodeListSpecification.cs" />
+    <Compile Include="Specification\Permission\PermissionCodeSpecification.cs" />
+=======
+    <Compile Include="Specification\Menu\IdSpecification.cs" />
+>>>>>>> origin/shaoliang/150807_LoginEdit
+    <Compile Include="Specification\Role\RoleApplicationIdSpecification.cs" />
+    <Compile Include="Specification\Role\RoleCodeListSpecification.cs" />
+    <Compile Include="Specification\Role\RoleCodeSpecification.cs" />
+    <Compile Include="Specification\Role\RoleNameSpecification.cs" />
+    <Compile Include="Specification\User\EmployeeNoSpecification.cs" />
+    <Compile Include="Specification\User\UserLoginNameSpecification.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram1.cd" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Infrastructure.Exceptions\Infrastructure.Exceptions.csproj">
+      <Project>{e3992073-8d24-4059-9e71-5b90fb8a3216}</Project>
+      <Name>Infrastructure.Exceptions</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Helper\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

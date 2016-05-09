@@ -1,0 +1,80 @@
+﻿@using Portal.Web.Admin.Core
+@using Portal.Web.Core;
+@model IEnumerable<Portal.Dto.ApiPermissionGroup>
+@{
+    bool update = PageUtility.HasPermission(PermissionCodes.ApiPermissionGroup_Edit);
+    bool setPer = PageUtility.HasPermission(PermissionCodes.Set_ApiPermissionGroup_Permission);
+    bool viewPer = PageUtility.HasPermission(PermissionCodes.View_ApiPermissionGroup_Permission);
+    bool showOperate = update || setPer;
+}
+<table class="table table-striped table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>
+                名称
+            </th>
+            <th>
+                编码
+            </th>
+            <th>
+                描述
+            </th>
+            @if (showOperate)
+            {
+                <th style="width: 170px;">
+                    操作
+                </th>
+            }
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.Any())
+        {
+            foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @item.Name
+                    </td>
+                    <td>
+                        @item.Code
+                    </td>
+                    <td class="textLeft">
+                        @item.Desc
+                    </td>
+                    @if (showOperate)
+                    {
+                        <td>
+                            @if (update)
+                            {
+                                <button title="编辑" class='btn btn-mini btn-info' onclick="EditDailog('@item.Code'); ">
+                                    <i class='ace-icon glyphicon glyphicon-edit'></i>编辑
+                                </button>
+                            }
+                            @if (item.HasPermission && viewPer)
+                            {
+                                <button title="查看权限" class='btn btn-mini btn-purple' onclick="ViewPermissionDailog('@item.Name','@item.Code'); ">
+                                    <i class='ace-icon glyphicon glyphicon-cog'></i>查看权限
+                                </button>
+                            }
+                            else if (!item.HasPermission && setPer)
+                            {
+                                <button title="设置权限" class='btn btn-mini btn-purple' onclick="EditPermissionDailog('@item.Name','@item.Code'); ">
+                                    <i class='ace-icon glyphicon glyphicon-cog'></i>设置权限
+                                </button>
+                            }
+                        </td>
+                    }
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="@(showOperate?4:3)">
+                    @{ Html.RenderPartial("~/Views/Control/NoDataControl.cshtml"); }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

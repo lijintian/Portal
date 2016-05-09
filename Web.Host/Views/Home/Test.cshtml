@@ -1,0 +1,16 @@
+﻿@using Portal.Web.Admin.Core
+@{
+    Layout = null;
+    ViewBag.Title = "Index";
+}
+<div>
+    <input type="text" id="ErrorMsg" />
+    <button id="GenerateError">生成错误日志</button>
+    <a href="@Url.Content("~/elmah.axd")" target="_blank">在elmah中查看错误日志</a>
+</div>
+<script src="@Url.Ck1Content("portal/Js/jquery-1.9.1.min.js")" type="text/javascript"></script>
+<script type="text/javascript">
+    $("#GenerateError").click(function () {
+        $.post("/Home/GenerateError?error=" + $("#ErrorMsg").val());
+    });
+</script>

@@ -1,0 +1,8 @@
+﻿<!-- 首页 -->
+@using Portal.Web.Admin.Core
+@{
+
+    ViewBag.Title = PageUtility.GetMenuName(ViewContext.RouteData, "Portal门户系统管理平台");
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<iframe id="mainFrame" name="mainFrame" src="@Url.Content(ViewBag.DefaultUrl)" style="width: 100%;" scrolling="auto" frameborder="0" marginwidth="0" marginheight="0" onload="Tab$.SetHeight(this)"></iframe>

@@ -1,0 +1,56 @@
+﻿<!-- 系统日志管理列表 -->
+@using Portal.Web.Admin.Core
+@{
+    ViewBag.Title = PageUtility.GetMenuName(ViewContext.RouteData, "系统日志管理列表");
+    Layout = PageUtility.GetLayout;
+}
+@section Head{
+    <script type="text/javascript" src="@Url.Content2("~/Scripts/SysManage/SysLoggerList.js")"></script>
+}
+<div id="divmain" class="row">
+    <div class="row">
+        <div class="col-xs-12 dataTables_length" id="divFilter">
+            <table class="search-table">
+                <tr>
+                    <th style="width: 50px;">系统：</th>
+                    <td><input type="text" name="ApplicationName" class="input-common" placeholder="请输入系统" /></td>
+                    <th style="width: 70px;">关键词：</th>
+                    <td><input type="text" name="KeyWord" class="input-common" placeholder="请输入关键词" /></td>
+                    <th style="width: 80px;">操作人员：</th>
+                    <td><input type="text" name="CreatedBy" class="input-common" placeholder="请输入操作人员" />
+                        &nbsp;&nbsp; &nbsp;&nbsp;<a class="btn btn-purple" onclick="SearchInfo();">
+                            <i class="ace-icon glyphicon glyphicon-search"></i>查询
+                        </a>
+                    </td>
+                </tr>
+                <tr>
+                    <th>类型：</th>
+                    <td>@Html.DropDownList("TypeSelect", null, new { @style = "width:150px", onchange = "SearchInfo();" })</td>
+                    <th>等级：</th>
+                    <td>@Html.DropDownList("LevelSelect", null, new { @style = "width:150px", onchange = "SearchInfo();" })</td>
+                    <th>日期：</th>
+                    <td>
+                        <span class="input-icon input-icon-right">
+                            <input type="text" name="StartTime" style="width: 120px;" onfocus="WdatePicker({startDate: '%y-%M-%d' ,dateFmt:'yyyy-MM-dd',alwaysUseStartDate: true,isShowClear:false,readOnly:true });">
+                            <i class="ace-icon glyphicon glyphicon-calendar"></i>
+                        </span>
+                        至
+                        <span class="input-icon input-icon-right">
+                            <input type="text" name="EndTime" style="width: 120px;" onfocus="WdatePicker({startDate: '%y-%M-%d' ,dateFmt:'yyyy-MM-dd',alwaysUseStartDate: true,isShowClear:false,readOnly:true });">
+                            <i class="ace-icon glyphicon glyphicon-calendar"></i>
+                        </span>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div id="divcontent" class="row listContent">
+        @{Html.RenderPartial("List");}
+    </div>
+</div>
+<script type="text/javascript" language="javascript">
+    // 保存各查询参数
+    var SearchConfig = {
+        IsPostBack: true
+    };
+</script>

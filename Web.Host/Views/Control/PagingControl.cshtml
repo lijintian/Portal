@@ -1,0 +1,11 @@
+﻿@*<h2>分页控件</h2>*@
+<div class="toolBar clearfix">
+    <ul class="pageTurn" id="pageTurn">
+        @Html.Raw(Model)
+    </ul>
+</div>
+<script type="text/javascript">
+    $(function () {
+        Tab$.BindPageEnter();
+    });
+</script>

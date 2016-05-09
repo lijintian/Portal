@@ -1,0 +1,141 @@
+﻿<!-- 角色管理 -->
+@using Portal.Dto.Request.Enum
+@using Portal.Web.Admin.Core
+@using Portal.Dto
+@using Portal.Web.Core;
+@{
+    IEnumerable<Application> allApp = ViewData["AllApplication"] as IEnumerable<Application>;
+    ViewBag.Title = PageUtility.GetMenuName(ViewContext.RouteData, "角色管理");
+    Layout = PageUtility.GetLayout;
+    bool isCanAddRole = PageUtility.HasPermission(PermissionCodes.Role_Add);
+}
+<div id="divmain" class="row">
+    <div class="row">
+        <div class="col-xs-9">
+            应用系统：<select id="selApplicationType" name="ApplicationId" onchange="ApplicationTypeChange();" style="width:200px">
+                @if (allApp != null)
+                {
+                    foreach (var app in allApp)
+                    {
+                        <option value="@app.Id">@app.CnName</option>
+                    }
+                }
+            </select>
+        </div>
+
+        <div class="col-xs-3">
+            <div class="dataTables_filter">
+                @Html.Raw(ViewBag.BatchImportSource)
+                @if (isCanAddRole)
+                {
+                    <a title="添加" class='btn btn-info' onclick="CreateRoleDailog()">
+                        <i class='ace-icon glyphicon glyphicon-plus-sign'></i>添加角色
+                    </a>
+                }
+            </div>
+        </div>
+        <br />
+    </div>
+    <div id="divcontent" class="row row listContent">
+        @{Html.RenderPartial("ListPartial");}
+    </div>
+</div>
+<script type="text/javascript" language="javascript">
+    $(function () {
+        $("#selApplicationType").chosen();
+    });
+
+    var QueryPara = new Object();
+    QueryPara.ApplicationId = $("#selApplicationType").val();
+
+
+    /*========================加载列表==============================*/
+    function InitData() {
+        $.ajaxBfeData({
+            url: 'Admin/Role/ListPartial', data: QueryPara, type: 'post', dataType: 'html',
+            success: function (data) {
+                $("#divcontent").html(data);
+            }
+        });
+    }
+
+    /*========================系统类型改变==============================*/
+    function ApplicationTypeChange() {
+        QueryPara.ApplicationId = $("#selApplicationType").val();
+        InitData();
+    }
+
+    /*========================添加事件==============================*/
+    function CreateRoleDailog() {
+        var url = window.ServiceAppPath + "Admin/Role/Create?appId=" + $("#selApplicationType").val();
+        $(this).showDailog("添加角色", url, null, 450, 280);
+    }
+
+    /*========================编辑事件==============================*/
+    function EditRoleDailog(roleCode) {
+        var url = window.ServiceAppPath + "Admin/Role/Edit?roleCode=" + roleCode;
+        $(this).showDailog("编辑角色", url, null, 450, 280);
+    }
+
+    /*========================编辑角色权限==============================*/
+    function EditRolePermissionDailog(applicationName, roleName, roleCode) {
+        var url = window.ServiceAppPath + "Admin/Role/Permission?roleCode=" + roleCode;
+        $(this).showDailog("设置  <font color='blue'>" + applicationName + "</font> >  <font color='orange'>" + roleName + "</font> 角色权限", url, null, 800, 380, "RolePermission");
+    }
+
+
+    /*========================删除一项==============================*/
+    function DeleteRole(id) {
+        if (confirm('确认删除此角色?')) {
+            $(this).ajaxBfeData({
+                url: 'Admin/Role/Delete', data: { RoleID: id }, type: 'post', dataType: 'Json',
+                success: function (data) {
+                    var messageBox = [str + "失败,请稍后再试！", str + "成功!", str + "失败！", str + "保存,该公司不存在！", str + "失败,超过上限不能启用用户！"];
+                    c$.alert(messageBox[data.Data]);
+                    if (data.Data) {
+                        InitData();
+                    }
+                }
+            });
+            return false;
+        }
+    }
+
+    /*========================保存==============================*/
+    function SaveData(obj) {
+        var checkresult = c$.checkForm(this.form);
+        if (!checkresult) { $("#dtips").show(); return false; }
+        var postObject = $("#detailForm").BfeSerialize();
+        $(this).ajaxBfeData({
+            url: 'admin/Role/Save', data: postObject, type: 'post', dataType: 'Json',
+            success: function (data) {
+                c$.alert(data.ErrorMessage);
+                if (data.Status == true) {
+                    $("#selApplicationType").val(postObject.ApplicationId).trigger("liszt:updated");
+                    ApplicationTypeChange();
+                    //关闭弹出框
+                    $(obj).Close();
+                }
+            }
+        });
+    }
+
+    function SaveDataRolePermission(obj) {
+        var checkresult = c$.checkForm(this.form);
+        if (!checkresult) { $("#dtips").show(); return false; }
+        var postObject = $("#permissionForm").BfeSerialize();
+        $(this).ajaxBfeData({
+            url: 'admin/Role/SavePermission', data: postObject, type: 'post', dataType: 'Json',
+            success: function (data) {
+                c$.alert(data.ErrorMessage);
+                if (data.Status == true) {
+                    InitData();
+                    //关闭弹出框
+                    $(obj).Close();
+                }
+            }
+        });
+    }
+
+</script>
+

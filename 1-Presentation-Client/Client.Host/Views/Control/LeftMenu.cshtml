@@ -1,0 +1,32 @@
+﻿@using Portal.Client.Model
+@{
+    var list = ViewBag.MenuList as List<SysMenuInfo>;
+}
+<div class="mian_l_content subnav">
+    <h3>开放平台</h3>
+    <ul class="mainlist">
+        @if (list != null)
+        {
+            foreach (var item in list)
+            {
+                <li class="@item.ClassName">
+                    <a href="#"><h4>@item.Name</h4></a>
+                    @if (item.Childs != null)
+                    {
+                        <ul class="sublist">
+                            @foreach (var childItem in item.Childs)
+                            {
+                                <li class="@childItem.ClassName">
+                                    <a href="@Url.Content(childItem.Url)">
+                                        @childItem.Name
+                                    </a>
+                                </li>
+                            }
+                        </ul>
+                    }
+                </li>
+            }
+        }
+    </ul>
+</div>
+

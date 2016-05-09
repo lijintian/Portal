@@ -1,0 +1,119 @@
+﻿<!-- 系统用户信息管理编辑弹出对话框 -->
+@using Portal.Dto
+@using Portal.Web.Admin.Core
+@using Portal.Web.Core
+@{
+    var item = Model as Menu;
+    bool delete = PageUtility.HasPermission(PermissionCodes.Menu_Delete);//删除
+    bool save = (string.IsNullOrEmpty(item.Id) && PageUtility.HasPermission(PermissionCodes.Menu_Add)) || (!string.IsNullOrEmpty(item.Id) && PageUtility.HasPermission(PermissionCodes.Menu_Update));
+    var check = item.Target == (int)MenuTarget.Blank ? "checked='checked'" : "";
+    var shareCheck = item.IsShare ? "checked='checked'" : "";
+}
+<form action="#" id="detailForm" class="form-horizontal">
+    <input type="hidden" id="hddatakey" name="Id" value="@item.Id" />
+    <table id="table1" class="tab-pane active form_table">
+        <tr>
+            <th>
+                所属应用<span class="red">*</span>：
+            </th>
+            <td>
+                <select id="ApplicationList" name="ApplicationId" checktype="S{id:'error1'}R{请选择所属应用}" onchange="ApplicationIdChanged(this)">
+                    @Html.Raw(ViewBag.ApplicationList)
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <th>
+                上级菜单：
+            </th>
+            <td>
+                <select id="ParentList" name="ParentId">
+                    @Html.Raw(ViewBag.ParentList)
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <th>
+                菜单名称<span class="red">*</span>：
+            </th>
+            <td>
+                @Html.TextBox("txtName", item.Name, new { @Name = "Name", checktype = "S{id:'error2'}R{请输入菜单名称}", onchange = "c$.checkElement(this)" })
+            </td>
+        </tr>
+        <tr>
+            <th>
+                权限码：
+            </th>
+            <td>
+                <select id="PermissionList" name="PermissionCode">
+                    @Html.Raw(ViewBag.PermissionList)
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <th>
+                Url：
+            </th>
+            <td>
+                @Html.TextBox("txtUrl", item.Url, new { @Name = "Url" })
+            </td>
+        </tr>
+        <tr>
+            <th>
+                打开方式：
+            </th>
+            <td>
+                <label>
+                    <input id="cbxTarget" name="Target" type="checkbox" @check /><span class="lbl">新窗口</span>
+                </label>
+            </td>
+        </tr>
+        <tr>
+            <th>
+                共享：
+            </th>
+            <td>
+                <label>
+                    <input id="cbxIsShare" name="IsShare" type="checkbox" @shareCheck /><span class="lbl">共享</span>
+                </label>
+            </td>
+        </tr>
+        <tr>
+            <th>排序：</th>
+            <td>
+                @Html.TextBox("txtOrder", item.Order, new { @Name = "Order", checktype = "S{id:'error3'}I{min:0,max:2147483647,  name:'排序'}", onkeydown = "return c$.inputNumber(event);" })
+            </td>
+        </tr>
+        <tr>
+            <th>
+                备注：
+            </th>
+            <td>
+                @Html.TextBox("txtDesc", item.Desc, new { @Name = "Desc", checktype = "S{id:'error4'}L{len:200, msg:'备注长度不能超过200'}", onchange = "c$.checkElement(this)" })
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" style="padding-left: 32%;">
+                @if (save)
+                {
+                    <a title="保存" class='btn btn-info' onclick="SaveData();">
+                        <i class='ace-icon glyphicon glyphicon-edit'></i>保存
+                    </a>
+                }
+                @if (delete)
+                {
+                    <a title="删除" class='btn btn-danger' onclick="DeleInfo();">
+                        <i class='ace-icon glyphicon glyphicon-trash'></i>删除
+                    </a>
+                }
+            </td>
+        </tr>
+    </table>
+    @{Html.RenderPartial("~/Views/Control/ErrorControl.cshtml", 3);}
+</form>
+<script type="text/javascript">
+    $(function () {
+        $("#ParentList").chosen();
+        $("#PermissionList").chosen();
+    });
+</script>

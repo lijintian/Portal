@@ -1,0 +1,23 @@
+﻿<!-- 修改账号 -->
+@using Portal.Client.Core
+@{
+    Layout = PageUtility.GetOpenLayout;
+}
+<div class="inner">
+    <h1>如何修改账号</h1>
+    <p>操作步骤如下（共4步）：</p>
+    <p>1.<a target="_blank" href="@Url.Content("~/Account/Login")">登录</a>【@(PageUtility.ProjectName)】；</p>
+    <p>2.点击菜单<a target="_blank" href="@Url.Content("~/User/View")">【账号管理】</a>，点击<a target="_blank" href="@Url.Content("~/User/Detail")">【修改】</a>按钮</p>
+    <p>3.填写表单：</p>
+    <table class="table table-striped table-bordered table-hover">
+        <tbody>
+            <tr><td style="width: 85px;"><em>参数名称</em></td><td class="textLeft"><em>参数说明</em></td></tr>
+            <tr><td>原始密码</td><td class="textLeft">选填参数，点击【修改密码】奇数次后原始密码必填，原始密码只允许输入字母、数字、下划线；新密码的字符长度不能小于6位且不能超过50位</td></tr>
+            <tr><td>新密码</td><td class="textLeft">选填参数，点击【修改密码】奇数次后新密码必填，新密码只允许输入字母、数字、下划线；新密码的字符长度不能小于6位且不能超过50位</td></tr>
+            <tr><td>确认密码</td><td class="textLeft">选填参数，点击【修改密码】奇数次后确认密码必填，确认密码只允许输入字母、数字、下划线；确认密码的字符长度不能小于6位且不能超过50位；确认密码必须与新密码一致</td></tr>
+            <tr><td>邮箱</td><td class="textLeft">必选参数，请填写正确的邮箱，以便我们与您联系</td></tr>
+            <tr><td>手机号码</td><td class="textLeft">必选参数，请填写正确的手机号码，以便我们与您联系</td></tr>
+        </tbody>
+    </table>
+    <p>4.完成后点击【提交】。 </p>
+</div>

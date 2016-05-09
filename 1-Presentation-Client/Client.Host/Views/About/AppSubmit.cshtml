@@ -1,0 +1,24 @@
+﻿<!-- 提交审核 -->
+@using Portal.Client.Core
+@{
+    Layout = PageUtility.GetOpenLayout;
+}
+<div class="inner">
+    <h1>如何提交审核</h1>
+    <p>操作步骤如下（共6步）：</p>
+    <p>1.<a target="_blank" href="@Url.Content("~/Account/Login")">登录</a>【@(PageUtility.ProjectName)】；</p>
+    <p>2.点击菜单<a target="_blank" href="@Url.Content("~/Application")">【应用系统管理】</a>,点击要设置权限行的【应用名称】，进入【应用系统查看页】；</p>
+    <p>
+        3.点击【API权限】，展开所有权限项，勾选您需要的API；
+    </p>
+    <p>4.完成后点击【保存】； </p>
+    <p>【API权限】保存成功之后，【提交审核】栏的“待生效的权限”会自动刷新</p>
+    <p>5.点击【提交审核】，展开所有待生效的权限，点击【我知道了，提交审核】；</p>
+    <p>6.等待管理员审核，审核通过后，应用就可以使用了。</p>
+    <h1>我的应用审核不通过怎么办？</h1>
+    <p>操作步骤如下（共3步）：</p>
+    <p>1.点击菜单<a target="_blank" href="@Url.Content("~/Application")">【应用系统管理】</a>,点击要查看的【应用名称】，进入【应用系统查看页】；</p>
+    <p>2.【应用属性】->【备注】栏，显示了管理员审核不通过的原因；</p>
+    <p>3.根据审核意见调整“我的应用”【API权限】、【提交审核】，再次提交审核</p>
+    <p style="color: #ff8400;">如果有异常情况，请联系<a href="mailto:@(PageUtility.AdminEmail)">系统管理员</a>。</p>
+</div>

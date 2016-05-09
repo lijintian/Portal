@@ -1,0 +1,36 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>@ViewBag.Title</title>
+    @{ Html.RenderPartial("../Control/CommonControl");}
+    @RenderSection("Head", required: false)
+</head>
+<body>
+    <div id="ck1_body">
+        <br /><br />
+        <div id="ck1_main">
+            <div style="width: 1px; height: 1px; overflow: hidden; font-size: 1px; line-height: 1px;">
+                <img style='width: 258px; height: 258px;' src='http://pic.chukou1.com/0/0_c5c571.jpg' />
+            </div>
+            <div class="main">
+                <div class="body" style="min-height: 200px;">
+                    <div class="frm margin_t10_b10">
+                        <div class="mian_content">
+                            <div class="main_mid_content">
+                                <div class="mian_r_content">
+                                    <h2 style="color:#006dcc;font-weight:900;font-size:36px;">@ViewBag.Title</h2>
+                                    <div class="width920 margin_t10_b10 padding_t20_b20" align="center">
+                                        @RenderBody()
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

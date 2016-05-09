@@ -1,0 +1,63 @@
+﻿@model Portal.Dto.Role
+@using Portal.Dto
+@{
+    IEnumerable<Application> allApp = ViewData["AllApplication"] as IEnumerable<Application>;
+    string currentApplicationId = ViewData["CurrentApplicitionId"] as string;
+}
+<form class="form-horizontal" action="#" id="detailForm">
+    <input type="hidden" id="hddatakey" name="Id" value="@Model.Id" />
+    <table id="table1" class="tab-pane active form_table">
+        <tr>
+            <th>
+                应用系统名称<span class="red">*</span>：
+            </th>
+            <td>
+                <select id="selApp" name="ApplicationId" @(string.IsNullOrEmpty(Model.Code) ? "" : "disabled='disabled' ")>
+                    @if (allApp != null)
+                    {
+                        foreach (var app in allApp)
+                        {
+                            <option value="@app.Id" @((Model.ApplicationId == app.Id || currentApplicationId== app.Id) ? "selected='selected' " : "")>@app.CnName</option>
+                        }
+                    }
+                </select>
+                @*@Html.DropDownList("selApplicationType",  , new { @Name = "ApplicationID", @style = "width:150px", onchange = "ApplicationTypeChange();", value = item.ApplicationID })*@
+            </td>
+        </tr>
+        <tr>
+            <th>
+                角色名称<span class="red">*</span>：
+            </th>
+            <td>
+                @Html.TextBox("txtRole", Model.Name, new { @Name = "Name", checktype = "S{id:'error1'}R{请输入角色名称}", onchange = "c$.checkElement(this)" })
+            </td>
+        </tr>
+        <tr>
+            <th>
+                角色代码<span class="red">*</span>：
+            </th>
+            <td>
+                <input id="txtRole" type="text" name="Code" value="@Model.Code" checktype="S{id:'error2'}B{msg:'角色代码只允许输入字母、数字、下划线'}R{请输入角色代码}" onkeydown="return c$.inputNumLetter(event);" @(string.IsNullOrEmpty(Model.Code) ? "" : "disabled='disabled' ") />
+            </td>
+        </tr>
+        <tr>
+            <th>
+                备注：
+            </th>
+            <td>
+                @Html.TextBox("txtRemark", Model.Desc, new { @Name = "Desc", Class = "input_common", checktype = "S{id:'error3'}L{len:200, msg:'备注长度不能超过200'}", onchange = "c$.checkElement(this)" })
+            </td>
+        </tr>
+    </table>
+    @{Html.RenderPartial("~/Views/Control/ErrorControl.cshtml", 3);}
+</form>
+<script type="text/javascript">
+    $(function () {
+        $("#selApp").chosen();
+    });
+</script>
+<style type="text/css">
+    .BodyL {
+        overflow: visible;
+    }
+</style>

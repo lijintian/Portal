@@ -1,0 +1,35 @@
+﻿@using Portal.OAuth.Core
+@{
+    ViewBag.Title = "404";
+    Layout = PageUtility.GetLayout;
+}
+<div class="row-fluid">
+    <div class="span12 div404">
+        &nbsp;
+    </div>
+    <div class="clearfix">&nbsp;</div>
+    <div class="span11 text-center">
+        <h1 class="smaller lighter">
+            亲~您要查看的页面不存在或已删除！
+        </h1>
+        @*<h4>请检查您输入的网址是否正确，或者点击链接继续浏览空间</h4>
+        <h4>
+            您可以回到<a href="@Url.Content("~/Home/Index")" id="href1">
+                网站首页
+            </a>
+        </h4>
+        <h5>系统将会在<strong id="endtime"></strong>秒后跳转到首页！</h5>*@
+    </div>
+</div>
+    <script type="text/javascript">
+        var i = 10;
+        function remainTime() {
+            if (i <= 0) {
+                location.href = $("#href1").attr("href");
+            } else {
+                document.getElementById('endtime').innerHTML = i--;
+                setTimeout("remainTime()", 1000);
+            }
+        }
+        //remainTime();
+    </script>

@@ -1,0 +1,134 @@
+﻿@model IEnumerable<Portal.Dto.Permission>
+@{
+    Portal.Dto.Role currentRole = ViewData["CurrentRole"] as Portal.Dto.Role;
+    IEnumerable<Portal.Dto.PagePermission> sysAllPagePermission = ViewData["sysAllPagePermission"] as IEnumerable<Portal.Dto.PagePermission>;
+    IEnumerable<Portal.Dto.ApiPermission> sysAllApiPermission = ViewData["sysAllApiPermission"] as IEnumerable<Portal.Dto.ApiPermission>;
+}
+<form class="tab-content" action="#" id="permissionForm">
+    <div>
+        <input type="hidden" name="roleId" value="@currentRole.Id" />
+    </div>
+    <div class="checkBar">
+        <label><input id="checkAll" type="checkbox" onclick='Tab$.CheckResultAllByAttribute(this, "permissionType")' /><span class="lbl">全选</span></label>
+    </div>
+    <div class="pagePermission">
+        <label>
+            <input type="checkbox" permissiontype="page" onchange='Tab$.CheckResultAllByAttribute(this, "pagePermission")' /><span class="lbl">页面</span>
+        </label>
+        @if (sysAllPagePermission.Any())
+        {//页面权限
+            <table class="level2">
+                <tbody>
+                    @foreach (var pm in sysAllPagePermission)
+                    {
+                        <tr>
+                            <td>
+                                <div class="level3_1">
+                                    <label>
+                                        <input page="@pm.Code" name="permission" pagepermission type="checkbox" onchange='Tab$.CheckResultAllByAttribute(this,"funPageCode=@pm.Code")' @(Model != null ? (Model.ToList().Exists(p => p.Code == pm.Code) ? "checked='checked'" : "") : "") value="@pm.Code" /><span class="lbl">@pm.Name</span>
+                                    </label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="level3_2">
+                                    @foreach (var fpm in pm.FunctionPermissions)
+                                    {
+                                        <div class="tp">
+                                            <label>
+                                                <input name="permission" funpagecode="@pm.Code" type="checkbox" @(Model != null ? (Model.ToList().Exists(p => p.Id == fpm.Id) ? "checked='checked'" : "") : "") value="@fpm.Code" onclick='Tab$.CheckParent(this,"funPageCode=@pm.Code", "page=@pm.Code")' callback="true" /><span class="lbl">@fpm.Name</span>
+                                            </label>
+                                        </div>
+                                    }
+                                </div>
+
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <div>暂无页面权限</div>
+        }
+    </div>
+    <div class="apiPermission">
+        <label><input type="checkbox" permissiontype="api" onchange='Tab$.CheckResultAllByAttribute(this, "apiPermission")' /><span class="lbl">API</span></label>
+        @if (sysAllApiPermission.Any())
+        {//API权限
+            <div class="level2_1">
+
+                @foreach (var pm in sysAllApiPermission)
+                {
+                    <div class="tp">
+                        <label>
+                            <input apipermission name="permission" type="checkbox" @(Model != null ? (Model.ToList().Exists(p => p.Id == pm.Id) ? "checked='checked'" : "") : "") value="@pm.Code" /><span class="lbl">@pm.Name</span>
+                        </label>
+                    </div>
+                }
+            </div>
+        }
+        else
+        {
+            <div>暂无API权限</div>
+        }
+    </div>
+</form>
+
+<style>
+    .permissionForm {
+        border: 0;
+    }
+
+    .checkBar {
+    }
+
+
+    .pagePermission {
+        color: green;
+    }
+
+    .level2 {
+        margin-left: 50px;
+    }
+
+        .level2 td {
+            padding-top: 5px;
+            vertical-align:middle;
+            padding-bottom: 5px;
+        }
+
+        .level2 tr:nth-child(even) {
+           background-color:rgba(238, 238, 238, 1);
+        }
+
+    .level3_1 {
+        color: orange;
+        width: 121px;
+        margin-right: 5px;
+    }
+
+    .level3_2 {
+        color: black;
+    }
+
+
+    .apiPermission {
+        color: green;
+    }
+
+    .level2_1 {
+        color: black;
+        padding-left: 50px;
+        padding-top: 5px;
+    }
+
+
+    .tp {
+        display: inline-block;
+        margin-right: 5px;
+        width: 120px;
+    }
+</style>
+
+

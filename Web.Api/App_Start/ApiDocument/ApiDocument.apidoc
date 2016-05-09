@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>CK1.Portal.Web.Api</name>
+    </assembly>
+    <members>
+        <member name="T:CK1.Portal.Web.Api.Controllers.LoginController">
+            <summary>
+            表示登录服务API
+            </summary>
+        </member>
+        <member name="T:CK1.Portal.Web.Api.Controllers.UserController">
+            <summary>
+            表示用户资源
+            </summary>
+        </member>
+        <member name="M:CK1.Portal.Web.Api.Controllers.UserController.Get(System.String)">
+            <summary>
+            获取用户聚合信息,包括角色与权限信息
+            </summary>
+            <param name="identity">标识</param>
+        </member>
+        <member name="M:CK1.Portal.Web.Api.Controllers.UserController.Create(CK1.Portal.Dto.Request.CreateUserRequest)">
+            <summary>
+            创建新用户
+            </summary>
+        </member>
+        <member name="M:CK1.Portal.Web.Api.Controllers.UserController.Update(System.String,CK1.Portal.Dto.Request.UpdateUserRequest)">
+            <summary>
+            更新用户信息
+            </summary>
+            <param name="identity">标识</param>
+            <param name="request">用户信息</param>
+        </member>
+        <member name="M:CK1.Portal.Web.Api.Controllers.UserController.ChangePassword(System.String,CK1.Portal.Dto.Request.ChangePasswordRequest)">
+            <summary>
+            更改用户密码
+            </summary>
+        </member>
+        <member name="M:CK1.Portal.Web.Api.Controllers.UserController.Approve(System.String)">
+            <summary>
+            设置用户可用
+            </summary>
+        </member>
+        <member name="M:CK1.Portal.Web.Api.Controllers.UserController.Disapprove(System.String)">
+            <summary>
+            禁用客户
+            </summary>
+        </member>
+    </members>
+</doc>

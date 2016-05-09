@@ -1,0 +1,36 @@
+﻿<!-- 批量导入 -->
+@using Portal.Web.Admin.Core
+<script type="text/javascript" src="@Url.Content2("~/Content/Js/ajaxfileupload.js")"></script>
+<script type="text/javascript" src="@Url.Content2("~/Scripts/File/BatchImport.js")"></script>
+<form id="filesForm" enctype="multipart/form-data">
+    <table id="table1" class="tab-pane active form_table">
+        <tr>
+            <th>导入：</th>
+            <td style="width: 360px;">
+                <div style="padding-top: 6px;" id="divUploadFiles">
+                    <input type="file" id="file_upload" name="file" />
+                </div>
+            </td>
+            <td>
+                <a href="#" onclick="DownFile();">下载模板</a>
+                @*<input type="submit" value="测试" />*@
+            </td>
+        </tr>
+        <tr id="trErrorFile" style="display: none;">
+            <th>失败数据：</th>
+            <td colspan="2">
+                <a href="#" onclick="DownFailData();" id="btnDownFile">下载失败数据</a>
+            </td>
+        </tr>
+    </table>
+    @{Html.RenderPartial("~/Views/Control/ErrorControl.cshtml", 2);}
+</form>
+<script type="text/javascript">
+    var importConfig = {
+        TypeId: "@ViewBag.TypeId",
+        ErrorFilePath: ""
+    };
+    $(function () {
+        InitUploadify(importConfig);
+    });
+</script>

@@ -1,0 +1,79 @@
+﻿@using Portal.Client.Core
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>@ViewBag.Title</title>
+    <link href="@Url.Ck1Content("ck1/assets/css/subnav.css")" rel="stylesheet" />
+    @{ Html.RenderPartial("../Control/CommonControl");}
+    @RenderSection("Head", required: false)
+</head>
+<body>
+    <div id="ck1_body">
+        @{ Html.RenderPartial("../Control/NavigationControl");}
+        <div id="ck1_main">
+            <div style="width: 1px; height: 1px; overflow: hidden; font-size: 1px; line-height: 1px;">
+                <img style='width: 258px; height: 258px;' src='http://pic.chukou1.com/0/0_c5c571.jpg' />
+            </div>
+            <div class="main">
+                <div class="body">
+                    <div class="frm">
+                        <div class="main_left">
+                            <div class="main_mid_l">
+                                <div class="main_m">
+                                    @{ Html.RenderPartial("../Control/LeftMenu");}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="main_right">
+                            <div class="right_content">
+                                <div class="main_mid_r">
+                                    <div class="main_m">
+                                        <div class="mian_serach_content">
+                                            <table style="width: 100%">
+                                                <tbody>
+                                                    <tr>
+                                                        <td align="left">
+                                                            <span style="line-height: 21px;">
+                                                                当前位置：<a class="color_666666" href="@Url.Content("~/Home/Index")">首页</a>@Html.Raw(ViewBag.CurrentLocation)
+                                                            </span>
+                                                        </td>
+                                                        <td align="right" class="form-search">
+                                                            @*<div class="input-append">
+                                                                    <input type="text" name="textfield" id="textfield" class="span2 search-query" />
+                                                                    <button type="button" onclick="onSubmit();" class="btn">搜索</button>
+                                                                </div>*@
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="clear">
+                                </div>
+                            </div>
+                            <div class="right_content margin_top8">
+                                <div class="main_mid_r">
+                                    <div class="main_m">
+                                        <!--right content start-->
+                                        <div class="mian_r_content">
+                                            @*<h2>@ViewBag.Title</h2>*@
+                                            @RenderBody()
+                                        </div>
+                                        <!--right content end-->
+                                    </div>
+                                </div>
+                                <div class="clear">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        @{ Html.RenderPartial("../Control/BottomControl");}
+    </div>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

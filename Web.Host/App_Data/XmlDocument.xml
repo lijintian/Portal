@@ -1,0 +1,354 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>CK1.PRC.WebApi.Core</name>
+    </assembly>
+    <members>
+        <member name="T:CK1.PRC.WebApi.Core.UnityWebApiActivator">
+            <summary>Provides the bootstrapping for integrating Unity with WebApi when it is hosted in ASP.NET</summary>
+        </member>
+        <member name="M:CK1.PRC.WebApi.Core.UnityWebApiActivator.Start">
+            <summary>Integrates Unity when the application starts.</summary>
+        </member>
+        <member name="M:CK1.PRC.WebApi.Core.UnityWebApiActivator.Shutdown">
+            <summary>Disposes the Unity container when the application is shut down.</summary>
+        </member>
+        <member name="T:CK1.PRC.WebApi.Core.Controllers.PricingDiscountTemplateController">
+            <summary>
+            折扣方案API
+            </summary>
+        </member>
+        <member name="M:CK1.PRC.WebApi.Core.Controllers.PricingDiscountTemplateController.#ctor(CK1.PRC.Applications.Services.IPricingDiscountTemplateAppService)">
+            <summary>
+            构造方法
+            </summary>
+        </member>
+        <member name="M:CK1.PRC.WebApi.Core.Controllers.PricingDiscountTemplateController.List(CK1.PRC.Dto.PricingDiscountTemplate.PricingDiscountTemplateSearchCriteria)">
+            <summary>
+             获取折扣方案信息列表
+            </summary>
+            <param name="criteria">查询条件</param>
+            <returns>折扣方案信息列表</returns>
+        </member>
+        <member name="M:CK1.PRC.WebApi.Core.Controllers.PricingDiscountTemplateController.Create(CK1.PRC.Dto.PricingDiscountTemplate.CreatePricingDiscountTemplateRequest)">
+            <summary>
+            创建一个折扣方案
+            </summary>
+            <param name="request">创建折扣方案的请求参数</param>
+            <returns>被创建的折扣方案信息</returns>
+        </member>
+        <member name="M:CK1.PRC.WebApi.Core.Controllers.PricingDiscountTemplateController.ModifyPricingDiscountTemplate(System.String,CK1.PRC.Dto.PricingDiscountTemplate.ModifyPricingDiscountTemplateRequest)">
+            <summary>
+            修改一个折扣方案
+            </summary>
+            <param name="id">折扣方案Id</param>
+            <param name="request">修改折扣方案的请求参数</param>
+            <returns>被修改的折扣方案信息</returns>
+        </member>
+        <member name="M:CK1.PRC.WebApi.Core.Controllers.PricingDiscountTemplateController.ImportPricingDiscounts(System.String,CK1.PRC.Dto.PricingDiscountTemplate.ImportPricingDiscountsRequest)">
+            <summary>
+            导入等级方案中的产品等级信息
+            </summary>
+            <param name="id">折扣方案Id</param>
+            <param name="request">导入的折扣信息</param>
+            <returns></returns>
+        </member>
+        <member name="M:CK1.PRC.WebApi.Core.Controllers.PricingDiscountTemplateController.GetPricingDiscountList(System.String,CK1.PRC.Dto.PricingDiscountTemplate.PricingDiscountSearchCriteria)">
+            <summary>
+             获取产品等级信息列表
+            </summary>
+            <param name="id">折扣方案Id</param>
+            <param name="criteria">查询条件</param>
+            <returns>产品等级信息列表</returns>
+        </member>
+        <member name="M:CK1.PRC.WebApi.Core.Controllers.PricingDiscountTemplateController.ImportAssociatedCustomers(System.String,CK1.PRC.Dto.PricingDiscountTemplate.ImportAssociatedCustomersRequest)">
+            <summary>
+            导入关联客户信息
+            </summary>
+            <param name="id">折扣方案Id</param>
+            <param name="request">导入的关联客户信息</param>
+            <returns></returns>
+        </member>
+        <member name="M:CK1.PRC.WebApi.Core.Controllers.PricingDiscountTemplateController.GetAssociatedCustomerList(System.String,CK1.PRC.Dto.PricingDiscountTemplate.AssociatedCustomerSearchCriteria)">
+            <summary>
+             获取关联客户信息列表
+            </summary>
+            <param name="id">折扣方案Id</param>
+            <param name="criteria">查询条件</param>
+            <returns>关联客户信息列表</returns>
+        </member>
+        <member name="T:CK1.PRC.WebApi.Core.Controllers.CustomerGradeTemplateController">
+            <summary>
+            客户等级方案API
+            </summary>
+        </member>
+        <member name="M:CK1.PRC.WebApi.Core.Controllers.CustomerGradeTemplateController.#ctor(CK1.PRC.Applications.Services.ICustomerGradeTemplateAppService)">
+            <summary>
+            构造方法
+            </summary>
+            <param name="customerGradeTemplateAppService"></param>
+        </member>
+        <member name="M:CK1.PRC.WebApi.Core.Controllers.CustomerGradeTemplateController.GetCustomerGradeTemplateList(CK1.PRC.Dto.CustomerGradeTemplate.CustomerGradeTemplateSearchCriteria)">
+            <summary>
+             获取客户等级方案信息列表
+            </summary>
+            <param name="criteria">查询条件</param>
+            <returns>客户等级方案信息列表</returns>
+        </member>
+        <member name="M:CK1.PRC.WebApi.Core.Controllers.CustomerGradeTemplateController.CreateCustomerGradeTemplate(CK1.PRC.Dto.CustomerGradeTemplate.CreateCustomerGradeTemplateRequest)">
+            <summary>
+            创建一个客户等级方案
+            </summary>
+            <param name="request">创建客户等级方案的请求参数</param>
+            <returns>被创建的客户等级方案信息</returns>
+        </member>
+        <member name="M:CK1.PRC.WebApi.Core.Controllers.CustomerGradeTemplateController.ModifyCustomerGradeTemplate(System.String,CK1.PRC.Dto.CustomerGradeTemplate.ModifyCustomerGradeTemplateRequest)">
+            <summary>
+            修改一个客户等级方案
+            </summary>
+            <param name="id">客户等级方案Id</param>
+            <param name="request">修改客户等级方案的请求参数</param>
+            <returns>被修改的客户等级方案信息</returns>
+        </member>
+        <member name="M:CK1.PRC.WebApi.Core.Controllers.CustomerGradeTemplateController.ImportProductGrades(System.String,CK1.PRC.Dto.CustomerGradeTemplate.ImportProductGradesRequest)">
+            <summary>
+            导入等级方案中的产品等级信息
+            </summary>
+            <param name="id">客户等级方案Id</param>
+            <param name="request">导入的客户等级信息</param>
+            <returns></returns>
+        </member>
+        <member name="M:CK1.PRC.WebApi.Core.Controllers.CustomerGradeTemplateController.GetProductGradeList(System.String,CK1.PRC.Dto.CustomerGradeTemplate.ProductGradeSearchCriteria)">
+            <summary>
+             获取产品等级信息列表
+            </summary>
+            <param name="id">客户等级方案Id</param>
+            <param name="criteria">查询条件</param>
+            <returns>产品等级信息列表</returns>
+        </member>
+        <member name="M:CK1.PRC.WebApi.Core.Controllers.CustomerGradeTemplateController.ImportAssociatedCustomers(System.String,CK1.PRC.Dto.CustomerGradeTemplate.ImportAssociatedCustomersRequest)">
+            <summary>
+            导入关联客户信息
+            </summary>
+            <param name="id">客户等级方案Id</param>
+            <param name="request">导入的关联客户信息</param>
+            <returns></returns>
+        </member>
+        <member name="M:CK1.PRC.WebApi.Core.Controllers.CustomerGradeTemplateController.GetAssociatedCustomerList(System.String,CK1.PRC.Dto.CustomerGradeTemplate.AssociatedCustomerSearchCriteria)">
+            <summary>
+             获取关联客户信息列表
+            </summary>
+            <param name="id">客户等级方案Id</param>
+            <param name="criteria">查询条件</param>
+            <returns>关联客户信息列表</returns>
+        </member>
+        <member name="T:CK1.PRC.WebApi.Core.Controllers.ProductController">
+            <summary>
+            物流产品API
+            </summary>
+        </member>
+        <member name="M:CK1.PRC.WebApi.Core.Controllers.ProductController.FindByCode(System.String)">
+            <summary>
+            获取产品信息
+            </summary>
+            <param name="code">产品代码</param>
+            <returns>产品信息</returns>
+        </member>
+        <member name="M:CK1.PRC.WebApi.Core.Controllers.ProductController.FindActualByCode(System.String,System.String)">
+            <summary>
+            获取产品所配置的路由信息
+            </summary>
+            <param name="code">产品代码</param>
+            <param name="warehouse">仓库/处理点</param>
+            <returns>产品所配置的路由信息</returns>
+        </member>
+        <member name="M:CK1.PRC.WebApi.Core.Controllers.ProductController.ListByPage(System.String,System.String,System.String,System.String,System.String,System.Int32,System.Int32)">
+            <summary>
+            获取产品信息列表
+            </summary>
+            <param name="code">产品代码</param>
+            <param name="name">产品名称</param>
+            <param name="category">产品类别</param>
+            <param name="type">产品类型</param>
+            <param name="sort">排序</param>
+            <param name="page">页码</param>
+            <param name="pageSize">每页记录数</param>
+            <returns>包含分页信息的数据列表</returns>
+        </member>
+        <member name="M:CK1.PRC.WebApi.Core.Controllers.ProductController.Create(CK1.PRC.Dto.Logistics.CreateLogisticsProductRequest)">
+            <summary>
+            创建一个物流产品
+            </summary>
+            <returns>创建后的客户报价物流产品信息</returns>
+        </member>
+        <member name="M:CK1.PRC.WebApi.Core.Controllers.ProductController.ChangeBaseInfo(System.String,CK1.PRC.Dto.Logistics.ChangeLogisticsProductBaseInfoRequest)">
+            <summary>
+            修改一个物流产品信息
+            </summary>
+            <param name="code">物流产品代码</param>
+            <param name="request"></param>
+            <returns>修改后的物流产品信息</returns>
+        </member>
+        <member name="M:CK1.PRC.WebApi.Core.Controllers.ProductController.ChangeInfo(System.String,CK1.PRC.Dto.Logistics.ChangeLogisticsProductInfoRequest)">
+            <summary>
+            修改一个物流产品信息
+            </summary>
+            <param name="code">物流产品代码</param>
+            <param name="request"></param>
+            <returns>修改后的物流产品信息</returns>
+        </member>
+        <member name="T:CK1.PRC.WebApi.Core.Controllers.GradeController">
+            <summary>
+                报价等级控制器
+            </summary>
+        </member>
+        <member name="M:CK1.PRC.WebApi.Core.Controllers.GradeController.#ctor(CK1.PRC.Applications.Services.IPricingGradeAppService)">
+            <summary>
+                构造方法
+            </summary>
+            <param name="service">报价等级的应用层服务</param>
+        </member>
+        <member name="M:CK1.PRC.WebApi.Core.Controllers.GradeController.ListByPage(CK1.PRC.Dto.PricingGrade.PricingGradeSearchCriteria)">
+            <summary>
+                获取报价等级列表
+            </summary>
+            <returns>等级列表</returns>
+        </member>
+        <member name="M:CK1.PRC.WebApi.Core.Controllers.GradeController.Create(CK1.PRC.Dto.PricingGrade.CreatePricingGradeRequest)">
+            <summary>
+                创建新的报价等级
+            </summary>
+            <param name="request">创建新等级的请求参数</param>
+            <returns>创建后的报价等级信息</returns>
+        </member>
+        <member name="M:CK1.PRC.WebApi.Core.Controllers.GradeController.ChangeInfo(System.String,CK1.PRC.Dto.PricingGrade.ModifyPricingGradeRequest)">
+            <summary>
+                修改报价等级
+            </summary>
+            <param name="id">等级Id</param>
+            <param name="request">修改等级的请求参数</param>
+            <returns>修改后的报价等级信息</returns>
+        </member>
+        <member name="M:CK1.PRC.WebApi.Core.Controllers.GradeController.Remove(System.String)">
+            <summary>
+                删除报价等级
+            </summary>
+            <param name="id">等级Id</param>
+            <returns>被删除报价等级</returns>
+        </member>
+        <member name="M:CK1.PRC.WebApi.Core.Controllers.GradeController.SetDefault(System.String)">
+            <summary>
+                设置默认的报价等级
+            </summary>
+            <param name="id">报价等级id</param>
+            <returns></returns>
+        </member>
+        <member name="P:CK1.PRC.WebApi.Core.Controllers.GradeController.PricingGradeAppService">
+            <summary>
+                报价等级应用服务
+            </summary>
+        </member>
+        <member name="T:CK1.PRC.WebApi.Core.Controllers.PricingController">
+            <summary>
+            报价API
+            </summary>
+        </member>
+        <member name="M:CK1.PRC.WebApi.Core.Controllers.PricingController.#ctor(CK1.PRC.Applications.Services.IPricingAppService)">
+            <summary>
+            
+            </summary>
+            <param name="pricingAppService"></param>
+        </member>
+        <member name="M:CK1.PRC.WebApi.Core.Controllers.PricingController.CalculatePackagePrice(CK1.PRC.Dto.Pricing.CalculatePackagePriceRequest)">
+            <summary>
+            计算包裹的价格
+            </summary>
+            <param name="request">需要计算价格的包裹信息</param>
+            <returns>计价结果</returns>
+        </member>
+        <member name="T:CK1.PRC.WebApi.Core.Controllers.SheetController">
+            <summary>
+            报价表API
+            </summary>
+        </member>
+        <member name="M:CK1.PRC.WebApi.Core.Controllers.SheetController.#ctor(CK1.PRC.Applications.Services.IPricingAppService)">
+            <summary>
+            构造方法
+            </summary>
+        </member>
+        <member name="M:CK1.PRC.WebApi.Core.Controllers.SheetController.Find(System.String)">
+            <summary>
+            获取具体产品报价表的详情
+            </summary>
+            <param name="id">产品报价表Id</param>
+            <returns>产品报价表信息</returns>
+        </member>
+        <member name="M:CK1.PRC.WebApi.Core.Controllers.SheetController.Create(CK1.PRC.Dto.PricingSheet.CreatePricingSheetRequest)">
+            <summary>
+            创建一个新的产品报价表
+            </summary>
+            <param name="request">请求参数</param>
+            <returns>新创建的产品报价表详情</returns>
+        </member>
+        <member name="M:CK1.PRC.WebApi.Core.Controllers.SheetController.ChangeBaseInfo(System.String,CK1.PRC.Dto.PricingSheet.ChangePrcingSheetBaseInfoRequest)">
+            <summary>
+            修改产品报价表
+            </summary>
+            <param name="id">产品代码</param>
+            <param name="request">请求参数</param>
+            <returns></returns>
+        </member>
+        <member name="M:CK1.PRC.WebApi.Core.Controllers.SheetController.ChangeDetail(System.String,CK1.PRC.Dto.PricingSheet.ChangePrcingSheetDetailRequest)">
+            <summary>
+            修改产品报价表详情
+            </summary>
+            <param name="id">产品代码</param>
+            <param name="request">请求参数</param>
+        </member>
+        <member name="M:CK1.PRC.WebApi.Core.Controllers.SheetController.ImportPricings(System.String,CK1.PRC.Dto.PricingSheet.ImportPricingInfoRequest)">
+            <summary>
+            导入产品报价表
+            </summary>
+            <param name="id">产品代码</param>
+            <param name="request">请求参数</param>
+        </member>
+        <member name="T:CK1.PRC.WebApi.Core.Extends.ContentNegotiatedExceptionHandler">
+            <summary>
+            全局的异常处理
+            </summary>
+        </member>
+        <member name="T:CK1.PRC.WebApi.Core.Extends.ResourceRemovedAttribute">
+            <summary>
+            资源被移除不再有效
+            </summary>
+        </member>
+        <member name="T:CK1.PRC.WebApi.Core.Extends.CustomJsonFormatter">
+            <summary>
+            自定义JsonFormatter
+            </summary>
+        </member>
+        <member name="M:CK1.PRC.WebApi.Core.Extends.CustomJsonFormatter.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:CK1.PRC.WebApi.Core.Extends.CustomJsonFormatter.CanReadType(System.Type)">
+            <summary>
+            Queries whether this <see cref="T:System.Net.Http.Formatting.MediaTypeFormatter"/> can deserializean object of the specified type.
+            </summary>
+            <returns>
+            true if the <see cref="T:System.Net.Http.Formatting.MediaTypeFormatter"/> can deserialize the type; otherwise, false.
+            </returns>
+            <param name="type">The type to deserialize.</param>
+        </member>
+        <member name="M:CK1.PRC.WebApi.Core.Extends.CustomJsonFormatter.CanWriteType(System.Type)">
+            <summary>
+            Queries whether this <see cref="T:System.Net.Http.Formatting.MediaTypeFormatter"/> can serializean object of the specified type.
+            </summary>
+            <returns>
+            true if the <see cref="T:System.Net.Http.Formatting.MediaTypeFormatter"/> can serialize the type; otherwise, false.
+            </returns>
+            <param name="type">The type to serialize.</param>
+        </member>
+    </members>
+</doc>

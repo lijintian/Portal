@@ -1,0 +1,36 @@
+﻿@using Portal.Client.Core
+@using Portal.Dto
+@{
+    var item = Model as DeveloperAppDto;
+    bool audit = PageUtility.HasPermission(ClientPermissionCodes.ClientDeveloperApp_Audit); //提交审核
+}
+<div class="row-fluid" id="AppAudit">
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 65px; text-align: left;">属性列表</th>
+                <th style="text-align: left;">待生效的值</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>权限</td>
+                <td class="tdwordBreak">@item.RequestPermssionDesc</td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <h5 class="red">提交审核之前，你需要保证你的APP已测试通过，审核通过以后，只有用户授权之后才能使用该应用。</h5>
+                </td>
+            </tr>
+            @if (audit && item.State == DeveloperAppState.Developing)
+            {
+                <tr>
+                    <td></td>
+                    <td>
+                        <input type="button" value="我知道了，提交审核" class="btn btn-primary" onclick="SubmitAudit(this)">
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

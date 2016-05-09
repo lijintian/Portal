@@ -1,0 +1,126 @@
+﻿@*用户权限设置异步加载*@
+@model  IEnumerable<Portal.Dto.Application>
+@{
+    Portal.Dto.User currentUser = ViewData["CurrentUser"] as Portal.Dto.User;
+    string curUserPermissions = ViewData["curUserPermissions"] as string;
+    string currentUerRolePermissions = ViewData["currentUerRolePermissions"] as string;
+}
+<form class="tab-content" action="#" id="permissionForm">
+    <div>
+        <input type="hidden" name="UserId" value="@currentUser.Id" />
+        <input type="hidden" name="PermissionCode" id="txtCurrentUserPermission" value="@curUserPermissions" />
+        <input type="hidden"  id="txtCurrentUserRolePermission" value="@currentUerRolePermissions" />
+    </div>
+    <div class="checkBar">
+        @*<input id="checkAll" type="checkbox" onclick='Tab$.CheckResultAllByAttribute(this, "application")'  value=""/><span class="lbl">全选</span>*@
+    </div>
+    <div>
+        @foreach (var app in Model)
+        {
+            //系统
+            <div class="level1">
+
+                <span class="fa fa-chevron-down btn btn-info" style="cursor:pointer" aria-hidden="true" applicationid="@app.Id"> @app.CnName</span>
+           
+              
+                <div class="level2">
+                    <label><input application type="checkbox" onchange='Tab$.CheckResultAllByAttribute(this,"AppId=@app.Id")' value=""  /><span class="lbl">全选</span></label>
+                    <div class="level2_1">
+                        @{ Html.RenderPartial("~/Views/Control/LodingControl.cshtml"); }
+                    </div>
+                   
+                </div>
+            </div>
+        }
+    </div>
+</form>
+<script src="~/Scripts/PermissionSetting/PermissionSettingCommon.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $("[applicationid]").each(function () {
+            $(this).click(function ()
+            {
+                if (!$(this).attr("hasload"))
+                {
+                    GetApplicationPagePermission(this, $(this).attr("applicationId"));
+                }
+                ShowOrHide(this);
+            });
+        });
+        
+        //绑定checkbox change引起的权限变化
+        BindPermissionChange("#permissionForm", "#txtCurrentUserPermission");
+    })
+
+    function GetApplicationPagePermission(obj, appId) {
+        $.ajaxBfeData({
+            isloading: false,
+           url: window.ServiceAppPath + "Admin/PermissionSetting/AsynPagePermission", data: { "applicationId": appId }, type: 'post', dataType: 'html',
+           success: function (data) {
+                $(obj).attr("hasload","true")
+                $(obj).parents('.level1').find('.level2_1').html(data);
+
+                var currenUserPermissions = $("#txtCurrentUserPermission").val();
+                var currentUserRolePermissions = $("#txtCurrentUserRolePermission").val();
+
+                if (currenUserPermissions != "")
+                {//选中原有权限
+                    $(obj).parents('.level1').find('.level2').find("input[type=checkbox]").each(function () {
+                        if (currenUserPermissions.indexOf(","+$(this).val()+",") > -1) {
+                            this.checked = true;
+                            if (currentUserRolePermissions.indexOf("," + $(this).val() + ",")>-1) {
+                                //如果该权限当前用户的角色权限，灰掉
+                                $(this).attr("disabled", "disabled");
+                            }
+                            
+                        }
+                    });
+                }
+            }
+        });
+   }
+</script>
+
+<style>
+    .level1 {
+        color: blue;
+        margin-bottom: 10px;
+        word-break: break-all;
+    }
+
+    .level2 {
+        color: black;
+        display:none;
+    }
+
+    .level3 {
+        margin-left: 30px;
+    }
+
+    .level3 tr:nth-child(even) {
+           background-color:rgba(238, 238, 238, 1);
+        }
+
+    .level3 td{
+        padding-top:5px;
+        vertical-align:middle;
+        padding-bottom:5px;
+    }
+
+
+    .level3_1 {
+        width:120px;
+        color: orange;
+    }
+
+    .level3_2 {
+        padding-left: 20px;
+    }
+
+        .level3_2 div {
+            display:inline-block;
+            width:120px;
+            margin-right: 5px;
+        }
+</style>
+

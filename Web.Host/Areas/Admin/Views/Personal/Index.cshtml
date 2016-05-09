@@ -1,0 +1,30 @@
+﻿
+<form class="form-horizontal" action="#" id="detailForm">
+    <table id="table1" class="tab-pane active form_table">
+        <tr>
+            <th>
+                原密码<span class="red">*</span>：
+            </th>
+            <td>
+                @Html.Password("txtPwdOld", "", new { @Name = "PwdOld", Class = "input_common", checktype = "S{id:'error1'}L{len:20, msg:'原密码长度不能超过20'};R{请输入原密码}", onchange = "c$.checkElement(this);" })
+            </td>
+        </tr>
+        <tr>
+            <th>
+                新密码<span class="red">*</span>：
+            </th>
+            <td>
+                @Html.Password("txtPwdNew", "", new { @Name = "PwdNew", Class = "input_common", checktype = "S{id:'error2'}L{len:20, msg:'新密码长度不能超过20'};R{请输入新密码}", onchange = "c$.checkElement(this);" })
+            </td>
+        </tr>
+        <tr>
+            <th>
+                确认密码<span class="red">*</span>：
+            </th>
+            <td>
+                @Html.Password("txtPwdAffirm", "", new { @Name = "PwdAffirm", Class = "input_common", checktype = "S{id:'error3'}L{len:20, msg:'确认密码长度不能超过20'};R{请输入确认密码}", onchange = "c$.checkElement(this);" })
+            </td>
+        </tr>
+    </table>
+    @{Html.RenderPartial("../Control/ErrorControl", 3);}
+</form>

@@ -1,0 +1,14 @@
+﻿@model List<Portal.Dto.Role>
+@if (Model.Count() == 0)
+{
+    <div>没有角色</div>
+}
+else
+{
+     foreach (var role in Model)
+     {//角色
+        <div>
+            <label><input appid="@role.ApplicationId" type="checkbox" value="@role.Code" /><span class="lbl">@role.Name</span></label>
+        </div>
+     }
+}

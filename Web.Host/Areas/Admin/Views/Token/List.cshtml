@@ -1,0 +1,118 @@
+﻿<!-- 外部开发者应用信息管理明细 -->
+@using Portal.Dto
+@using Portal.Web.Admin.Core
+@using Portal.Web.Core
+@using Portal.Web.Core.Common
+@using Portal.Web.Core.Model
+@{
+    var infolist = Model as PageListSource<TokenWrapperDto>;
+    bool approve = PageUtility.HasPermission(PermissionCodes.Token_Approve);//启用
+    bool disapprove = PageUtility.HasPermission(PermissionCodes.Token_DisApprove);//禁用
+    bool showOperate = approve || disapprove;//是否显示操作
+}
+<table class="table table-striped table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>
+                应用名称
+            </th>
+            <th>
+                Token
+            </th>
+            <th>
+                到期时间
+            </th>
+            <th>
+                类型
+            </th>
+            <th style="width: 33%;">
+                访问权限
+            </th>
+            <th>
+                所属客户
+            </th>
+            <th>状态</th>
+            @if (showOperate)
+            {
+                <th>
+                    操作
+                </th>
+            }
+        </tr>
+    </thead>
+    <tbody>
+        @if (infolist.TotalRows > 0)
+        {
+            foreach (var item in infolist.Source)
+            {
+                <tr>
+                    <td>
+                        @item.DeveloperAppName
+                    </td>
+                    <td class="textLeft">
+                        @item.AccessToken
+                    </td>
+                    <td>
+                        <label utc="@item.AccessTokenExpiredTime.Show("yyyy-MM-dd")" utcformat="YYYY-MM-DD"></label>
+                    </td>
+                    <td>
+                        @(item.IsExternal ? "外部" : "内部")
+                    </td>
+                    <td class="textLeft wordBreak">
+                        @(string.Join(",", item.Codes))
+                    </td>
+                    <td>
+                        @(string.IsNullOrEmpty(item.CustomerIdentity) ? "所有客户" : item.CustomerIdentity)
+                    </td>
+                    <td>
+                        @(item.IsDisabled ? "禁用" : "正常")
+                    </td>
+                    @if (showOperate)
+                    {
+                        <td>
+                            @if (disapprove && item.IsDisabled)
+                            {
+                                <button title="启用" class='btn btn-mini btn-success' onclick="DeleInfo('@item.Id', 1); ">
+                                    <i class='ace-icon glyphicon glyphicon-wrench'></i>启用
+                                </button>
+                            }
+                            else if (approve && !item.IsDisabled)
+                            {
+                                <button title="禁用" class='btn btn-mini btn-danger' onclick="DeleInfo('@item.Id', 0); ">
+                                    <i class='ace-icon glyphicon glyphicon-ban-circle'></i>禁用
+                                </button>
+                            }
+                        </td>
+                    }
+                </tr>
+                <tr>
+                    <td colspan="@(showOperate?8:7)" class="textLeft">
+                        <div>
+                            <div class="col-xs-6" style="padding-left: 0px;"><label>RefreshToken：</label>@(item.RefreshToken)</div>
+                            <div class="col-xs-2">
+                                <label>到期时间：</label>
+                                <span utc="@item.RefreshTokenExpiredTime.Show("yyyy-MM-dd")" utcformat="YYYY-MM-DD"></span> 
+                            </div>
+                            <div class="col-xs-2"><label>生成日期：</label>
+                                <span utc="@item.CreatedOn.Show("yyyy-MM-dd")" utcformat="YYYY-MM-DD"></span> 
+                            </div>
+                            <div class="col-xs-2"><label>是否过期：</label>@(item.IsExpired ? "是" : "否")</div>
+                        </div>
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="@(showOperate?8:7)">
+                    @{ Html.RenderPartial("~/Views/Control/NoDataControl.cshtml"); }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@if (infolist.TotalRows > 0)
+{
+    Html.RenderPartial("../Control/PagingControl", infolist.Pageing);
+}

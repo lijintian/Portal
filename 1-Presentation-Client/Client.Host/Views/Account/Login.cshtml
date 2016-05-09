@@ -1,0 +1,7 @@
+﻿<!-- 外部开发者信息管理编辑弹出对话框 -->
+@using Portal.Client.Core
+@{
+    ViewBag.Title = PageUtility.GetMenuName(ViewContext.RouteData, "用户登录");
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+}
+@{ Html.RenderPartial("../Account/UserLogin", Request.RawUrl);}

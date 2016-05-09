@@ -1,0 +1,88 @@
+﻿<!-- 外部开发者应用信息管理查看弹出对话框 -->
+@using Portal.Dto
+@using Portal.Web.Core
+@{
+    var item = Model as DeveloperAppDto;
+}
+<form class="form-horizontal" action="#" id="detailForm">
+    <input type="hidden" id="hddatakey" name="Id" value="@item.Id" />
+    <table class="tab-pane active form_table">
+        <tr>
+            <th>
+                应用名称：
+            </th>
+            <td>
+                @item.Name
+            </td>
+            <th>
+                应用类型：
+            </th>
+            <td>
+                @(item.AppType.GetDescription())
+            </td>
+        </tr>
+        <tr>
+            <th>
+                应用简介：
+            </th>
+            <td colspan="3">
+                @item.Desc
+            </td>
+        </tr>
+        <tr>
+            <th>
+                应用地址：
+            </th>
+            <td>
+                @item.AccessUrl
+            </td>
+            <th>
+                回调地址：
+            </th>
+            <td>
+                @item.CallbackUrl
+            </td>
+        </tr>
+        <tr>
+            <th>
+                ClientId：
+            </th>
+            <td colspan="3">
+                @item.ClientId
+            </td>
+        </tr>
+        <tr>
+            <th>
+                Secret：
+            </th>
+            <td colspan="3">
+                @item.Secret
+            </td>
+        </tr>
+        <tr>
+            <th>
+                申请分组：
+            </th>
+            <td colspan="3">
+                @item.RequestGroupDesc
+            </td>
+        </tr>
+        <tr>
+            <th>
+                已审分组：
+            </th>
+            <td colspan="3">
+                @item.ApprovedGroupDesc
+            </td>
+        </tr>
+        <tr>
+            <th>
+                备注:
+            </th>
+            <td colspan="3">
+                <textarea rows="3" name="Remark" id="Remark" style="width: 520px;" checktype="S{id:'error1'}L{len:200, msg:'备注长度不能超过200'}" onchange="c$.checkElement(this)"></textarea>
+            </td>
+        </tr>
+    </table>
+    @{Html.RenderPartial("~/Views/Control/ErrorControl.cshtml", 1);}
+</form>

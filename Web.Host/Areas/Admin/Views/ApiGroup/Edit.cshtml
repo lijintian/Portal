@@ -1,0 +1,31 @@
+﻿@model Portal.Dto.ApiPermissionGroup
+<form class="form-horizontal" action="#" id="detailForm">
+    <input type="hidden" id="hddatakey" name="Id" value="@Model.Id" />
+    <table id="table1" class="tab-pane active form_table">
+        <tr>
+            <th>
+                名称<span class="red">*</span>：
+            </th>
+            <td>
+                @Html.TextBox("txtApiPermissionGroup", Model.Name, new { @Name = "Name", checktype = "S{id:'error1'}R{请输入名称}L{len:100, msg:'名称长度不能超过100'}", onchange = "c$.checkElement(this)" })
+            </td>
+        </tr>
+        <tr>
+            <th>
+                编码<span class="red">*</span>：
+            </th>
+            <td>
+                <input id="txtApiPermissionGroup" type="text" name="Code" value="@Model.Code" checktype="S{id:'error2'}B{msg:'编码只允许输入字母、数字、下划线'}L{len:100, msg:'编码长度不能超过100'}R{请输入编码}" onkeydown="return c$.inputNumLetter(event);" @(string.IsNullOrEmpty(Model.Code) ? "" : "disabled='disabled' ") onchange="c$.checkElement(this)" />
+            </td>
+        </tr>
+        <tr>
+            <th>
+                描述：
+            </th>
+            <td>
+                @Html.TextBox("txtRemark", Model.Desc, new { @Name = "Desc", Class = "input_common", checktype = "S{id:'error3'}L{len:200, msg:'描述长度不能超过200'}", onchange = "c$.checkElement(this)" })
+            </td>
+        </tr>
+    </table>
+    @{Html.RenderPartial("~/Views/Control/ErrorControl.cshtml", 3);}
+</form>

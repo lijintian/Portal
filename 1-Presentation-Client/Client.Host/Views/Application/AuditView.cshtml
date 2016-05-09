@@ -1,0 +1,68 @@
+﻿<!-- 外部开发者应用信息管理查看弹出对话框 -->
+@using Portal.Client.Core
+@using Portal.Dto
+@using Portal.Web.Core
+@{
+    ViewBag.Title = PageUtility.GetMenuName(ViewContext.RouteData, "应用管理");
+    Layout = PageUtility.GetLayout;
+    var item = Model as DeveloperAppDto;
+    var flowInfo = ViewBag.FlowInfo as FlowInfo;
+}
+@section Head{
+    @{ Html.RenderPartial("~/Views/Control/FlowScheduleCtl.cshtml");}
+    <script type="text/javascript" src="@Url.Content2("~/Scripts/Client/ApplicationList.js")"></script>
+}
+<input type="hidden" id="hddatakey" value="@item.Id" backpageid="@ViewBag.BackPageId" />
+<table class="Commontable">
+    <tr>
+        <th style="white-space:nowrap;">
+            应用名称：
+        </th>
+        <td>
+            @item.Name
+        </td>
+    </tr>
+    <tr>
+        <th>
+            应用状态：
+        </th>
+        <td>
+            @if (item.State == DeveloperAppState.Disable)
+            {
+                @(item.State.GetDescription())
+            }
+            else
+            {
+                <div id="orderFlow">
+                </div>
+                <script type="text/javascript">
+                    $(function () {
+                        InitFlowPage(@flowInfo.StepId,'@Html.Raw(flowInfo.Json)');
+                    });
+                </script>
+            }
+        </td>
+    </tr>
+    <tr>
+        <th>
+            ClientId：
+        </th>
+        <td>
+            @item.ClientId
+        </td>
+    </tr>
+    <tr>
+        <th>
+            Secret：
+        </th>
+        <td>
+            @item.Secret
+        </td>
+    </tr>
+    <tr>
+        <td></td>
+        <td>
+            <input type="button" value="返回" class="btn" onclick="Cancel()">
+        </td>
+    </tr>
+</table>

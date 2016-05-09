@@ -1,0 +1,49 @@
+﻿<!-- 系统用户信息管理编辑弹出对话框 -->
+@model Portal.Dto.Application
+
+<form class="form-horizontal" action="#" id="detailForm">
+    <input type="hidden" id="hddatakey" name="Id" value="@Model.Id" />
+    <table id="table1" class="tab-pane active form_table">
+        <tr>
+            <th>
+                名称<span class="red">*</span>：
+            </th>
+            <td>
+                @Html.TextBox("txtCnName", Model.CnName, new { @Name = "CnName", checktype = "S{id:'error1'}L{len:50, msg:'名称长度不能超过50'};R{请输入名称}", onchange = "c$.checkElement(this);" })
+            </td>
+        </tr>
+        <tr>
+            <th>
+                英文名称<span class="red">*</span>：
+            </th>
+            <td>
+                @Html.TextBox("txtEnName", Model.EnName, new { @Name = "EnName", checktype = "S{id:'error2'}L{len:50, msg:'英文名称长度不能超过50'}B{msg:'英文名称只允许输入字母、数字、下划线'}R{请输入英文名称}", onchange = "c$.checkElement(this);", onkeydown = "return c$.inputNumLetter(event);" })
+            </td>
+        </tr>
+        <tr>
+            <th>
+                URL<span class="red">*</span>：
+            </th>
+            <td>
+                @Html.TextBox("txtUrl", Model.Url, new { @Name = "Url", checktype = "S{id:'error3'}U{msg:'URL输入不正确'}L{len:100, msg:'URL长度不能超过100'}R{请输入URL}", onchange = "c$.checkElement(this);" })
+            </td>
+        </tr>
+        <tr>
+            <th>
+                描述：
+            </th>
+            <td>
+                @Html.TextBox("txtDesc", Model.Desc, new { @Name = "Desc" })
+            </td>
+        </tr>
+        <tr>
+            <th>
+                备注：
+            </th>
+            <td>
+                @Html.TextBox("txtRemark", Model.Remark, new { @Name = "Remark" })
+            </td>
+        </tr>
+    </table>
+    @{Html.RenderPartial("../Control/ErrorControl", 3);}
+</form>

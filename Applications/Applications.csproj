@@ -1,0 +1,182 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{EE20C94B-378A-406B-92AC-984E71CAFBE8}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Portal.Applications</RootNamespace>
+    <AssemblyName>Portal.Applications</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AutoMapper">
+      <HintPath>..\packages\AutoMapper.3.3.1\lib\net40\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="AutoMapper.Net4">
+      <HintPath>..\packages\AutoMapper.3.3.1\lib\net40\AutoMapper.Net4.dll</HintPath>
+    </Reference>
+    <Reference Include="EasyDDD.Core, Version=1.0.5.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EasyDDD.1.0.6\lib\EasyDDD.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EasyDDD.Infrastructure.Crosscutting, Version=1.0.5.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EasyDDD.1.0.6\lib\EasyDDD.Infrastructure.Crosscutting.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EasyDDD.Infrastructure.Crosscutting.Ioc.Unity, Version=1.0.6.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EasyDDD.1.0.6\lib\EasyDDD.Infrastructure.Crosscutting.Ioc.Unity.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EasyDDD.Infrastructure.Data.EntityFramework, Version=1.0.5.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EasyDDD.1.0.6\lib\EasyDDD.Infrastructure.Data.EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EasyDDD.Infrastructure.Data.MongoDB, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EasyDDD.1.0.6\lib\EasyDDD.Infrastructure.Data.MongoDB.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\versions\Versions.cs">
+      <Link>Properties\Versions.cs</Link>
+    </Compile>
+    <Compile Include="Events\ApplicationEvent.cs" />
+    <Compile Include="Events\Callbacks\CommonCheckEventResult.cs" />
+    <Compile Include="Events\Callbacks\ImportCheckEventResult.cs" />
+    <Compile Include="Events\Callbacks\ReturnModel.cs" />
+    <Compile Include="Events\Handler\BaseImportCheckEventHandler.cs" />
+    <Compile Include="Events\Handler\ImportCustomerPermissionCheckEventHandler.cs" />
+    <Compile Include="Events\Handler\ImportCustomerRoleCheckEventHandler.cs" />
+    <Compile Include="Events\Handler\ImportMenuCheckEventHandler.cs" />
+    <Compile Include="Events\Handler\ImportPermissionCheckEventHandler.cs" />
+    <Compile Include="Events\Handler\ImportRoleCheckEventHandler.cs" />
+    <Compile Include="Events\Handler\ImportRolePermissionCheckEventHandler.cs" />
+    <Compile Include="Events\Handler\ImportUserPermissionCheckEventHandler.cs" />
+    <Compile Include="Events\Handler\InternalApiUserPermssionResetEventHandle.cs" />
+    <Compile Include="Events\Handler\ResetedPasswordSendEmailHandler.cs" />
+    <Compile Include="Events\Handler\SynchronizationEventHandle.cs" />
+    <Compile Include="Events\Handler\ImportUserRoleCheckEventHandler.cs" />
+    <Compile Include="Events\BaseImportCheckEvent.cs" />
+    <Compile Include="Events\ImportCustomerPermissionCheckEvent.cs" />
+    <Compile Include="Events\ImportCustomerRoleCheckEvent.cs" />
+    <Compile Include="Events\ImportMenuCheckEvent.cs" />
+    <Compile Include="Events\ImportPermissionCheckEvent.cs" />
+    <Compile Include="Events\ImportRoleCheckEvent.cs" />
+    <Compile Include="Events\ImportRolePermissionCheckEvent.cs" />
+    <Compile Include="Events\ImportUserPermissionCheckEvent.cs" />
+    <Compile Include="Events\InternalApiUserPermssionResetEvent.cs" />
+    <Compile Include="Events\NewPermissionCreatedEvent.cs" />
+    <Compile Include="Events\SynchronizationEvent.cs" />
+    <Compile Include="Events\UserInfoChangedEvent.cs" />
+    <Compile Include="Events\UserPermissionChangedEvent.cs" />
+    <Compile Include="Events\ImportUserRoleCheckEvent.cs" />
+    <Compile Include="Helper\CheckHelper.cs" />
+    <Compile Include="Helper\WebHelper.cs" />
+    <Compile Include="Services\Common\PortalService.cs" />
+    <Compile Include="Services\Common\CommonService.cs" />
+    <Compile Include="Services\IApiPermissionGroupManagerService.cs" />
+    <Compile Include="Services\IAuthorizationCodeManagerService.cs" />
+    <Compile Include="Services\ICustomerAuthorizationManagerService.cs" />
+    <Compile Include="Services\IDeveloperAppManagerService.cs" />
+    <Compile Include="Services\Impl\ApiPermissionGroupManagerService.cs" />
+    <Compile Include="Services\Impl\ApplicationManagerService.cs" />
+    <Compile Include="Services\IAuthorizationManagerService.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\IApplicationManagerService.cs" />
+    <Compile Include="Services\ILoginMangerService.cs" />
+    <Compile Include="Services\IMenuManagerService.cs" />
+    <Compile Include="Services\Impl\AuthorizationCodeManagerService.cs" />
+    <Compile Include="Services\Impl\AuthorizationManagerService.cs" />
+    <Compile Include="Services\Impl\CustomerAuthorizationManagerService.cs" />
+    <Compile Include="Services\Impl\DeveloperAppManagerService.cs" />
+    <Compile Include="Services\Impl\DtoDomainMapper.cs" />
+    <Compile Include="Services\Impl\ImportManagerService.cs" />
+    <Compile Include="Services\Impl\LoginMangerService.cs" />
+    <Compile Include="Services\Impl\MenuManagerService.cs" />
+    <Compile Include="Services\Impl\PermissionManagerService.cs" />
+    <Compile Include="Services\Impl\RoleManagerService.cs" />
+    <Compile Include="Services\Common\ServiceBase.cs" />
+    <Compile Include="Services\Impl\SysLoggerManagerService.cs" />
+    <Compile Include="Services\Impl\SysLoggerTypeMapper.cs" />
+    <Compile Include="Services\Impl\TokenManagerService.cs" />
+    <Compile Include="Services\Impl\UserManagerService.cs" />
+    <Compile Include="Services\Impl\UserTypeMapper.cs" />
+    <Compile Include="Services\IPermissionManagerService.cs" />
+    <Compile Include="Services\IRoleManagerService.cs" />
+    <Compile Include="Services\ISysLoggerManagerService.cs" />
+    <Compile Include="Services\ITokenManagerService.cs" />
+    <Compile Include="Services\IUserManagerService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Domain\Domain.csproj">
+      <Project>{67c014ad-a14c-4e4b-8e76-6ef379fc44b1}</Project>
+      <Name>Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Dto\Dto.csproj">
+      <Project>{2ee2ef7e-e851-4eb6-ac24-09da0bdde8c1}</Project>
+      <Name>Dto</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Infrastructure.Exceptions\Infrastructure.Exceptions.csproj">
+      <Project>{e3992073-8d24-4059-9e71-5b90fb8a3216}</Project>
+      <Name>Infrastructure.Exceptions</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Web.Core\Web.Core.csproj">
+      <Project>{9b861e62-ed1f-4fbb-b9ad-4e6b74b692cf}</Project>
+      <Name>Web.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+  </Target>
+  <Import Project="..\packages\AutoMapper.3.3.1\tools\AutoMapper.targets" Condition="Exists('..\packages\AutoMapper.3.3.1\tools\AutoMapper.targets')" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

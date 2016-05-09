@@ -1,0 +1,86 @@
+﻿@using Portal.Web.Admin.Core
+@using Portal.Web.Core;
+@model IEnumerable<Portal.Dto.Role>
+@{
+    IEnumerable<Portal.Dto.Application> allApp = ViewData["AllApplication"] as IEnumerable<Portal.Dto.Application>;
+    bool isCanEditRole = PageUtility.HasPermission(PermissionCodes.Role_Edit);
+    bool isCanSetRolePermission = PageUtility.HasPermission(PermissionCodes.Set_Role_Permission);
+    bool showOperate = isCanEditRole || isCanSetRolePermission;
+}
+<table class="table table-striped table-bordered table-hover">
+    <thead>
+        <tr>
+            <th style="width: 15%;">
+                应用系统名称
+            </th>
+            <th style="width: 15%;">
+                角色名称
+            </th>
+            <th style="width: 15%;">
+                角色代码
+            </th>
+            <th style="width: 35%;">
+                备注
+            </th>
+            @if (showOperate)
+            {
+                <th style="width: 20%;">
+                    操作
+                </th>
+            }
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.Any())
+        {
+            foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @*根据id获取系统名称*@
+                        @{
+                var ApplicationName = allApp.First(r => r.Id == item.ApplicationId).CnName;
+
+                        }
+                        @ApplicationName
+
+                    </td>
+                    <td class="textLeft wordBreak">
+                        @item.Name
+                    </td>
+                    <td class="textLeft wordBreak">
+                        @item.Code
+                    </td>
+                    <td class="textLeft wordBreak">
+                        @item.Desc
+                    </td>
+                    @if (showOperate)
+                    {
+                        <td>
+                            @if (isCanEditRole)
+                            {
+                                <button title="编辑" class='btn btn-mini btn-info' onclick="EditRoleDailog('@item.Code'); ">
+                                    <i class='ace-icon glyphicon glyphicon-edit'></i>编辑
+                                </button>
+                            }
+                            @if (isCanSetRolePermission)
+                            {
+                                <button title="编辑权限" class='btn btn-mini btn-purple' onclick="EditRolePermissionDailog('@ApplicationName','@item.Name','@item.Code'); ">
+                                    <i class='ace-icon glyphicon glyphicon-cog'></i>编辑权限
+                                </button>
+                            }
+                        </td>
+                    }
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="@(showOperate?5:4)">
+                    @{ Html.RenderPartial("~/Views/Control/NoDataControl.cshtml"); }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

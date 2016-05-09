@@ -1,0 +1,101 @@
+﻿<!-- API权限管理编辑弹出对话框 -->
+@{
+    var item = Model as Portal.Dto.ApiPermission;
+    var isNew = item.IsNew();
+    var check = "";
+}
+<form class="form-horizontal" action="#" id="detailForm">
+    <table id="formMain" class="tab-pane active form_table">
+        <tr>
+            <th>所属系统<span class="red">*</span>：</th>
+            <td>
+                <input type="hidden" id="hddatakey" name="Id" value="@item.Id" />
+                @if (string.IsNullOrEmpty(item.Id))
+                {
+                    @Html.DropDownList("ApplicationList", null, new { @Name = "ApplicationId", checktype = "S{id:'error1'}R{请选择所属系统};", onchange = "c$.checkElement(this);" })
+                }
+                else
+                {
+                    @Html.DropDownList("ApplicationList", null, new { @Name = "ApplicationId", @Disabled = "disabled", checktype = "S{id:'error1'}R{请选择所属系统};", onchange = "c$.checkElement(this);" })
+                }
+            </td>
+        </tr>
+        <tr>
+            <th>
+                名称<span class="red">*</span>：
+            </th>
+            <td>
+                @Html.TextBox("txtName", item.Name, new { @Name = "Name", checktype = "S{id:'error2'}L{len:30, msg:'名称长度不能超过30'};R{请输入名称}", onchange = "c$.checkElement(this);" })
+            </td>
+        </tr>
+        <tr>
+            <th>
+                权限码<span class="red">*</span>：
+            </th>
+            <td>
+                @if (isNew)
+                {
+                    @Html.TextBox("txtCode", item.Code, new { @Name = "Code", checktype = "S{id:'error3'}L{len:50, msg:'权限码长度不能超过50'}B{msg:'权限码只允许输入字母、数字、下划线'}R{请输入权限码}", onchange = "c$.checkElement(this)", onkeydown = "return c$.inputNumLetter(event);" })
+                }
+                else
+                {
+                    @item.Code
+                    <input type="hidden" name="Code" value="@item.Code" />
+                }
+            </td>
+        </tr>
+
+        <tr>
+            <th>是否对外开放：</th>
+            <td>
+                @if (isNew)
+                {
+                    <label>
+                        @{ check = item.IsOpened ? "checked='checked'" : "";
+                         var disabled = item.IsCustomerGranted ? "disabled='disabled'" : "";}
+                        <input type="checkbox" class="ace ace-switch ace-switch-5" name="IsOpened" id="cbxIsOpened" @check @disabled>
+                        <span class="lbl">对外开放</span>
+                    </label>
+                }
+                else
+                {
+                    @(item.IsOpened ? "是" : "否")
+                }
+            </td>
+        </tr>
+        <tr>
+            <th>是否客户授权：</th>
+            <td>
+                @if (isNew)
+                {
+                    <label>
+                        @{
+                    check = item.IsCustomerGranted ? "checked='checked'" : "";
+                        }
+                        <input type="checkbox" class="ace ace-switch ace-switch-5" name="IsCustomerGranted" @check onclick="ChangeCustomerGranted(this); ">
+                        <span class="lbl">是</span>
+                    </label>
+                }
+                else
+                {
+                    @(item.IsOpened ? "是" : "否")
+                }
+            </td>
+        </tr>
+        <tr>
+            <th>排序：</th>
+            <td>
+                @Html.TextBox("txtOrder", item.Order, new { @Name = "Order", checktype = "S{id:'error4'}I{min:0,max:2147483647,  name:'排序'}R{请输入排序}", onchange = "c$.checkElement(this)", onkeydown = "return c$.inputNumber(event);" })
+            </td>
+        </tr>
+        <tr>
+            <th>
+                描述：
+            </th>
+            <td>
+                @Html.TextBox("txtDesc", item.Desc, new { @Name = "Desc", checktype = "S{id:'error5'}L{len:200, msg:'描述长度不能超过200'}", onchange = "c$.checkElement(this)" })
+            </td>
+        </tr>
+    </table>
+    @{Html.RenderPartial("~/Views/Control/ErrorControl.cshtml", 7);}
+</form>

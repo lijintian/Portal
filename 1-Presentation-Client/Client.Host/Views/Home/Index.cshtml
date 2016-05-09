@@ -1,0 +1,13 @@
+﻿<!-- 首页 -->
+@using Portal.Client.Core
+@{
+    Layout = PageUtility.GetLayout;
+    var isLogin = PageUtility.IsLogin();
+}
+<div id="divHome">
+    <h2>欢迎进入@(PageUtility.ProjectName)</h2>
+</div>
+@if (!isLogin)
+{
+    Html.RenderPartial("../Account/UserLogin", @Url.Content("~/Account/Login"));
+}

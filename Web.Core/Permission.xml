@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!--权限码-->
+<PermissionCodes>
+  <Segment Name="Portal Permission">
+    <!--Application -->
+    <PermissionCode Name="Application" Code="Application" Desc="应用系统管理页面 查询"/>
+    <PermissionCode Name="Application_Add" Code="Application_Add" Desc="应用系统管理页面 新增" />
+    <PermissionCode Name="Application_Edit" Code="Application_Edit" Desc="应用系统管理页面 编辑" />
+    <!--Role-->
+    <PermissionCode Name="Role" Code="Role" Desc="角色管理页面 查询"/>
+    <PermissionCode Name="Role_Add" Code="Role_Add" Desc="角色管理页面 新增"/>
+    <PermissionCode Name="Role_Edit" Code="Role_Edit" Desc="角色管理页面 编辑"/>
+    <PermissionCode Name="Set_Role_Permission" Code="Set_Role_Permission" Desc="角色管理页面 设置角色的权限"/>
+    <PermissionCode Name="ImportRole" Code="ImportRole" Desc="批量导入角色"/>
+    <PermissionCode Name="CreateRolePermission" Code="CreateRolePermission" Desc="批量新增角色权限"/>
+    <PermissionCode Name="DeleteRolePermission" Code="DeleteRolePermission" Desc="批量删除角色权限"/>
+    <!--User-->
+    <PermissionCode Name="User" Code="User" Desc="用户页面 查询"/>
+    <PermissionCode Name="User_Approve" Code="User_Approve" Desc="用户启用"/>
+    <PermissionCode Name="User_DisApprove" Code="User_DisApprove" Desc="用户禁用"/>
+    <PermissionCode Name="User_SetRole" Code="User_SetRole" Desc="用户设置角色权限"/>
+    <PermissionCode Name="User_SetPermission" Code="User_SetPermission" Desc="用户设置权限"/>
+    <PermissionCode Name="CreateUserRole" Code="CreateUserRole" Desc="批量新增用户角色"/>
+    <PermissionCode Name="DeleteUserRole" Code="DeleteUserRole" Desc="批量删除用户角色"/>
+    <PermissionCode Name="CreateUserPermission" Code="CreateUserPermission" Desc="批量新增用户权限"/>
+    <PermissionCode Name="DeleteUserPermission" Code="DeleteUserPermission" Desc="批量删除用户权限"/>
+    <!--Customer-->
+    <PermissionCode Name="Customer" Code="Customer" Desc="客户帐号页面 查询"/>
+    <PermissionCode Name="Customer_Approve " Code="Customer_Approve" Desc="客户帐号启用"/>
+    <PermissionCode Name="Customer_DisApprove" Code="Customer_DisApprove" Desc="客户帐号禁用"/>
+    <PermissionCode Name="Customer_SetRole" Code="Customer_SetRole" Desc="客户帐号设置角色权限"/>
+    <PermissionCode Name="Customer_SetPermission" Code="Customer_SetPermission" Desc="客户帐号设置权限"/>
+    <PermissionCode Name="CreateCustomerRole" Code="CreateCustomerRole" Desc="批量新增客户角色"/>
+    <PermissionCode Name="DeleteCustomerRole" Code="DeleteCustomerRole" Desc="批量删除客户角色"/>
+    <PermissionCode Name="CreateCustomerPermission" Code="CreateCustomerPermission" Desc="批量新增客户权限"/>
+    <PermissionCode Name="DeleteCustomerPermission" Code="DeleteCustomerPermission" Desc="批量删除客户权限"/>
+    <!--APIUser-->
+    <PermissionCode Name="APIUser" Code="APIUser" Desc="API帐号页面 查询"/>
+    <PermissionCode Name="APIUser_Add" Code="APIUser_Add" Desc="API帐号添加"/>
+    <PermissionCode Name="APIUser_Update" Code="APIUser_Update" Desc="API帐号更新"/>
+    <PermissionCode Name="APIUser_Approve" Code="APIUser_Approve" Desc="API帐号启用"/>
+    <PermissionCode Name="APIUser_DisApprove" Code="APIUser_DisApprove" Desc="API帐号禁用"/>
+    <PermissionCode Name="APIUser_ResetPassword" Code="APIUser_ResetPassword" Desc="API帐号重置密码"/>
+    <PermissionCode Name="APIUser_SetRole" Code="APIUser_SetRole" Desc="API帐号设置角色权限"/>
+    <PermissionCode Name="APIUser_SetPermission" Code="APIUser_SetPermission" Desc="API帐号设置权限"/>
+    <!--Menu-->
+    <PermissionCode Name="Menu" Code="Menu" Desc="菜单页面 查询"/>
+    <PermissionCode Name="Menu_Add" Code="Menu_Add" Desc="菜单添加"/>
+    <PermissionCode Name="Menu_Update" Code="Menu_Update" Desc="菜单更新"/>
+    <PermissionCode Name="Menu_Delete" Code="Menu_Delete" Desc="菜单删除"/>
+    <PermissionCode Name="ImportMenu" Code="ImportMenu" Desc="批量导入菜单"/>
+    <!--Permission-->
+    <PermissionCode Name="Permission" Code="Permission" Desc="系统权限页面 查询"/>
+    <PermissionCode Name="Permission_Add" Code="Permission_Add" Desc="系统权限页面添加"/>
+    <PermissionCode Name="Permission_Update" Code="Permission_Update" Desc="系统权限页面更新"/>
+    <PermissionCode Name="Permission_AddDetail" Code="Permission_AddDetail" Desc="系统权限页面添加明细"/>
+    <PermissionCode Name="ImportPermission" Code="ImportPermission" Desc="批量导入权限"/>
+    <!--APIPermission-->
+    <PermissionCode Name="APIPermission" Code="APIPermission" Desc="API权限页面 查询"/>
+    <PermissionCode Name="APIPermission_Add" Code="APIPermission_Add" Desc="API权限添加"/>
+    <PermissionCode Name="APIPermission_Update" Code="APIPermission_Update" Desc="API权限更新"/>
+    <!--DeveloperApp -->
+    <PermissionCode Name="DeveloperApp" Code="DeveloperApp" Desc="外部应用系统管理 查询"/>
+    <PermissionCode Name="DeveloperApp_View" Code="DeveloperApp_View" Desc="外部应用系统管理 查看" />
+    <PermissionCode Name="DeveloperApp_Update" Code="DeveloperApp_Update" Desc="外部应用系统管理 更新" />
+    <PermissionCode Name="DeveloperApp_Audit" Code="DeveloperApp_Audit" Desc="外部应用系统管理 审核" />
+    <PermissionCode Name="DeveloperApp_Token" Code="DeveloperApp_Token" Desc="外部应用系统管理 Token" />
+    <PermissionCode Name="DeveloperApp_AuthCode" Code="DeveloperApp_AuthCode" Desc="外部应用系统管理 授权码" />
+    <!--Token-->
+    <PermissionCode Name="Token" Code="Token" Desc="管理访问Token 查询"/>
+    <PermissionCode Name="Token_Approve" Code="Token_Approve" Desc="管理访问Token 启用"/>
+    <PermissionCode Name="Token_DisApprove" Code="Token_DisApprove" Desc="管理访问Token 禁用"/>
+    <!-- AuthorizationCode -->
+    <PermissionCode Name="AuthorizationCode" Code="AuthorizationCode" Desc="管理授权码 查询"/>
+    <!--ApiPermissionGroup-->
+    <PermissionCode Name="ApiPermissionGroup" Code="ApiPermissionGroup" Desc="API权限分组管理页面 查询"/>
+    <PermissionCode Name="ApiPermissionGroup_Add" Code="ApiPermissionGroup_Add" Desc="API权限分组管理页面 新增"/>
+    <PermissionCode Name="ApiPermissionGroup_Edit" Code="ApiPermissionGroup_Edit" Desc="API权限分组管理页面 编辑"/>
+    <PermissionCode Name="Set_ApiPermissionGroup_Permission" Code="Set_ApiPermissionGroup_Permission" Desc="API权限分组管理页面 设置权限"/>
+    <PermissionCode Name="View_ApiPermissionGroup_Permission" Code="View_ApiPermissionGroup_Permission" Desc="API权限分组管理页面 查看权限"/>
+    <!--SysLogger -->
+    <PermissionCode Name="SysLogger" Code="SysLogger" Desc="系统日志管理 查询"/>
+    <PermissionCode Name="SysLogger_View" Code="SysLogger_View" Desc="系统日志管理 查看" />
+    <PermissionCode Name="SysLogger_Create" Code="SysLogger_Create" Desc="系统日志管理 创建" />
+    <PermissionCode Name="SysLogger_Update" Code="SysLogger_Update" Desc="系统日志管理 更新" />
+    <PermissionCode Name="SysLogger_Delete" Code="SysLogger_Delete" Desc="系统日志管理 删除" />
+    <PermissionCode Name="SysLogger_Audit" Code="SysLogger_Audit" Desc="系统日志管理 提交审核" />
+  </Segment>
+</PermissionCodes>
