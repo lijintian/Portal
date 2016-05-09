@@ -72,8 +72,8 @@ namespace Web.Host.Test
         [TestMethod]
         public void Create()
         {
-            User info = new User() { LoginName = "guest", UserType = UserType.Customer, Password = "111111", Email = "admin1@chukou1.com", Desc = "描述内容111" };
-            //User info = new User() { LoginName = "admin1", Email = "admin1@chukou1.com", Desc = "描述内容111" };
+            User info = new User() { LoginName = "guest", UserType = UserType.Customer, Password = "111111", Email = "123@abc.com", Desc = "描述内容111" };
+            //User info = new User() { LoginName = "admin1", Email = "123@abc.com", Desc = "描述内容111" };
             var result = Save(info);
         }
 
@@ -84,7 +84,7 @@ namespace Web.Host.Test
         [TestMethod]
         public void Update()
         {
-            User info = new User() { Id = "55cbf6d546b9e41ecc54b2cd", Email = "apiTest@chukou1.com", Desc = "api帐号描述内容333" };
+            User info = new User() { Id = "55cbf6d546b9e41ecc54b2cd", Email = "123@abc.com", Desc = "api帐号描述内容333" };
             var result = Save(info);
         }
 

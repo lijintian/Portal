@@ -175,7 +175,7 @@ namespace Portal.Client.Core
         /// </summary>
         public static string AdminEmail
         {
-            get { return AppSettingsUtility.Get("adminEmail", "report@chukou1.com"); }
+            get { return AppSettingsUtility.Get("adminEmail", "123@abc.com"); }
         }
         /// <summary>
         /// 授权系统URL

@@ -617,25 +617,6 @@
             初始化日志
             </summary>
         </member>
-        <member name="M:Portal.Web.Admin.Core.Authentication.IsLoginCookieExist">
-            <summary>
-            检查当前请求中是否包含指定Cookie
-            </summary>    
-            <returns></returns>
-        </member>
-        <member name="M:Portal.Web.Admin.Core.Authentication.GetCookie(System.String)">
-            <summary>
-            得到Cookies值
-            </summary>
-            <param name="cookiename"></param>
-        </member>
-        <member name="M:Portal.Web.Admin.Core.Authentication.SetCookie(System.String,System.String)">
-            <summary>
-            设置Cookie
-            </summary>
-            <param name="CookieName"></param>
-            <param name="CookieValue"></param>       
-        </member>
         <member name="M:Portal.Web.Admin.Core.RemotePost.Add(System.String,System.String)">
             <summary>
             添加需要提交的名和值

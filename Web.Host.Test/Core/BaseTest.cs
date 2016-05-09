@@ -7,7 +7,7 @@ namespace Web.Host.Test.Model
     public abstract class BaseTest
     {
         #region 属性
-        private string PortalUrl = "http://portal-test.chukou1.cn/Admin";
+        private string PortalUrl = "http://portal-test.abc.cn/Admin";
         private string ControllerName = "";
         #endregion
 

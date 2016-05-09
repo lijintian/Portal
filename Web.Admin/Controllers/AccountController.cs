@@ -127,8 +127,6 @@ namespace Portal.Web.Admin.Controllers
 
         public ActionResult Logout(string identity, string returnUrl)
         {
-            YewuHelper.Logout();
-
             Ck1PortalAuthenticationHelper.LoginOut(returnUrl, () =>
             {
                 if (!string.IsNullOrEmpty(identity))

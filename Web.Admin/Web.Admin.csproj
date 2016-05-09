@@ -179,7 +179,6 @@
     <Compile Include="Core\CommonUtility.cs" />
     <Compile Include="Core\LogicCheckHelper.cs" />
     <Compile Include="Core\PageUtility.cs" />
-    <Compile Include="Core\YewuHelper.cs" />
     <Compile Include="Model\ApiPermissionGroup\GroupApiPermission.cs" />
     <Compile Include="Model\Application\ApplicationVM.cs" />
     <Compile Include="Model\BatchImportSelect.cs" />
@@ -197,7 +196,6 @@
     <Compile Include="Model\Parameter\SysUserParameter.cs" />
     <Compile Include="Controllers\HelpersController.cs" />
     <Compile Include="Core\AppSettingHelper.cs" />
-    <Compile Include="Core\Authentication.cs" />
     <Compile Include="Core\Cryptogram.cs" />
     <Compile Include="Core\RemotePost.cs" />
     <Compile Include="Core\TempTokenBiz.cs" />

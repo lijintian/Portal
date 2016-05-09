@@ -37,7 +37,7 @@ namespace SDK.Test
         {
             var updateDesc = "updatedesc";
             var updateDis = "updatenickname";
-            var updateEmail = "jianyong.jiang@chukou1.com";
+            var updateEmail = "123@abc.com";
             var request = new UpdateUserRequest()
             {
                 Desc = updateDesc,
@@ -46,11 +46,11 @@ namespace SDK.Test
                 ClientNo = "123",
             };
 
-            var response = UserServiceClient.Update("jjy_8888@163.com", request);
+            var response = UserServiceClient.Update("123@abc.com", request);
             Assert.IsNotNull(response);
             Assert.IsFalse(response.HasError);
 
-            var getUserRep = UserServiceClient.GetUser("jjy_8888@163.com");
+            var getUserRep = UserServiceClient.GetUser("123@abc.com");
             Assert.AreEqual(getUserRep.Desc, updateDesc);
             Assert.AreEqual(getUserRep.DisplayName, updateDis);
             Assert.AreEqual(getUserRep.Email, updateEmail);

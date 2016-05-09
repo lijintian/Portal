@@ -70,7 +70,7 @@ namespace Portal.Domain.Tests
         public void TestCreate()
         {
             var u = new User("WishTesting", "123456", UserType.ExternalApi);
-            u.SetEmail("jianyong.jiang@chukou1.com");
+            u.SetEmail("123@abc.com");
             u.PhoneNumber = "123456778";
 
             var context = new MongoDBRepositoryContext("PortalDB");
