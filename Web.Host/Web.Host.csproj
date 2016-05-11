@@ -54,6 +54,42 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\AutoMapper.3.3.1\lib\net40\AutoMapper.Net4.dll</HintPath>
     </Reference>
+    <Reference Include="EasyDDD.Core, Version=1.0.5.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EasyDDD.1.0.7\lib\EasyDDD.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EasyDDD.Infrastructure.Crosscutting, Version=1.0.5.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EasyDDD.1.0.7\lib\EasyDDD.Infrastructure.Crosscutting.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EasyDDD.Infrastructure.Crosscutting.Adapter.AutoMapper, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EasyDDD.1.0.7\lib\EasyDDD.Infrastructure.Crosscutting.Adapter.AutoMapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EasyDDD.Infrastructure.Crosscutting.Caching.Memcached, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EasyDDD.1.0.7\lib\EasyDDD.Infrastructure.Crosscutting.Caching.Memcached.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EasyDDD.Infrastructure.Crosscutting.Ioc.Unity, Version=1.0.6.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EasyDDD.1.0.7\lib\EasyDDD.Infrastructure.Crosscutting.Ioc.Unity.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EasyDDD.Infrastructure.Crosscutting.Json.ServiceStackText, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EasyDDD.1.0.7\lib\EasyDDD.Infrastructure.Crosscutting.Json.ServiceStackText.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EasyDDD.Infrastructure.Crosscutting.Logging.log4net, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EasyDDD.1.0.7\lib\EasyDDD.Infrastructure.Crosscutting.Logging.log4net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EasyDDD.Infrastructure.Data.EntityFramework, Version=1.0.5.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EasyDDD.1.0.7\lib\EasyDDD.Infrastructure.Data.EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EasyDDD.Infrastructure.Data.MongoDB, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EasyDDD.1.0.7\lib\EasyDDD.Infrastructure.Data.MongoDB.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Elmah">
       <HintPath>..\packages\elmah.corelibrary.1.2.2\lib\Elmah.dll</HintPath>
     </Reference>
@@ -194,8 +230,6 @@
     <Content Include="Content\Css\bootstrap.css" />
     <Content Include="Content\Css\login.css" />
     <Content Include="Content\Css\template.css" />
-    <Content Include="Content\Images\0_341f27.png" />
-    <Content Include="Content\Images\0_c5c571.jpg" />
     <Content Include="Content\Images\0_sprites2.png" />
     <Content Include="Content\Images\404.png" />
     <Content Include="Content\Images\500.png" />
@@ -264,6 +298,7 @@
     <Content Include="Scripts\respond.matchmedia.addListener.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
     <Content Include="Scripts\Client\TokenList.js" />
+    <Content Include="Todo.txt" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>

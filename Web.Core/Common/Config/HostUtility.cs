@@ -23,7 +23,7 @@ namespace Portal.Web.Core
         /// </summary>
         public static string ResourcesUrl
         {
-            get { return AppSettingsUtility.Get("ResourcesUrl", "http://res.chukou1.com"); }
+            get { return AppSettingsUtility.Get("ResourcesUrl", "http://res.abc.com"); }
         }
 
         /// <summary>

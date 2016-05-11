@@ -184,7 +184,7 @@ namespace Portal.Web.Admin.Controllers
         /// </summary>
         private void AmazonUkPromotion()
         {
-            const string userRegisterUrl = "http://www.chukou1.com/User/Regesit.aspx";
+            const string userRegisterUrl = "http://www.abc.com/User/Regesit.aspx";
             var amazonUkPromotionStr = Request.QueryString["AmazonUkPromotion"];
             ViewData["amazonUkPromotion"] = string.IsNullOrEmpty(amazonUkPromotionStr)
                 ? userRegisterUrl

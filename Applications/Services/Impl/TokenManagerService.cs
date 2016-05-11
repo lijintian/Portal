@@ -28,14 +28,14 @@ namespace Portal.Applications.Services.Impl
         private readonly IRepositoryContext _repositoryContext;
         private readonly IRequstAccessTokenValidateService _ratValidateService;
         private readonly IDirectGetAccessTokenValidateService _dgtValidateService;
-        private readonly ICustomerProviderService _customerProviderService;
+       // private readonly ICustomerProviderService _customerProviderService;
         private readonly IAuthorizationCodeRepository _authRepository;
         private readonly IValidateTokenValidateService _validateTokenValidateService;
         public TokenManagerService(ITokenWrapperRepository tokenRepository, 
             IRepositoryContext repositoryContext,
             IRequstAccessTokenValidateService ratValidateService, 
             IDirectGetAccessTokenValidateService dgtValidateService,
-            ICustomerProviderService customerProviderService,
+           // ICustomerProviderService customerProviderService,
             IAuthorizationCodeRepository authRepository,
             IValidateTokenValidateService validateTokenValidateService)
         {
@@ -43,7 +43,7 @@ namespace Portal.Applications.Services.Impl
             this._repositoryContext = repositoryContext;
             this._ratValidateService = ratValidateService;
             this._dgtValidateService = dgtValidateService;
-            this._customerProviderService = customerProviderService;
+           // this._customerProviderService = customerProviderService;
             this._authRepository = authRepository;
             this._validateTokenValidateService = validateTokenValidateService;
         }
@@ -105,7 +105,8 @@ namespace Portal.Applications.Services.Impl
             this._validateTokenValidateService.Validate(accessToken, apiPermissionCode);
 
             var token = this._tokenRepository.Get(new AccessTokenSpecification(accessToken));
-            var customer = this._customerProviderService.GetCustomerInfoByLoginName(token.CustomerIdentity) ?? CustomerInfo.NullCustomer;
+            //var customer = this._customerProviderService.GetCustomerInfoByLoginName(token.CustomerIdentity) ?? CustomerInfo.NullCustomer;
+            var customer = CustomerInfo.NullCustomer;
             return new TokenValidateResult(true)
             {
                 CustomerNo = customer.CustomerNo,

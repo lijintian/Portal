@@ -2,6 +2,7 @@
 
 using EasyDDD.Core.Specification;
 using EasyDDD.Infrastructure.Crosscutting;
+using EasyDDD.Infrastructure.Crosscutting.Caching;
 using Portal.Domain.Aggregates.UserAgg;
 using Portal.Domain.Aggregates.UserAgg.State;
 using Portal.Domain.Model;

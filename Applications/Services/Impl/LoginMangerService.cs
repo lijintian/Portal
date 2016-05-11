@@ -13,6 +13,7 @@ using UserIdentity = Portal.Dto.UserIdentity;
 using EasyDDD.Core.Repository;
 using EasyDDD.Infrastructure.Crosscutting.Helpers;
 using EasyDDD.Infrastructure.Crosscutting;
+using EasyDDD.Infrastructure.Crosscutting.Caching;
 
 namespace Portal.Applications.Services.Impl
 {

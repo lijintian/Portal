@@ -36,7 +36,7 @@ namespace Portal.Applications.Events.Handler
 <p style='text-indent: 2em;'>您的新密码已生成成功，新密码:【{0}】，新密码将在{1}分钟后生效。</p>
 <p style='text-indent: 2em;'>------------------------------------------------------------------------------------------</p>
 <p style='text-indent: 2em;'>此邮件为系统所发，请勿直接回复。</p>
-<p style='text-indent: 2em;'><a target='_blank' href='http://www.chukou1.com/'>www.chukou1.com<wbr/></a></p>
+<p style='text-indent: 2em;'><a target='_blank' href='http://www.abc.com/'>www.abc.com<wbr/></a></p>
 <p style='text-indent: 2em;'>此致</p>
 <p style='text-indent: 2em;'>出口易团队</p>", evnt.NewPassword, ConfigurationManager.AppSettings["ResetPasswordValidTime"] ?? "5"));
             }
