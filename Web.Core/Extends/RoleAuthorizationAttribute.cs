@@ -36,7 +36,7 @@ namespace Portal.Web.Core.Extends
 
             if (this._roleCodes != null && this._roleCodes.Length > 0)
             {
-                var principal = actionContext.ControllerContext.RequestContext.Principal as CK1Principal;
+                var principal = actionContext.ControllerContext.RequestContext.Principal as PortalPrincipal;
                 if (principal == null)
                 {
                     //this case should never happen.

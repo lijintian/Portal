@@ -16,7 +16,7 @@ namespace Portal.SDK.Common
             string appId = string.Empty;
             try
             {
-                appId = CK1PortalAuthenticationConfig.ApplicationName;
+                appId = PortalAuthenticationConfig.ApplicationName;
             }
             catch (Exception)
             {

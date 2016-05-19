@@ -7,7 +7,7 @@
     {
         public const string PortalWebAddressKey = "PortalWebApiBaseAddress";
         public const string PortalOpenApiOauth2BaseAddressKey = "PortalOpenApiOauth2BaseAddress";
-        public const string DecryptKey = "CK1@PJ@CRYKEY";
+        public const string DecryptKey = "ABC@PJ@CRYKEY";
         public const string ApplicationParamKey = "ApplicationSource";
         //public const string ApplicationNameKey = "ApplicationName";
     }

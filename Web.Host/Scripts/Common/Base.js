@@ -373,7 +373,7 @@ function nullToEmpty(s) {
     处理ajax response.redirect login的问题
     */
     $.fn.CheckServerRedirect = function(data) {
-        if (typeof data === "string" && data.indexOf('<meta name="CK1-Portal-LoginPage">') > -1) {
+        if (typeof data === "string" && data.indexOf('<meta name="Portal-LoginPage">') > -1) {
             window.top.location.href = window.ServiceAppPath + "Account/Login";
             return true;
         }

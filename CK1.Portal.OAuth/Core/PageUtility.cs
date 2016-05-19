@@ -35,7 +35,7 @@ namespace Portal.OAuth.Core
         {
             get
             {
-                var user = HttpContext.Current.User as CK1Principal;
+                var user = HttpContext.Current.User as PortalPrincipal;
                 if (user == null)
                 {
                     return string.Empty;

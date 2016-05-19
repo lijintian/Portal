@@ -86,11 +86,11 @@ namespace SDK.Test
             var request = new CreateUserRequest()
             {
                 Desc = string.Empty,
-                DisplayName = "tangsschukou1@163.com",
-                Email = "tangsschukou1@163.com",
+                DisplayName = "abc@163.com",
+                Email = "abc@163.com",
                 EmployeeNo = string.Empty,
                 IsApproved = false,
-                LoginName = "tangsschukou1@163.com",
+                LoginName = "abc@163.com",
                 Password = "79218965EB72C92A549DD5A",
                 IsCustomer = true
             };

@@ -13,9 +13,9 @@ namespace Portal.SDK.Security
     /// <summary>
     /// 表示Portal验证帮助类
     /// </summary>
-    public static class Ck1PortalAuthenticationHelper
+    public static class PortalAuthenticationHelper
     {
-        private static readonly string CacheTokenPrefix = Ck1PortalAuthenticationHelper.GenerateTokenPrefix();
+        private static readonly string CacheTokenPrefix = PortalAuthenticationHelper.GenerateTokenPrefix();
         /// <summary>
         /// 设置Portal验证Cookie
         /// </summary>
@@ -26,11 +26,11 @@ namespace Portal.SDK.Security
                 throw new ArgumentException("token");
             }
 
-            HttpContext.Current.Response.Cookies.Remove(CK1PortalAuthenticationConfig.AuthCookieName);
-            var authCookie = new HttpCookie(CK1PortalAuthenticationConfig.AuthCookieName, token)
+            HttpContext.Current.Response.Cookies.Remove(PortalAuthenticationConfig.AuthCookieName);
+            var authCookie = new HttpCookie(PortalAuthenticationConfig.AuthCookieName, token)
             {
                 HttpOnly = true,
-                Domain = CK1PortalAuthenticationConfig.CookieDomain
+                Domain = PortalAuthenticationConfig.CookieDomain
             };
             HttpContext.Current.Response.Cookies.Add(authCookie);
         }
@@ -38,15 +38,15 @@ namespace Portal.SDK.Security
         /// <summary>
         /// 登录成功后处理，包括设置验证cookie, 保存用户信息至缓存等
         /// </summary>
-        public static CK1Principal LoginedIn(UserPackageInfo userInfo)
+        public static PortalPrincipal LoginedIn(UserPackageInfo userInfo)
         {
             if (userInfo == null)
             {
                 throw new ArgumentException("userinfo");
             }
-            var principal = new CK1Principal(userInfo);
-            Ck1PortalAuthenticationHelper.SetAuthCookie(userInfo.Token);
-            CacheManager.Set(CacheTokenPrefix + userInfo.Token, principal, CK1PortalAuthenticationConfig.CacheExpiredTime);
+            var principal = new PortalPrincipal(userInfo);
+            PortalAuthenticationHelper.SetAuthCookie(userInfo.Token);
+            CacheManager.Set(CacheTokenPrefix + userInfo.Token, principal, PortalAuthenticationConfig.CacheExpiredTime);
 
             return principal;
         }
@@ -54,13 +54,13 @@ namespace Portal.SDK.Security
         /// <summary>
         /// 获取缓存的用户主体
         /// </summary>
-        public static CK1Principal GetPrincipalFromCache(string token)
+        public static PortalPrincipal GetPrincipalFromCache(string token)
         {
             if (string.IsNullOrEmpty(token))
             {
                 throw new ArgumentException("token");
             }
-            return CacheManager.Get<CK1Principal>(CacheTokenPrefix + token);
+            return CacheManager.Get<PortalPrincipal>(CacheTokenPrefix + token);
         }
 
         /// <summary>
@@ -71,20 +71,20 @@ namespace Portal.SDK.Security
             //remove auth cookie
             var httpRequest = HttpContext.Current.Request;
             var httpResponse = HttpContext.Current.Response;
-            var cookie = httpRequest.Cookies[CK1PortalAuthenticationConfig.AuthCookieName];
+            var cookie = httpRequest.Cookies[PortalAuthenticationConfig.AuthCookieName];
             if (cookie != null)
             {
                 cookie.Value = null;
                 cookie.Values.Clear();
                 cookie.Expires = DateTime.Now.AddMonths(-1);
-                cookie.Domain = CK1PortalAuthenticationConfig.CookieDomain;
+                cookie.Domain = PortalAuthenticationConfig.CookieDomain;
 
-                httpResponse.Cookies.Remove(CK1PortalAuthenticationConfig.AuthCookieName);
+                httpResponse.Cookies.Remove(PortalAuthenticationConfig.AuthCookieName);
                 httpResponse.Cookies.Add(cookie);
             }
 
             //clear cache
-            var user = HttpContext.Current.User as CK1Principal;
+            var user = HttpContext.Current.User as PortalPrincipal;
             if (user != null)
             {
                 CacheManager.Remove(user.Token);
@@ -95,7 +95,7 @@ namespace Portal.SDK.Security
                 beforeRedirectCallback();
             }
 
-            var redirectUrl = string.IsNullOrEmpty(returnUrl) ? CK1PortalAuthenticationConfig.PortalLoginUrl : returnUrl;
+            var redirectUrl = string.IsNullOrEmpty(returnUrl) ? PortalAuthenticationConfig.PortalLoginUrl : returnUrl;
             httpResponse.Redirect(redirectUrl);
         }
 
@@ -104,12 +104,12 @@ namespace Portal.SDK.Security
         /// </summary>
         public static bool IsAccessingPortalHomeOrLoginPage(string accessUrl)
         {
-            return Ck1PortalAuthenticationHelper.IsAccessingPortalHomeOrLoginPage(new Uri(accessUrl));
+            return PortalAuthenticationHelper.IsAccessingPortalHomeOrLoginPage(new Uri(accessUrl));
         }
 
         public static bool IsAccessingPortalHomeOrLoginPage(Uri accessUri)
         {
-            var loginUri = new Uri(CK1PortalAuthenticationConfig.PortalLoginUrl);
+            var loginUri = new Uri(PortalAuthenticationConfig.PortalLoginUrl);
             bool isAccessingPortal = string.Compare(loginUri.Host, accessUri.Host, true) == 0;
 
             if (isAccessingPortal)
@@ -135,7 +135,7 @@ namespace Portal.SDK.Security
         private static string GenerateTokenPrefix()
         {
             var random = new Random();
-            return "#" + CK1PortalAuthenticationConfig.ApplicationName + random.Next();
+            return "#" + PortalAuthenticationConfig.ApplicationName + random.Next();
         }
     }
 }

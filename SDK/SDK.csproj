@@ -69,9 +69,9 @@
     <Compile Include="Common\ServiceStackJsonDeserializer.cs" />
     <Compile Include="Common\ServiceStackJsonSerializer.cs" />
     <Compile Include="Extensions\UrlExtend.cs" />
-    <Compile Include="Security\CK1Identity.cs" />
-    <Compile Include="Security\Ck1PortalAuthenticationHelper.cs" />
-    <Compile Include="Security\CK1PortalAuthenticationModule.cs" />
+    <Compile Include="Security\PortalIdentity.cs" />
+    <Compile Include="Security\PortalAuthenticationHelper.cs" />
+    <Compile Include="Security\PortalAuthenticationModule.cs" />
     <Compile Include="Security\CK1Principal.cs" />
     <Compile Include="Security\Configuration\AddSection.cs" />
     <Compile Include="Security\Configuration\AuthenticationBase.cs" />
@@ -80,7 +80,7 @@
     <Compile Include="Security\Configuration\ProviderCollection.cs" />
     <Compile Include="Security\IPermissionCheck.cs" />
     <Compile Include="Security\IRoleCheck.cs" />
-    <Compile Include="Security\CK1PortalAuthenticationConfig.cs" />
+    <Compile Include="Security\PortalAuthenticationConfig.cs" />
     <Compile Include="Security\UserPackageInfo.cs" />
     <Compile Include="ServiceClient\LoggerServiceClient.cs" />
     <Compile Include="ServiceClient\LoginServiceClient.cs" />

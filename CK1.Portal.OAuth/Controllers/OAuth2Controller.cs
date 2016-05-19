@@ -20,7 +20,7 @@ namespace Portal.OAuth.Controllers
         private readonly ICustomerAuthorizationManagerService _camService;
         private readonly IDeveloperAppManagerService _appService;
         private readonly IApiPermissionGroupManagerService _apgService;
-        private CK1Identity _identity;
+        private PortalIdentity _identity;
         public OAuth2Controller(ICustomerAuthorizationManagerService camService, 
             IDeveloperAppManagerService appService, 
             IApiPermissionGroupManagerService apgService)
@@ -32,14 +32,14 @@ namespace Portal.OAuth.Controllers
 
         protected override void OnActionExecuting(ActionExecutingContext filterContext)
         {
-            this._identity = (CK1Identity)this.User.Identity;
+            this._identity = (PortalIdentity)this.User.Identity;
             base.OnActionExecuting(filterContext);
         }
 
         /// <summary>
         /// 客户授权界面
-        /// 测试地址1：http://openapilocal.test-ck1.cn/OAuth2/Authorization?scope=afds_safdsafd,bbcc&redirect_uri=http://safdsa.com/back&response_type=code&client_id=ZGZmZjllMGQtMjg5MS00MGUyLThmZjMtZjVkN2VkMjhiMjNl&state=9ac8a7a074d5a866b57ac1fa63617a66
-        /// 测试地址2：http://openapilocal.test-ck1.cn/OAuth2/Authorization?scope=afds_safdsafd,bbcc&redirect_uri=http://safdsa.com/back&response_type=token&client_id=ZGZmZjllMGQtMjg5MS00MGUyLThmZjMtZjVkN2VkMjhiMjNl&state=9ac8a7a074d5a866b57ac1fa63617a66
+        /// 测试地址1：http://openapilocal.test-abc.cn/OAuth2/Authorization?scope=afds_safdsafd,bbcc&redirect_uri=http://safdsa.com/back&response_type=code&client_id=ZGZmZjllMGQtMjg5MS00MGUyLThmZjMtZjVkN2VkMjhiMjNl&state=9ac8a7a074d5a866b57ac1fa63617a66
+        /// 测试地址2：http://openapilocal.test-abc.cn/OAuth2/Authorization?scope=afds_safdsafd,bbcc&redirect_uri=http://safdsa.com/back&response_type=token&client_id=ZGZmZjllMGQtMjg5MS00MGUyLThmZjMtZjVkN2VkMjhiMjNl&state=9ac8a7a074d5a866b57ac1fa63617a66
         /// </summary>
         /// <returns></returns>
         public ActionResult Authorization(string client_id, string scope)

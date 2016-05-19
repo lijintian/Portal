@@ -20,7 +20,7 @@ namespace Portal.SDK.Security
     /// <summary>
     /// 表示Portal验证的http模块
     /// </summary>
-    public class CK1PortalAuthenticationModule : IHttpModule
+    public class PortalAuthenticationModule : IHttpModule
     {
         private static readonly bool Ck1PortalAuthenticationEnable;
         private static readonly List<string> IgnoreExtensions = new List<string>(){ "css", "js", "ico", 
@@ -28,10 +28,10 @@ namespace Portal.SDK.Security
         private const string WWWAuthenticate = "WWW-Authenticate";
         private bool _isOnEnterCalled;
 
-        static CK1PortalAuthenticationModule()
+        static PortalAuthenticationModule()
         {
             var authenticationEnable = ConfigurationManager.AppSettings["CK1PortalAuthenticationEnable"];
-            CK1PortalAuthenticationModule.Ck1PortalAuthenticationEnable = bool.Parse(authenticationEnable ?? "false");
+            PortalAuthenticationModule.Ck1PortalAuthenticationEnable = bool.Parse(authenticationEnable ?? "false");
         }
 
         public void Dispose()
@@ -41,7 +41,7 @@ namespace Portal.SDK.Security
 
         public void Init(HttpApplication context)
         {
-            if (CK1PortalAuthenticationModule.Ck1PortalAuthenticationEnable)
+            if (PortalAuthenticationModule.Ck1PortalAuthenticationEnable)
             {
                 context.AuthenticateRequest += new EventHandler(this.OnEnter);
                 context.EndRequest += new EventHandler(this.OnLeave);
@@ -70,14 +70,14 @@ namespace Portal.SDK.Security
             }
 
             //check for toke url parameter
-            var token = httpCtx.Request.QueryString[CK1PortalAuthenticationConfig.TokenUrlParameterName];
+            var token = httpCtx.Request.QueryString[PortalAuthenticationConfig.TokenUrlParameterName];
             if (!string.IsNullOrWhiteSpace(token))
             {
                 this.AuthenticateByUrl(httpCtx, token);
             }
 
             //check for auth cookie
-            var authCookie = httpCtx.Request.Cookies[CK1PortalAuthenticationConfig.AuthCookieName];
+            var authCookie = httpCtx.Request.Cookies[PortalAuthenticationConfig.AuthCookieName];
             if (authCookie != null)
             {
                 this.AuthenticateByCookie(httpCtx, authCookie);
@@ -112,25 +112,25 @@ namespace Portal.SDK.Security
             // Don't do it if already there is ReturnUrl, already being redirected,
             // to avoid infinite redirection loop
             String strUrl = context.Request.RawUrl;
-            if (strUrl.IndexOf("?" + CK1PortalAuthenticationConfig.ReturnUrl + "=", StringComparison.Ordinal) != -1
-                || strUrl.IndexOf("&" + CK1PortalAuthenticationConfig.ReturnUrl + "=", StringComparison.Ordinal) != -1)
+            if (strUrl.IndexOf("?" + PortalAuthenticationConfig.ReturnUrl + "=", StringComparison.Ordinal) != -1
+                || strUrl.IndexOf("&" + PortalAuthenticationConfig.ReturnUrl + "=", StringComparison.Ordinal) != -1)
             {
                 return;
             }
 
-            string loginUrl = CK1PortalAuthenticationConfig.PortalLoginUrl;
+            string loginUrl = PortalAuthenticationConfig.PortalLoginUrl;
             if (loginUrl == null || loginUrl.Length <= 0)
                 throw new HttpException("Invalid Login url.");
 
             string strRedirect;
-            if (Ck1PortalAuthenticationHelper.IsAccessingPortalHomeOrLoginPage(context.Request.Url))
+            if (PortalAuthenticationHelper.IsAccessingPortalHomeOrLoginPage(context.Request.Url))
             {
                 strRedirect = loginUrl;
             }
             else
             {
                 //other application, add as return url
-                strRedirect = loginUrl + "?" + CK1PortalAuthenticationConfig.ReturnUrl + "=" + this.BuildReturnUrl(context);
+                strRedirect = loginUrl + "?" + PortalAuthenticationConfig.ReturnUrl + "=" + this.BuildReturnUrl(context);
             }
 
             context.Response.Redirect(strRedirect, false);
@@ -148,7 +148,7 @@ namespace Portal.SDK.Security
             var userInfo = this.GetUserInfoFromPortal(token);
             if (userInfo != null)
             {                              
-                httpCtx.User = Ck1PortalAuthenticationHelper.LoginedIn(userInfo);
+                httpCtx.User = PortalAuthenticationHelper.LoginedIn(userInfo);
             }
 
             //if it is get request and the url just include token parameter, remove it and redirect 
@@ -156,7 +156,7 @@ namespace Portal.SDK.Security
             if (request.HttpMethod.ToUpper() == "GET" && (request.QueryString.Count == 1) && (request.QueryString.Keys.Count > 0))
             {
                 var key = request.QueryString.Keys[0];
-                if (key != null && (key.ToLower() == CK1PortalAuthenticationConfig.TokenUrlParameterName.ToLower()))
+                if (key != null && (key.ToLower() == PortalAuthenticationConfig.TokenUrlParameterName.ToLower()))
                 {
                     var strRedirect = this.ReBuildUrlExceptToken(httpCtx);
                     httpCtx.Response.Redirect(strRedirect, true);
@@ -169,7 +169,7 @@ namespace Portal.SDK.Security
             var userInfo = this.GetUserInfoFromPortal(token);
             if (userInfo != null)
             {
-                httpCtx.User = Ck1PortalAuthenticationHelper.LoginedIn(userInfo);
+                httpCtx.User = PortalAuthenticationHelper.LoginedIn(userInfo);
 
                 //remove token from url 
                 var strRedirect = this.ReBuildUrlExceptToken(httpCtx);
@@ -184,11 +184,11 @@ namespace Portal.SDK.Security
             var isShowFrame = false;//是否从frame中显示
             foreach (var key in context.Request.QueryString.AllKeys)
             {
-                if (key.ToLower() == CK1PortalAuthenticationConfig.TokenUrlParameterName.ToLower())
+                if (key.ToLower() == PortalAuthenticationConfig.TokenUrlParameterName.ToLower())
                 {
                     continue;
                 }
-                if (key.ToLower() == CK1PortalAuthenticationConfig.PortalFrameName.ToLower())
+                if (key.ToLower() == PortalAuthenticationConfig.PortalFrameName.ToLower())
                 {
                     isShowFrame = true;
                     continue;
@@ -198,7 +198,7 @@ namespace Portal.SDK.Security
             var redirectHostUrl = string.Format("{0}://{1}:{2}{3}", context.Request.Url.Scheme, context.Request.Url.Host, context.Request.Url.Port, context.Request.Url.AbsolutePath);
             if (isShowFrame)
             {
-                redirectHostUrl = string.Format("/?{0}={1}", CK1PortalAuthenticationConfig.PortalDefaultUrl, redirectHostUrl);
+                redirectHostUrl = string.Format("/?{0}={1}", PortalAuthenticationConfig.PortalDefaultUrl, redirectHostUrl);
                 if (queryStrBuilder.Length > 0)
                 {
                     redirectHostUrl = string.Format("{0}&{1}", redirectHostUrl, queryStrBuilder);
@@ -229,8 +229,8 @@ namespace Portal.SDK.Security
 
         private string BuildReturnUrl(HttpContext context)
         {
-            var returnUrl = CK1PortalAuthenticationConfig.IsFixedRedirect
-                ? CK1PortalAuthenticationConfig.FixedRedirect
+            var returnUrl = PortalAuthenticationConfig.IsFixedRedirect
+                ? PortalAuthenticationConfig.FixedRedirect
                 : context.Request.Url.ToString();
             return HttpUtility.UrlEncode(returnUrl, context.Request.ContentEncoding);
         }

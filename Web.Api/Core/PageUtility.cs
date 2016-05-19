@@ -9,7 +9,7 @@ namespace Portal.Web.Api.Core
     public static class PageUtility
     {
         #region 字段
-        public static string DecryptKey = "CK1@PJ@CRYKEY";
+        public static string DecryptKey = "ABC@PJ@CRYKEY";
         public static string ApplicationParamKey = "ApplicationSource";
         //public static string ApplicationNameKey = "ApplicationName";
         //public static string ApplicationNameValue = "portal-api";

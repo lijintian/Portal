@@ -4,16 +4,16 @@
     Layout = PageUtility.GetOpenLayout;
 }
 <div class="inner">
-    <h1>使用 OAuth 2.0 访问出口易 API</h1>
-    <p>出口易支持 OAuth 2.0 协议的授权访问。关于 OAuth 2.0 协议规范，请参考<a target="_blank" href="http://oauth.net/2/">这里</a>。</p>
+    <h1>使用 OAuth 2.0 访问ABC API</h1>
+    <p>ABC支持 OAuth 2.0 协议的授权访问。关于 OAuth 2.0 协议规范，请参考<a target="_blank" href="http://oauth.net/2/">这里</a>。</p>
     <p>使用 OAuth 2.0 的流程可以简单概括为：</p>
     <ol>
-        <li>应用向出口易请求授权</li>
-        <li>出口易为用户显示一个授权页面，用户在此页面确认是否同意应用的请求</li>
+        <li>应用向ABC请求授权</li>
+        <li>ABC为用户显示一个授权页面，用户在此页面确认是否同意应用的请求</li>
         <li>如果用户同意授权，应用会获取到一个访问令牌(access_token)，通过此令牌，应用可以访问授权用户的数据。</li>
         <li>如果访问需要授权的 API，请使用 HTTPS 协议，加上 access_token 的 Header，具体见<a href="@Url.Content("~/About/Index?Code=oauth2#access_token")">获取 access_token</a></li>
     </ol>
-    <p>出口易支持三种 OAuth 2.0 的授权流程：</p>
+    <p>ABC支持三种 OAuth 2.0 的授权流程：</p>
     <ul>
         <li>服务器的 WEB 应用的授权流程（server-side flow）</li>
         <li>桌面客户端应用、移动客户端应用的授权流程（native-application flow）</li>
@@ -38,7 +38,7 @@
     <p>例如：</p>
 <pre><code>@string.Format("{0}?",PageUtility.PortalOpenApiOauth2Url)
 client_id=YzgyNWQxMGMtN2E3MC00ZTBlLTg5NDgtNTEwZmQ5OGVkYjFk&amp;
-redirect_uri=http://appdemo.test-ck1.cn/back&amp;
+redirect_uri=http://appdemo.test-ABC.cn/back&amp;
 response_type=code&amp;
 scope=3333
 </code></pre>
@@ -46,12 +46,12 @@ scope=3333
     <ul>
         <li>
             <p>当用户拒绝授权时，浏览器会重定向到 redirect_uri，并附加错误信息</p>
-<pre><code>http://appdemo.test-ck1.cn/back?error=access_denied
+<pre><code>http://appdemo.test-ABC.cn/back?error=access_denied
 </code></pre>
         </li>
         <li>
             <p>当用户同意授权时，浏览器会重定向到 redirect_uri，并附加 autorization_code</p>
-<pre><code>http://appdemo.test-ck1.cn/back?code=NGVhZTE4Y2UtNjBiNi00NjFjLThlNmUtMmRhYjJhNDA3OTRi
+<pre><code>http://appdemo.test-ABC.cn/back?code=NGVhZTE4Y2UtNjBiNi00NjFjLThlNmUtMmRhYjJhNDA3OTRi
 </code></pre>
         </li>
     </ul>
@@ -71,7 +71,7 @@ scope=3333
     <p>例如：</p>
 <pre><code>@string.Format("{0}?",PageUtility.PortalOpenApiOauth2Url)
 client_id=YzgyNWQxMGMtN2E3MC00ZTBlLTg5NDgtNTEwZmQ5OGVkYjFk&amp;
-redirect_uri=http://appdemo.test-ck1.cn/back&amp;
+redirect_uri=http://appdemo.test-ABC.cn/back&amp;
 response_type=token&amp;
 scope=3333
 </code></pre>
@@ -79,12 +79,12 @@ scope=3333
     <ul>
         <li>
             <p>当用户拒绝授权时，浏览器会重定向到 redirect_uri，并附加错误信息</p>
-<pre><code>http://appdemo.test-ck1.cn/back?error=access_denied
+<pre><code>http://appdemo.test-ABC.cn/back?error=access_denied
 </code></pre>
         </li>
         <li>
             <p>当用户同意授权时，浏览器会重定向到 redirect_uri，并附加 autorization_code</p>
-<pre><code>http://appdemo.test-ck1.cn/back?code=NGVhZTE4Y2UtNjBiNi00NjFjLThlNmUtMmRhYjJhNDA3OTRi
+<pre><code>http://appdemo.test-ABC.cn/back?code=NGVhZTE4Y2UtNjBiNi00NjFjLThlNmUtMmRhYjJhNDA3OTRi
 </code></pre>
         </li>
     </ul>
@@ -110,7 +110,7 @@ scope=3333
         <tbody>
             <tr><td><em>参数名称</em></td><td class="textLeft"><em>参数说明</em></td></tr>
             <tr><td>client_id</td><td class="textLeft">必选参数，应用的唯一标识，对应于 APIKey</td></tr>
-            <tr><td>client_secret</td><td class="textLeft">必选参数，应用的唯一标识，对应于出口易 secret</td></tr>
+            <tr><td>client_secret</td><td class="textLeft">必选参数，应用的唯一标识，对应于ABC secret</td></tr>
             <tr><td>redirect_uri</td><td class="textLeft">必选参数，用户授权完成后的回调地址，应用需要通过此回调地址获得用户的授权结果。此地址必须与在应用注册时填写的回调地址一致</td></tr>
             <tr><td>grant_type</td><td class="textLeft">必选参数，此值可以为 authorization_code 或者 refresh_token。在本流程中，此值为 refresh_token</td></tr>
             <tr><td>refresh_token</td><td class="textLeft">必选参数，刷新令牌</td></tr>
@@ -121,7 +121,7 @@ scope=3333
 <pre><code>https://www.douban.com/service/auth2/token?
   client_id=0b5405e19c58e4cc21fc11a4d50aae64&amp;
   client_secret=edfc4e395ef93375&amp;
-  redirect_uri=http://appdemo.test-ck1.cn/back&amp;
+  redirect_uri=http://appdemo.test-ABC.cn/back&amp;
   grant_type=refresh_token&amp;
   refresh_token=5d633d136b6d56a41829b73a424803ec
 </code></pre>

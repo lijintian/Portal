@@ -174,7 +174,7 @@ function CheckData(postObject) {
     }
     if ($("#ckAgree").length > 0) {
         check1 = $("#ckAgree").IsChecked();
-        c$.InitMsg(check1, $("#divAgree"), "请确认是否阅读并同意 《出口易隐私申明》！！！");
+        c$.InitMsg(check1, $("#divAgree"), "请确认是否阅读并同意 《ABC隐私申明》！！！");
         if (!check1) {
             result = false;
         }

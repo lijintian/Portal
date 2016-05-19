@@ -26,7 +26,7 @@ namespace Portal.Client.Model
             app.Childs.Add(new SysMenuInfo("提交审核", "AppSubmit", code));
             app.SetClassName();
             list.Add(app);
-            SysMenuInfo api = new SysMenuInfo("出口易API手册");
+            SysMenuInfo api = new SysMenuInfo("ABCAPI手册");
             api.Childs.Add(new SysMenuInfo("了解OAuth2.0", "OAuth2", code));
             api.Childs.Add(new SysMenuInfo("开发者流程", "Flow", code));
             api.SetClassName();

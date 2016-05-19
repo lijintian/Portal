@@ -90,7 +90,7 @@ function CheckData() {
     var result = true;
     if ($("#ckAgree").length > 0) {
         result = $("#ckAgree").IsChecked();
-        c$.InitMsg(result, $("#divAgree"), "请确认是否阅读并同意 《出口易隐私申明》！！！");
+        c$.InitMsg(result, $("#divAgree"), "请确认是否阅读并同意 《ABC隐私申明》！！！");
         if (!result) {
             result = false;
         }

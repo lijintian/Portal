@@ -11,19 +11,19 @@ namespace Portal.SDK.Security
     /// <summary>
     /// 表示用户身份主体
     /// </summary>
-    public class CK1Principal : IPrincipal, IPermissionCheck, IRoleCheck
+    public class PortalPrincipal : IPrincipal, IPermissionCheck, IRoleCheck
     {
-        private readonly CK1Identity _ck1Identity;
+        private readonly PortalIdentity _portalIdentity;
         protected UserPackageInfo UserInfo { get; private set; }
 
         /// <summary>
         /// 实例化用户主体对象
         /// </summary>
         /// <param name="userInfo"></param>
-        public CK1Principal(UserPackageInfo userInfo)
+        public PortalPrincipal(UserPackageInfo userInfo)
         {
             this.UserInfo = userInfo;
-            this._ck1Identity = new CK1Identity(userInfo.LoginName);
+            this._portalIdentity = new PortalIdentity(userInfo.LoginName);
         }
 
         /// <summary>
@@ -31,7 +31,7 @@ namespace Portal.SDK.Security
         /// </summary>
         public IIdentity Identity
         {
-            get { return this._ck1Identity; }
+            get { return this._portalIdentity; }
         }
 
         /// <summary>

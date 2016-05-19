@@ -31,7 +31,7 @@ namespace Portal.Mvc
         {
             if (this._codes != null && this._codes.Length > 0)
             {
-                var principal = httpContext.User as CK1Principal;
+                var principal = httpContext.User as PortalPrincipal;
                 if (principal == null)
                 {
                     //this case should never happen.

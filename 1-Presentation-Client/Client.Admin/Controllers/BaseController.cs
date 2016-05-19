@@ -22,12 +22,12 @@ namespace Portal.Client.Controllers
         /// <summary>
         /// 当前登录用户信息(保存Session)
         /// </summary>
-        public CK1Principal CurrentUser
+        public PortalPrincipal CurrentUser
         {
             get
             {
                 //return new CK1Principal(new UserPackageInfo("tss", "tss", "token", UserType.ExternalApi, null, null));
-                return (CK1Principal)this.ControllerContext.HttpContext.User;
+                return (PortalPrincipal)this.ControllerContext.HttpContext.User;
             }
         }
         #endregion

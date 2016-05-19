@@ -24,12 +24,12 @@ namespace Portal.Web.Admin.Controllers
         }
         public ActionResult Index()
         {
-            var principal = this.User as CK1Principal;
+            var principal = this.User as PortalPrincipal;
             if (principal != null && principal.IsCustomer)
             {
                 return this.Redirect(AppSettingHelper.Get(AppSettingKey.Login_DEFAULT_Client_URL));
             }
-            string dUrl = Request.QueryString[CK1PortalAuthenticationConfig.PortalDefaultUrl];
+            string dUrl = Request.QueryString[PortalAuthenticationConfig.PortalDefaultUrl];
             dUrl = string.IsNullOrEmpty(dUrl) ? "~/Home/Index2" : dUrl;
             ViewBag.DefaultUrl = dUrl;
             return View();

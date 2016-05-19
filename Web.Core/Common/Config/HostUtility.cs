@@ -12,9 +12,9 @@ namespace Portal.Web.Core
         /// <summary>
         /// 当前登陆用户
         /// </summary>
-        public static CK1Principal CurrentUser
+        public static PortalPrincipal CurrentUser
         {
-            get { return (CK1Principal)HttpContext.Current.User; }
+            get { return (PortalPrincipal)HttpContext.Current.User; }
         }
         #endregion
 

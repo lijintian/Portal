@@ -31,14 +31,14 @@ namespace Portal.Applications.Events.Handler
                 // 此处仅为演示，所以邮件内容很简单。可以根据自己的实际情况做一些复杂的邮件功能，比如
                 // 使用邮件模板或者邮件风格等。
                 SendEmail(evnt.UserEmail,
-                    "出口易 用户生成密码通知",
+                    "ABC 用户生成密码通知",
                     string.Format(@"<p><strong>亲爱的用户，您好：</strong><br/></p>
 <p style='text-indent: 2em;'>您的新密码已生成成功，新密码:【{0}】，新密码将在{1}分钟后生效。</p>
 <p style='text-indent: 2em;'>------------------------------------------------------------------------------------------</p>
 <p style='text-indent: 2em;'>此邮件为系统所发，请勿直接回复。</p>
 <p style='text-indent: 2em;'><a target='_blank' href='http://www.abc.com/'>www.abc.com<wbr/></a></p>
 <p style='text-indent: 2em;'>此致</p>
-<p style='text-indent: 2em;'>出口易团队</p>", evnt.NewPassword, ConfigurationManager.AppSettings["ResetPasswordValidTime"] ?? "5"));
+<p style='text-indent: 2em;'>ABC团队</p>", evnt.NewPassword, ConfigurationManager.AppSettings["ResetPasswordValidTime"] ?? "5"));
             }
             catch (Exception ex)
             {

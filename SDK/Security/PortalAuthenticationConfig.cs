@@ -15,7 +15,7 @@ namespace Portal.SDK.Security
     /// <summary>
     /// 表示Portal验证配置
     /// </summary>
-    public static class CK1PortalAuthenticationConfig
+    public static class PortalAuthenticationConfig
     {
         private static string _authCookieName;
         private static string _cookieDomain;
@@ -32,9 +32,9 @@ namespace Portal.SDK.Security
 
         private static NameValueCollection _cacheProviers;
 
-        static CK1PortalAuthenticationConfig()
+        static PortalAuthenticationConfig()
         {
-            CK1PortalAuthenticationConfig.Initialize();
+            PortalAuthenticationConfig.Initialize();
         }
         static void Initialize()
         {
@@ -75,7 +75,7 @@ namespace Portal.SDK.Security
         {
             get
             {
-                return CK1PortalAuthenticationConfig._authCookieName;
+                return PortalAuthenticationConfig._authCookieName;
             }
         }
 
@@ -86,7 +86,7 @@ namespace Portal.SDK.Security
         {
             get
             {
-                return CK1PortalAuthenticationConfig._cookieDomain;
+                return PortalAuthenticationConfig._cookieDomain;
             }
         }
 
@@ -97,7 +97,7 @@ namespace Portal.SDK.Security
         {
             get
             {
-                return CK1PortalAuthenticationConfig._portalLoginUrl;
+                return PortalAuthenticationConfig._portalLoginUrl;
             }
         }
 
@@ -131,7 +131,7 @@ namespace Portal.SDK.Security
         {
             get
             {
-                return CK1PortalAuthenticationConfig._returnUlr;
+                return PortalAuthenticationConfig._returnUlr;
             }
         }
 
@@ -142,7 +142,7 @@ namespace Portal.SDK.Security
         {
             get
             {
-                return CK1PortalAuthenticationConfig._tokenUrlParameterName;
+                return PortalAuthenticationConfig._tokenUrlParameterName;
             }
         }
 
@@ -153,7 +153,7 @@ namespace Portal.SDK.Security
         {
             get
             {
-                return CK1PortalAuthenticationConfig._portalFrame;
+                return PortalAuthenticationConfig._portalFrame;
             }
         }
 
@@ -164,7 +164,7 @@ namespace Portal.SDK.Security
         {
             get
             {
-                return CK1PortalAuthenticationConfig._portalDefaultUrl;
+                return PortalAuthenticationConfig._portalDefaultUrl;
             }
         }
 
@@ -175,7 +175,7 @@ namespace Portal.SDK.Security
         {
             get
             {
-                return CK1PortalAuthenticationConfig._applicationName;
+                return PortalAuthenticationConfig._applicationName;
             }
         }
 

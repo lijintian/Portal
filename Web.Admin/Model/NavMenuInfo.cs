@@ -40,7 +40,7 @@ namespace Portal.Web.Admin.Model
         {
             if (!string.IsNullOrEmpty(info.Url) && info.Target == (int)MenuTarget.Self)
             {
-                info.Url = string.Format("{0}{1}{2}=1", info.Url, info.Url.IndexOf("?") < 0 ? "?" : "&", CK1PortalAuthenticationConfig.PortalFrameName);
+                info.Url = string.Format("{0}{1}{2}=1", info.Url, info.Url.IndexOf("?") < 0 ? "?" : "&", PortalAuthenticationConfig.PortalFrameName);
             }
             this.Current = info;
         }

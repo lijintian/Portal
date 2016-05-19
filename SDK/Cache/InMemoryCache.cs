@@ -42,7 +42,7 @@ namespace Portal.SDK.Cache
 
             var policy = new CacheItemPolicy()
             {
-                SlidingExpiration = TimeSpan.FromMinutes(CK1PortalAuthenticationConfig.CacheExpiredTime),
+                SlidingExpiration = TimeSpan.FromMinutes(PortalAuthenticationConfig.CacheExpiredTime),
                 Priority = CacheItemPriority.NotRemovable
             };
             InMemoryCache.MemoryCache.Set(key, data, policy);

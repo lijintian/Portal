@@ -45,7 +45,7 @@ namespace Portal.Web.Admin.Controllers
         {
             AmazonUkPromotion();
             
-            var user = this.User as CK1Principal;
+            var user = this.User as PortalPrincipal;
             if (user != null)
             {
                 return this.RedirectToApp(user.Token, user.UserType, returnUrl);
@@ -101,7 +101,7 @@ namespace Portal.Web.Admin.Controllers
                     var getUserResponse = this._userManagerService.GetPackageUserInfo(identity.LoginName);
                     if (getUserResponse.IsValid())
                     {
-                        Ck1PortalAuthenticationHelper.LoginedIn(new UserPackageInfo(getUserResponse.LoginName,
+                        PortalAuthenticationHelper.LoginedIn(new UserPackageInfo(getUserResponse.LoginName,
                             getUserResponse.DisplayName,
                             identity.Token,
                             (UserType)Enum.Parse(typeof(UserType), getUserResponse.UserType),
@@ -127,7 +127,7 @@ namespace Portal.Web.Admin.Controllers
 
         public ActionResult Logout(string identity, string returnUrl)
         {
-            Ck1PortalAuthenticationHelper.LoginOut(returnUrl, () =>
+            PortalAuthenticationHelper.LoginOut(returnUrl, () =>
             {
                 if (!string.IsNullOrEmpty(identity))
                 {
@@ -156,7 +156,7 @@ namespace Portal.Web.Admin.Controllers
         {
             var redirectUrl = AppSettingHelper.Get(AppSettingKey.Login_DEFAULT_Client_URL);
             //!CheckUtility.IsUrl(returnUrl) || 
-            if (string.IsNullOrEmpty(returnUrl) || Ck1PortalAuthenticationHelper.IsAccessingPortalHomeOrLoginPage(returnUrl))
+            if (string.IsNullOrEmpty(returnUrl) || PortalAuthenticationHelper.IsAccessingPortalHomeOrLoginPage(returnUrl))
             {
                 if (userType == UserType.Customer)
                 {
@@ -174,7 +174,7 @@ namespace Portal.Web.Admin.Controllers
 
             var redirectUri = new Uri(redirectUrl);
             var appendSign = string.IsNullOrEmpty(redirectUri.Query) ? "?" : "&";
-            redirectUrl = string.Format("{0}{1}{2}={3}", redirectUrl, appendSign, CK1PortalAuthenticationConfig.TokenUrlParameterName, token);
+            redirectUrl = string.Format("{0}{1}{2}={3}", redirectUrl, appendSign, PortalAuthenticationConfig.TokenUrlParameterName, token);
 
             return this.Redirect(redirectUrl);
         }

@@ -12,7 +12,7 @@ namespace AppDemo.Core
         {
             get
             {
-                return Get("AppDemoBaseAddress", "http://appdemo.test-ck1.cn");
+                return Get("AppDemoBaseAddress", "http://appdemo.test-ABC.cn");
             }
         }
 

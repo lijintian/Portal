@@ -10,10 +10,10 @@ namespace Portal.SDK.Security
     /// <summary>
     /// 表示用户身份标识
     /// </summary>
-    public class CK1Identity : IIdentity
+    public class PortalIdentity : IIdentity
     {
         private readonly string _name;
-        public CK1Identity(string loginName)
+        public PortalIdentity(string loginName)
         {
             this._name = loginName;
         }

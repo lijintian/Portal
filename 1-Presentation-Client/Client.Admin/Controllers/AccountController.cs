@@ -35,7 +35,7 @@ namespace Portal.Client.Controllers
         [HttpGet]
         public ActionResult Login(string returnUrl, string amazonUkPromotion)
         {
-            var user = this.User as CK1Principal;
+            var user = this.User as PortalPrincipal;
             if (user != null)
             {
                 return this.RedirectToApp(user.Token, returnUrl);
@@ -81,7 +81,7 @@ namespace Portal.Client.Controllers
                     var getUserResponse = this._userManagerService.GetPackageUserInfo(identity.LoginName);
                     if (getUserResponse.IsValid())
                     {
-                        Ck1PortalAuthenticationHelper.LoginedIn(new UserPackageInfo(getUserResponse.LoginName,
+                        PortalAuthenticationHelper.LoginedIn(new UserPackageInfo(getUserResponse.LoginName,
                             getUserResponse.DisplayName,
                             identity.Token,
                             (UserType)Enum.Parse(typeof(UserType), getUserResponse.UserType),
@@ -114,7 +114,7 @@ namespace Portal.Client.Controllers
             {
                 returnUrl = "/";
             }
-            Ck1PortalAuthenticationHelper.LoginOut(returnUrl, () =>
+            PortalAuthenticationHelper.LoginOut(returnUrl, () =>
             {
                 if (!string.IsNullOrEmpty(identity))
                 {
@@ -135,7 +135,7 @@ namespace Portal.Client.Controllers
             //var redirectUri = new Uri(returnUrl);
             //var appendSign = string.IsNullOrEmpty(redirectUri.Query) ? "?" : "&";
             var appendSign = returnUrl.IndexOf("?") <= 0 ? "?" : "&";
-            returnUrl = string.Format("{0}{1}{2}={3}", returnUrl, appendSign, CK1PortalAuthenticationConfig.TokenUrlParameterName, token);
+            returnUrl = string.Format("{0}{1}{2}={3}", returnUrl, appendSign, PortalAuthenticationConfig.TokenUrlParameterName, token);
             return this.Redirect(returnUrl);
         }
         #endregion

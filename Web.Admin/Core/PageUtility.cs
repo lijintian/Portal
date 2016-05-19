@@ -45,16 +45,16 @@ namespace Portal.Web.Admin.Core
         /// <summary>
         /// 当前登陆用户
         /// </summary>
-        public static CK1Principal CurrentUser
+        public static PortalPrincipal CurrentUser
         {
-            get { return (CK1Principal)HttpContext.Current.User; }
+            get { return (PortalPrincipal)HttpContext.Current.User; }
         }
 
         public static string GetUserName
         {
             get
             {
-                var user = HttpContext.Current.User as CK1Principal;
+                var user = HttpContext.Current.User as PortalPrincipal;
                 if (user == null)
                 {
                     return "匿名用户";
@@ -237,7 +237,7 @@ namespace Portal.Web.Admin.Core
         {
             SysLoggerDto logger = new SysLoggerDto
             {
-                ApplicationName = CK1PortalAuthenticationConfig.ApplicationName,
+                ApplicationName = PortalAuthenticationConfig.ApplicationName,
                 Ip = WebHelper.GetUserIP(),
                 CreatedBy = GetUserName,
             };

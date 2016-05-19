@@ -11,13 +11,13 @@ namespace Portal.SDK.Cache
     {
         public static ICache Create()
         {
-            if (string.IsNullOrEmpty(CK1PortalAuthenticationConfig.CacheName))
+            if (string.IsNullOrEmpty(PortalAuthenticationConfig.CacheName))
             {
                 return InMemoryCache.Default;
             }
             else
             {
-                var cacheType = CK1PortalAuthenticationConfig.CacheProviders[CK1PortalAuthenticationConfig.CacheName];
+                var cacheType = PortalAuthenticationConfig.CacheProviders[PortalAuthenticationConfig.CacheName];
                 if (string.IsNullOrEmpty(cacheType))
                 {
                     throw new ArgumentException("missed cache type.");

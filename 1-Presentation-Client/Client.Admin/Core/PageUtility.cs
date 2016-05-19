@@ -24,15 +24,15 @@ namespace Portal.Client.Core
         /// <summary>
         /// 当前登陆用户
         /// </summary>
-        public static CK1Principal CurrentUser
+        public static PortalPrincipal CurrentUser
         {
-            get { return (CK1Principal)HttpContext.Current.User; }
+            get { return (PortalPrincipal)HttpContext.Current.User; }
         }
         public static string GetUserName
         {
             get
             {
-                var user = HttpContext.Current.User as CK1Principal;
+                var user = HttpContext.Current.User as PortalPrincipal;
                 if (user == null)
                 {
                     return "匿名用户";
@@ -50,7 +50,7 @@ namespace Portal.Client.Core
         {
             get
             {
-                string portalFrame = HttpContext.Current.Request.QueryString[CK1PortalAuthenticationConfig.PortalFrameName];
+                string portalFrame = HttpContext.Current.Request.QueryString[PortalAuthenticationConfig.PortalFrameName];
                 return Layouts[string.IsNullOrEmpty(portalFrame) ? 0 : 1];
             }
         }
@@ -141,18 +141,6 @@ namespace Portal.Client.Core
         {
             return path.EndsWith(".js") || path.EndsWith(".css") || path.EndsWith(".png");
         }
-        /// <summary>
-        /// 将虚拟（相对）路径转换为应用程序绝对路径
-        /// </summary>
-        /// <param name="url">已呈现的页的 URL</param>
-        /// <param name="contentPath">内容的虚拟路径</param>
-        /// <returns>应用程序绝对路径</returns>
-        public static string Ck1Content(this UrlHelper url, string contentPath)
-        {
-            // 防止低级错误
-            if (url == null || HttpContext.Current == null) throw new Exception("非http请求不可调用此方法");
-            return string.Format("{0}/{1}", HostUtility.ResourcesUrl, contentPath);
-        }
         #endregion
 
         #region 05.获取权限
@@ -182,7 +170,7 @@ namespace Portal.Client.Core
         /// </summary>
         public static string PortalOpenApiOauth2BaseAddressKey
         {
-            get { return AppSettingsUtility.Get(Constants.PortalOpenApiOauth2BaseAddressKey, "http://openapi.test-ck1.cn/"); }
+            get { return AppSettingsUtility.Get(Constants.PortalOpenApiOauth2BaseAddressKey, "http://openapi.test-ABC.cn/"); }
         }
 
         public static string PortalOpenApiOauth2Url
@@ -210,7 +198,7 @@ namespace Portal.Client.Core
         {
             SysLoggerDto logger = new SysLoggerDto
             {
-                ApplicationName = CK1PortalAuthenticationConfig.ApplicationName,
+                ApplicationName = PortalAuthenticationConfig.ApplicationName,
                 Ip = WebHelper.GetUserIP(),
                 CreatedBy = GetUserName,
             };
